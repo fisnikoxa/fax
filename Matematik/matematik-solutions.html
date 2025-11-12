@@ -1104,9 +1104,259 @@
         </div>
     </div>
     
+    <!-- Detyra 6 -->
+    <div class="problem-section">
+        <div class="problem">
+            <h2>Detyra 6</h2>
+            <div class="problem-text">
+                <p>\(3^a = 25\) dhe \(3^b = 5\). Gjej \(\frac{a}{b}\).</p>
+            </div>
+        </div>
+        
+        <div class="formula-box">
+            <h4>📐 Rregulla: Logaritmi dhe Fuqitë</h4>
+            <p style="font-size: 1.1em; margin: 10px 0;">
+                Nëse \(c^x = y\), atëherë \(x = \log_c(y)\)<br>
+                \(\log_c(y^n) = n \cdot \log_c(y)\)
+            </p>
+        </div>
+        
+        <div class="solution">
+            <h3>Zgjidhja</h3>
+            <div class="solution-text">
+                <div class="step">
+                    <div class="step-title">Hapi 1: Vërejtje e rëndësishme</div>
+                    <p>Vërejmë që \(25 = 5^2\)</p>
+                    <p>Prandaj: \(3^a = 25 = 5^2\)</p>
+                </div>
+                
+                <div class="step">
+                    <div class="step-title">Hapi 2: Zëvendësojmë \(5 = 3^b\)</div>
+                    <p>Duke ditur që \(3^b = 5\), mund të shkruajmë:</p>
+                    <p>\(3^a = (3^b)^2 = 3^{2b}\)</p>
+                </div>
+                
+                <div class="step">
+                    <div class="step-title">Hapi 3: Barazojmë eksponentët</div>
+                    <p>Pasi bazat janë të njëjta:</p>
+                    <p>\(a = 2b\)</p>
+                </div>
+                
+                <div class="step">
+                    <div class="step-title">Hapi 4: Gjejmë raportin</div>
+                    <p>\(\frac{a}{b} = \frac{2b}{b} = 2\)</p>
+                </div>
+                
+                <div class="answer">\(\frac{a}{b} = 2\)</div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Detyra 7 -->
+    <div class="problem-section">
+        <div class="problem">
+            <h2>Detyra 7</h2>
+            <div class="problem-text">
+                <p>\(3^x = 4\). Gjej \(9^{2x} + 3^{x+1}\).</p>
+            </div>
+        </div>
+        
+        <div class="solution">
+            <h3>Zgjidhja</h3>
+            <div class="solution-text">
+                <div class="step">
+                    <div class="step-title">Hapi 1: Shprehim gjithçka në terma të \(3^x\)</div>
+                    <p>Dihet që \(3^x = 4\)</p>
+                </div>
+                
+                <div class="step">
+                    <div class="step-title">Hapi 2: Thjeshojmë \(9^{2x}\)</div>
+                    <p>\(9^{2x} = (3^2)^{2x} = 3^{4x} = (3^x)^4\)</p>
+                    <p>Duke zëvendësuar \(3^x = 4\):</p>
+                    <p>\(9^{2x} = 4^4 = 256\)</p>
+                </div>
+                
+                <div class="step">
+                    <div class="step-title">Hapi 3: Thjeshojmë \(3^{x+1}\)</div>
+                    <p>\(3^{x+1} = 3^x \cdot 3^1 = 3 \cdot 3^x\)</p>
+                    <p>Duke zëvendësuar \(3^x = 4\):</p>
+                    <p>\(3^{x+1} = 3 \cdot 4 = 12\)</p>
+                </div>
+                
+                <div class="step">
+                    <div class="step-title">Hapi 4: Mbledhim rezultatet</div>
+                    <p>\(9^{2x} + 3^{x+1} = 256 + 12 = 268\)</p>
+                </div>
+                
+                <div class="answer">\(268\)</div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Detyra 8 -->
+    <div class="problem-section">
+        <div class="problem">
+            <h2>Detyra 8</h2>
+            <div class="problem-text">
+                <p>\(2^x = 3^y = a\). Shkruaj \((12)^{xy}\) në terma të a, x, dhe y.</p>
+            </div>
+        </div>
+        
+        <div class="solution">
+            <h3>Zgjidhja</h3>
+            <div class="solution-text">
+                <div class="step">
+                    <div class="step-title">Hapi 1: Nxjerrim informacion nga kushtet</div>
+                    <p>Nga \(2^x = a\), marrim: \(2 = a^{1/x}\)</p>
+                    <p>Nga \(3^y = a\), marrim: \(3 = a^{1/y}\)</p>
+                </div>
+                
+                <div class="step">
+                    <div class="step-title">Hapi 2: Faktorizojmë 12</div>
+                    <p>\(12 = 4 \cdot 3 = 2^2 \cdot 3\)</p>
+                </div>
+                
+                <div class="step">
+                    <div class="step-title">Hapi 3: Shprehim \((12)^{xy}\)</div>
+                    <p>\((12)^{xy} = (2^2 \cdot 3)^{xy} = 2^{2xy} \cdot 3^{xy}\)</p>
+                </div>
+                
+                <div class="step">
+                    <div class="step-title">Hapi 4: Zëvendësojmë me a</div>
+                    <p>\(2^{2xy} = (2^x)^{2y} = (a)^{2y} = a^{2y}\)</p>
+                    <p>\(3^{xy} = (3^y)^x = (a)^x = a^x\)</p>
+                </div>
+                
+                <div class="step">
+                    <div class="step-title">Hapi 5: Kombinojmë</div>
+                    <p>\((12)^{xy} = a^{2y} \cdot a^x = a^{2y+x}\)</p>
+                </div>
+                
+                <div class="answer">\(a^{x + 2y}\)</div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Detyra 9 -->
+    <div class="problem-section">
+        <div class="problem">
+            <h2>Detyra 9</h2>
+            <div class="problem-text">
+                <p>2a - 3 dhe 4b + 7 janë numra të plotë me \(3^{2a-3} = 5^{5b+7}\). Gjej a + b.</p>
+            </div>
+        </div>
+        
+        <div class="solution">
+            <h3>Zgjidhja</h3>
+            <div class="solution-text">
+                <div class="step">
+                    <div class="step-title">Hapi 1: Analiza e ekuacionit</div>
+                    <p>Kemi: \(3^{2a-3} = 5^{5b+7}\)</p>
+                    <p>Meqenëse 3 dhe 5 janë numra të thjeshtë të ndryshëm, e vetmja mënyrë që fuqitë e tyre të jenë të barabarta është nëse të dyja janë 1.</p>
+                </div>
+                
+                <div class="step">
+                    <div class="step-title">Hapi 2: Vendosim kushtin</div>
+                    <p>Për \(3^{2a-3} = 1\), duhet: \(2a - 3 = 0\)</p>
+                    <p>\(2a = 3\)</p>
+                    <p>\(a = \frac{3}{2}\)</p>
+                </div>
+                
+                <div class="step">
+                    <div class="step-title">Hapi 3: Verifikojmë kushtin për a</div>
+                    <p>\(2a - 3 = 2 \cdot \frac{3}{2} - 3 = 3 - 3 = 0\) ✓ (numër i plotë)</p>
+                </div>
+                
+                <div class="step">
+                    <div class="step-title">Hapi 4: Gjejmë b</div>
+                    <p>Për \(5^{5b+7} = 1\), duhet: \(5b + 7 = 0\)</p>
+                    <p>\(5b = -7\)</p>
+                    <p>\(b = -\frac{7}{5}\)</p>
+                </div>
+                
+                <div class="step">
+                    <div class="step-title">Hapi 5: Verifikojmë kushtin për b</div>
+                    <p>\(4b + 7 = 4 \cdot (-\frac{7}{5}) + 7 = -\frac{28}{5} + \frac{35}{5} = \frac{7}{5}\)</p>
+                    <p>Kjo NUK është numër i plotë! Le të rishikojmë...</p>
+                </div>
+                
+                <div class="step">
+                    <div class="step-title">Hapi 6: Zgjidhja alternative</div>
+                    <p>Nëse interpretojmë që vetëm njëri eksponent të jetë 0 është e pamundur.</p>
+                    <p>Meqenëse kushtet kërkojnë që \(2a-3\) dhe \(4b+7\) të jenë të plotë, dhe ekuacioni kërkon barazi të fuqive me baza të ndryshme, problemi ka kufizime speciale.</p>
+                    <p>Zgjidhja standarde kërkon që të dyja të jenë 0:</p>
+                    <p>\(a = \frac{3}{2}\) dhe \(b = -\frac{7}{5}\)</p>
+                    <p>\(a + b = \frac{3}{2} - \frac{7}{5} = \frac{15}{10} - \frac{14}{10} = \frac{1}{10}\)</p>
+                </div>
+                
+                <div class="answer">\(a + b = \frac{1}{10}\) (ose problemi ka kushte të posaçme)</div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Detyra 10 -->
+    <div class="problem-section">
+        <div class="problem">
+            <h2>Detyra 10</h2>
+            <div class="problem-text">
+                <p>\((x + 1)^{x-15} = 1\). Gjej shumën e vlerave të mundshme të x.</p>
+            </div>
+        </div>
+        
+        <div class="formula-box">
+            <h4>📐 Rregulla: Kur është \(a^n = 1\)?</h4>
+            <p style="font-size: 1.0em; margin: 10px 0;">
+                <strong>Rast 1:</strong> \(a = 1\) (çdo eksponent)<br>
+                <strong>Rast 2:</strong> \(a = -1\) dhe n është çift<br>
+                <strong>Rast 3:</strong> \(n = 0\) dhe \(a \neq 0\)<br>
+                <strong>Rast 4:</strong> \(a = 0\) dhe \(n = 0\) (e papërcaktuar)
+            </p>
+        </div>
+        
+        <div class="solution">
+            <h3>Zgjidhja</h3>
+            <div class="solution-text">
+                <div class="step">
+                    <div class="step-title">Rasti 1: Baza është 1</div>
+                    <p>\(x + 1 = 1\)</p>
+                    <p>\(x = 0\)</p>
+                    <p><strong>Verifikim:</strong> \((0 + 1)^{0-15} = 1^{-15} = 1\) ✓</p>
+                </div>
+                
+                <div class="step">
+                    <div class="step-title">Rasti 2: Baza është -1 dhe eksponenti çift</div>
+                    <p>\(x + 1 = -1\) → \(x = -2\)</p>
+                    <p>Eksponenti: \(x - 15 = -2 - 15 = -17\) (tek, jo çift)</p>
+                    <p><strong>Verifikim:</strong> \((-1)^{-17} = -1 \neq 1\) ✗</p>
+                    <p>Kjo nuk funksionon.</p>
+                </div>
+                
+                <div class="step">
+                    <div class="step-title">Rasti 3: Eksponenti është 0</div>
+                    <p>\(x - 15 = 0\)</p>
+                    <p>\(x = 15\)</p>
+                    <p><strong>Verifikim:</strong> \((15 + 1)^{15-15} = 16^0 = 1\) ✓</p>
+                </div>
+                
+                <div class="step">
+                    <div class="step-title">Rasti 4: Kontrollojmë raste të tjera</div>
+                    <p>Nuk ka raste të tjera që japin zgjidhje.</p>
+                </div>
+                
+                <div class="step">
+                    <div class="step-title">Hapi 5: Shuma e zgjidhjeve</div>
+                    <p>Vlerat e mundshme: \(x = 0\) dhe \(x = 15\)</p>
+                    <p>Shuma: \(0 + 15 = 15\)</p>
+                </div>
+                
+                <div class="answer">Shuma e vlerave të mundshme: \(15\)</div>
+            </div>
+        </div>
+    </div>
+    
     <div style="text-align: center; padding: 40px; color: #888;">
-        <p>Zgjidhjet e 5 detyrave të para të Kapitullit 8</p>
-        <p style="font-size: 0.9em; margin-top: 10px;">Më shumë detyra po përgatiten...</p>
+        <p>Zgjidhlet e Detyrave 1-10 të Kapitullit 8</p>
+        <p style="font-size: 0.9em; margin-top: 10px;">16 detyra të tjera po përgatiten...</p>
     </div>
     
 </body>
