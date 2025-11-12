@@ -1,0 +1,1553 @@
+<!DOCTYPE html>
+<html lang="sq">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gjeometri Pershkruese - Detyra dhe Zgjidhje</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+            background: #f5f5f5;
+        }
+        
+        h1 {
+            text-align: center;
+            margin-bottom: 40px;
+            color: #333;
+        }
+        
+        .problem-section {
+            background: white;
+            margin-bottom: 40px;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .problem {
+            margin-bottom: 20px;
+        }
+        
+        .problem h2 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+        }
+        
+        .problem-text {
+            color: #555;
+            margin-bottom: 20px;
+            padding-left: 20px;
+        }
+        
+        .solution {
+            background: #f8f9fa;
+            padding: 20px;
+            border-left: 4px solid #3498db;
+            margin-bottom: 20px;
+        }
+        
+        .solution h3 {
+            color: #2980b9;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+        
+        .solution-text {
+            color: #444;
+            line-height: 1.8;
+        }
+        
+        .diagram {
+            text-align: center;
+            margin-top: 20px;
+            padding: 20px;
+            background: white;
+        }
+        
+        svg {
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        
+        .axis {
+            stroke: #333;
+            stroke-width: 2;
+        }
+        
+        .axis-label {
+            font-size: 14px;
+            fill: #333;
+            font-weight: bold;
+        }
+        
+        .point {
+            fill: #e74c3c;
+        }
+        
+        .point-label {
+            font-size: 12px;
+            fill: #e74c3c;
+            font-weight: bold;
+        }
+        
+        .projection-line {
+            stroke: #95a5a6;
+            stroke-width: 1;
+            stroke-dasharray: 3,3;
+        }
+        
+        .line {
+            stroke: #3498db;
+            stroke-width: 2;
+        }
+        
+        .grid-line {
+            stroke: #e0e0e0;
+            stroke-width: 0.5;
+        }
+        
+        ul {
+            margin-left: 40px;
+            margin-top: 10px;
+        }
+        
+        li {
+            margin-bottom: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Gjeometri Pershkruese - Detyra për Ushtrime dhe Zgjidhje</h1>
+    
+    <!-- Kartela e Referencës për Pasqyrimet -->
+    <div class="problem-section" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white;">
+        <h2 style="color: white; text-align: center; margin-bottom: 20px;">📐 Rregullat e Pasqyrimit (Simetrisë)</h2>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; padding: 10px;">
+            <div style="background: rgba(255,255,255,0.15); padding: 20px; border-radius: 8px; backdrop-filter: blur(10px);">
+                <h3 style="color: #fff; margin-bottom: 10px; font-size: 1.2em;">🔵 Pasqyrimi ndaj π₁</h3>
+                <p style="font-size: 1.1em; margin: 10px 0;"><strong>Rrafshi xy (z = 0)</strong></p>
+                <p style="font-size: 1.3em; background: rgba(255,255,255,0.2); padding: 10px; border-radius: 5px; text-align: center;">
+                    <strong>z → -z</strong>
+                </p>
+                <p style="margin-top: 10px; font-size: 0.95em;">Ndryshon shenjën e koordinatës <strong>z</strong></p>
+                <p style="margin-top: 5px; font-size: 0.9em; opacity: 0.9;">Shembull: A(2, 3, 4) → A'(2, 3, -4)</p>
+            </div>
+            
+            <div style="background: rgba(255,255,255,0.15); padding: 20px; border-radius: 8px; backdrop-filter: blur(10px);">
+                <h3 style="color: #fff; margin-bottom: 10px; font-size: 1.2em;">🟢 Pasqyrimi ndaj π₂</h3>
+                <p style="font-size: 1.1em; margin: 10px 0;"><strong>Rrafshi xz (y = 0)</strong></p>
+                <p style="font-size: 1.3em; background: rgba(255,255,255,0.2); padding: 10px; border-radius: 5px; text-align: center;">
+                    <strong>y → -y</strong>
+                </p>
+                <p style="margin-top: 10px; font-size: 0.95em;">Ndryshon shenjën e koordinatës <strong>y</strong></p>
+                <p style="margin-top: 5px; font-size: 0.9em; opacity: 0.9;">Shembull: A(2, 3, 4) → A'(2, -3, 4)</p>
+            </div>
+            
+            <div style="background: rgba(255,255,255,0.15); padding: 20px; border-radius: 8px; backdrop-filter: blur(10px);">
+                <h3 style="color: #fff; margin-bottom: 10px; font-size: 1.2em;">🔴 Pasqyrimi ndaj π₃</h3>
+                <p style="font-size: 1.1em; margin: 10px 0;"><strong>Rrafshi yz (x = 0)</strong></p>
+                <p style="font-size: 1.3em; background: rgba(255,255,255,0.2); padding: 10px; border-radius: 5px; text-align: center;">
+                    <strong>x → -x</strong>
+                </p>
+                <p style="margin-top: 10px; font-size: 0.95em;">Ndryshon shenjën e koordinatës <strong>x</strong></p>
+                <p style="margin-top: 5px; font-size: 0.9em; opacity: 0.9;">Shembull: A(2, 3, 4) → A'(-2, 3, 4)</p>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Detyra 1 -->
+    <div class="problem-section">
+        <div class="problem">
+            <h2>Detyra 1</h2>
+            <div class="problem-text">
+                Të vizatohen të tri projeksionet e pikave E dhe F. Largësitë e pikës E të jenë të barabarta nga rrafshet e projeksionit:
+                <ul>
+                    <li>a) Pika E të jetë në oktantin e parë kurse pika F simetrike me pikën E ndaj rrafshit π₃</li>
+                    <li>b) Pika E të jetë në oktantin e katërt kurse F simetrike me pikën E ndaj rrafshit π₂</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="solution">
+            <h3>Zgjidhja</h3>
+            <div class="solution-text">
+                <p><strong>Pjesa a)</strong> Pika E në oktantin I me largësi të barabarta nga rrafshet e projeksionit:</p>
+                <p>Nëse E ka largësi të barabarta nga të tri rrafshet e projeksionit, atëherë E(a, a, a) ku a > 0.</p>
+                <p>Le të jetë E(3, 3, 3). Pika F është simetrike me E ndaj rrafshit π₃ (rrafshi yz).</p>
+                <p>Pasqyrimi ndaj π₃ ndryshon shenjën e koordinatës x: F(-3, 3, 3)</p>
+                <p><strong>Projeksionet:</strong></p>
+                <ul>
+                    <li>E': (3, 3) në π₁, E'': (3, 3) në π₂, E''': (3, 3) në π₃</li>
+                    <li>F': (-3, 3) në π₁, F'': (-3, 3) në π₂, F''': (3, 3) në π₃</li>
+                </ul>
+                
+                <p><strong>Pjesa b)</strong> Pika E në oktantin IV me largësi të barabarta:</p>
+                <p>Oktanti IV: x < 0, y > 0, z > 0. Le të jetë E(-3, 3, 3).</p>
+                <p>Pika F është simetrike me E ndaj rrafshit π₂ (rrafshi xz).</p>
+                <p>Pasqyrimi ndaj π₂ ndryshon shenjën e koordinatës y: F(-3, -3, 3)</p>
+                <p><strong>Projeksionet:</strong></p>
+                <ul>
+                    <li>E': (-3, 3) në π₁, E'': (-3, 3) në π₂, E''': (3, 3) në π₃</li>
+                    <li>F': (-3, -3) në π₁, F'': (-3, 3) në π₂, F''': (-3, 3) në π₃</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="diagram">
+            <svg width="800" height="400" viewBox="0 0 800 400">
+                <!-- Pjesa a -->
+                <g transform="translate(200, 200)">
+                    <text x="-50" y="-180" class="axis-label">Pjesa a) Projeksioni i Parë π₁</text>
+                    <!-- Boshtet -->
+                    <line x1="-150" y1="0" x2="150" y2="0" class="axis"/>
+                    <line x1="0" y1="-150" x2="0" y2="150" class="axis"/>
+                    <text x="160" y="5" class="axis-label">x</text>
+                    <text x="5" y="165" class="axis-label">y</text>
+                    <text x="-10" y="-160" class="axis-label">-y</text>
+                    
+                    <!-- Rrjeta -->
+                    <line x1="-150" y1="50" x2="150" y2="50" class="grid-line"/>
+                    <line x1="-150" y1="-50" x2="150" y2="-50" class="grid-line"/>
+                    <line x1="-50" y1="-150" x2="-50" y2="150" class="grid-line"/>
+                    <line x1="50" y1="-150" x2="50" y2="150" class="grid-line"/>
+                    
+                    <!-- Etiketat e kuadranteve -->
+                    <text x="100" y="100" style="font-size: 16px; fill: #aaa; font-style: italic;">I</text>
+                    <text x="100" y="-100" style="font-size: 16px; fill: #aaa; font-style: italic;">II</text>
+                    <text x="-120" y="-100" style="font-size: 16px; fill: #aaa; font-style: italic;">III</text>
+                    <text x="-120" y="100" style="font-size: 16px; fill: #aaa; font-style: italic;">IV</text>
+                    
+                    <!-- Pika E (3,3) - Kuadranti I (poshtë djathtas) -->
+                    <circle cx="50" cy="50" r="5" class="point"/>
+                    <text x="55" y="55" class="point-label">E'(3,3)</text>
+                    
+                    <!-- Pika F (-3,3) - Kuadranti IV (poshtë majtas) -->
+                    <circle cx="-50" cy="50" r="5" class="point"/>
+                    <text x="-90" y="55" class="point-label">F'(-3,3)</text>
+                    
+                    <!-- Vija e lidhjes -->
+                    <line x1="-50" y1="50" x2="50" y2="50" class="projection-line"/>
+                    
+                    <!-- Vija e simetrisë (π₃) -->
+                    <line x1="0" y1="-150" x2="0" y2="150" style="stroke: #e74c3c; stroke-width: 2; stroke-dasharray: 5,5;"/>
+                    <text x="10" y="-120" style="fill: #e74c3c; font-size: 12px;">π₃</text>
+                </g>
+                
+                <!-- Pjesa b -->
+                <g transform="translate(600, 200)">
+                    <text x="-50" y="-180" class="axis-label">Pjesa b) Projeksioni i Parë π₁</text>
+                    <!-- Boshtet -->
+                    <line x1="-150" y1="0" x2="150" y2="0" class="axis"/>
+                    <line x1="0" y1="-150" x2="0" y2="150" class="axis"/>
+                    <text x="160" y="5" class="axis-label">x</text>
+                    <text x="5" y="165" class="axis-label">y</text>
+                    <text x="-10" y="-160" class="axis-label">-y</text>
+                    
+                    <!-- Rrjeta -->
+                    <line x1="-150" y1="50" x2="150" y2="50" class="grid-line"/>
+                    <line x1="-150" y1="-50" x2="150" y2="-50" class="grid-line"/>
+                    <line x1="-50" y1="-150" x2="-50" y2="150" class="grid-line"/>
+                    <line x1="50" y1="-150" x2="50" y2="150" class="grid-line"/>
+                    
+                    <!-- Etiketat e kuadranteve -->
+                    <text x="100" y="100" style="font-size: 16px; fill: #aaa; font-style: italic;">I</text>
+                    <text x="100" y="-100" style="font-size: 16px; fill: #aaa; font-style: italic;">II</text>
+                    <text x="-120" y="-100" style="font-size: 16px; fill: #aaa; font-style: italic;">III</text>
+                    <text x="-120" y="100" style="font-size: 16px; fill: #aaa; font-style: italic;">IV</text>
+                    
+                    <!-- Pika E (-3,3) - Kuadranti IV -->
+                    <circle cx="-50" cy="50" r="5" class="point"/>
+                    <text x="-90" y="55" class="point-label">E'(-3,3)</text>
+                    
+                    <!-- Pika F (-3,-3) - Kuadranti III -->
+                    <circle cx="-50" cy="-50" r="5" class="point"/>
+                    <text x="-95" y="-40" class="point-label">F'(-3,-3)</text>
+                    
+                    <!-- Vija e lidhjes -->
+                    <line x1="-50" y1="-50" x2="-50" y2="50" class="projection-line"/>
+                    
+                    <!-- Vija e simetrisë (π₂) -->
+                    <line x1="-150" y1="0" x2="150" y2="0" style="stroke: #e74c3c; stroke-width: 2; stroke-dasharray: 5,5;"/>
+                    <text x="120" y="15" style="fill: #e74c3c; font-size: 12px;">π₂</text>
+                </g>
+            </svg>
+        </div>
+    </div>
+    
+    <!-- Detyra 2 -->
+    <div class="problem-section">
+        <div class="problem">
+            <h2>Detyra 2</h2>
+            <div class="problem-text">
+                Të vizatohen projeksionet dhe të caktohet se në cilin oktant është secila prej pikave A(3, 2, 4), B(2, -3, 2), C(-2, 5, 4), D(-4, -2, 5), E(-4, -2, -3)!
+            </div>
+        </div>
+        
+        <div class="solution">
+            <h3>Zgjidhja</h3>
+            <div class="solution-text">
+                <p>Oktantët përcaktohen nga shenjat e koordinatave (x, y, z):</p>
+                <ul>
+                    <li>Oktanti I: (+, +, +) - poshtë djathtas, mbi π₁</li>
+                    <li>Oktanti II: (+, -, +) - lart djathtas, mbi π₁</li>
+                    <li>Oktanti III: (-, -, +) - lart majtas, mbi π₁</li>
+                    <li>Oktanti IV: (-, +, +) - poshtë majtas, mbi π₁</li>
+                    <li>Oktanti V: (+, +, -) - poshtë djathtas, nën π₁</li>
+                    <li>Oktanti VI: (+, -, -) - lart djathtas, nën π₁</li>
+                    <li>Oktanti VII: (-, -, -) - lart majtas, nën π₁</li>
+                    <li>Oktanti VIII: (-, +, -) - poshtë majtas, nën π₁</li>
+                </ul>
+                
+                <p><strong>Përgjigjet:</strong></p>
+                <ul>
+                    <li><strong>A(3, 2, 4):</strong> (+, +, +) → Oktanti I</li>
+                    <li><strong>B(2, -3, 2):</strong> (+, -, +) → Oktanti II</li>
+                    <li><strong>C(-2, 5, 4):</strong> (-, +, +) → Oktanti IV</li>
+                    <li><strong>D(-4, -2, 5):</strong> (-, -, +) → Oktanti III</li>
+                    <li><strong>E(-4, -2, -3):</strong> (-, -, -) → Oktanti VII</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="diagram">
+            <svg width="600" height="500" viewBox="0 0 600 500">
+                <g transform="translate(300, 250)">
+                    <!-- Boshtet -->
+                    <line x1="-250" y1="0" x2="250" y2="0" class="axis"/>
+                    <line x1="0" y1="-200" x2="0" y2="200" class="axis"/>
+                    <text x="260" y="5" class="axis-label">x</text>
+                    <text x="5" y="215" class="axis-label">y</text>
+                    <text x="5" y="-210" class="axis-label">-y</text>
+                    
+                    <!-- Rrjeta -->
+                    <g opacity="0.3">
+                        <line x1="-250" y1="100" x2="250" y2="100" class="grid-line"/>
+                        <line x1="-250" y1="-100" x2="250" y2="-100" class="grid-line"/>
+                        <line x1="-100" y1="-200" x2="-100" y2="200" class="grid-line"/>
+                        <line x1="100" y1="-200" x2="100" y2="200" class="grid-line"/>
+                    </g>
+                    
+                    <!-- Shenjat e shkallës -->
+                    <text x="20" y="15" style="font-size: 10px; fill: #666;">1 njësi = 20px</text>
+                    
+                    <!-- Pika A(3, 2, 4) - Oktanti I (poshtë djathtas) -->
+                    <circle cx="60" cy="40" r="5" class="point"/>
+                    <text x="68" y="45" class="point-label">A(3,2,4) - I</text>
+                    
+                    <!-- Pika B(2, -3, 2) - Oktanti II (lart djathtas) -->
+                    <circle cx="40" cy="-60" r="5" class="point"/>
+                    <text x="48" y="-55" class="point-label">B(2,-3,2) - II</text>
+                    
+                    <!-- Pika C(-2, 5, 4) - Oktanti IV (poshtë majtas) -->
+                    <circle cx="-40" cy="100" r="5" class="point"/>
+                    <text x="-130" y="105" class="point-label">C(-2,5,4) - IV</text>
+                    
+                    <!-- Pika D(-4, -2, 5) - Oktanti III (lart majtas) -->
+                    <circle cx="-80" cy="-40" r="5" class="point"/>
+                    <text x="-170" y="-35" class="point-label">D(-4,-2,5) - III</text>
+                    
+                    <!-- Pika E(-4, -2, -3) - Oktanti VII (lart majtas, shënim) -->
+                    <circle cx="-80" cy="-40" r="5" style="fill: #9b59b6;"/>
+                    <text x="-190" y="-20" style="fill: #9b59b6; font-size: 11px; font-weight: bold;">E(-4,-2,-3) - VII</text>
+                    <text x="-190" y="-5" style="fill: #9b59b6; font-size: 9px;">(i njëjti proj. π₁ si D)</text>
+                    
+                    <!-- Etiketat e oktanteve -->
+                    <text x="180" y="140" style="font-size: 14px; fill: #888; font-style: italic;">I</text>
+                    <text x="180" y="-120" style="font-size: 14px; fill: #888; font-style: italic;">II</text>
+                    <text x="-200" y="-120" style="font-size: 14px; fill: #888; font-style: italic;">III</text>
+                    <text x="-200" y="140" style="font-size: 14px; fill: #888; font-style: italic;">IV</text>
+                </g>
+            </svg>
+        </div>
+    </div>
+    
+    <!-- Detyra 3 -->
+    <div class="problem-section">
+        <div class="problem">
+            <h2>Detyra 3</h2>
+            <div class="problem-text">
+                Është dhënë pika A(A'', A'''). Të caktohet projeksioni i parë A' i pikës A, kur:
+                <ul>
+                    <li>a) Kur A gjendet në oktantin e I</li>
+                    <li>b) A gjendet në oktantin e II</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="solution">
+            <h3>Zgjidhja</h3>
+            <div class="solution-text">
+                <p>Nëse jepen A''(x, z) dhe A'''(y, z), atëherë A' = (x, y).</p>
+                
+                <!-- Tabela e Oktanteve dhe Kuadranteve -->
+                <div style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); padding: 20px; border-radius: 8px; margin: 20px 0; color: white;">
+                    <h4 style="color: white; text-align: center; margin-bottom: 15px; font-size: 1.1em;">📊 Tabela: Oktantët dhe Kuadrantët në Projeksionin e Parë (π₁)</h4>
+                    <table style="width: 100%; border-collapse: collapse; background: rgba(255,255,255,0.1); border-radius: 5px; overflow: hidden;">
+                        <thead>
+                            <tr style="background: rgba(0,0,0,0.2);">
+                                <th style="padding: 12px; border: 1px solid rgba(255,255,255,0.3); text-align: center;">Oktanti</th>
+                                <th style="padding: 12px; border: 1px solid rgba(255,255,255,0.3); text-align: center;">Shenjat (x, y, z)</th>
+                                <th style="padding: 12px; border: 1px solid rgba(255,255,255,0.3); text-align: center;">Kuadranti në π₁</th>
+                                <th style="padding: 12px; border: 1px solid rgba(255,255,255,0.3); text-align: center;">Pozita</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr style="background: rgba(255,255,255,0.05);">
+                                <td style="padding: 10px; border: 1px solid rgba(255,255,255,0.2); text-align: center; font-weight: bold;">I</td>
+                                <td style="padding: 10px; border: 1px solid rgba(255,255,255,0.2); text-align: center;">(+, +, +)</td>
+                                <td style="padding: 10px; border: 1px solid rgba(255,255,255,0.2); text-align: center; font-weight: bold;">I</td>
+                                <td style="padding: 10px; border: 1px solid rgba(255,255,255,0.2); text-align: center;">Poshtë djathtas</td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 10px; border: 1px solid rgba(255,255,255,0.2); text-align: center; font-weight: bold;">II</td>
+                                <td style="padding: 10px; border: 1px solid rgba(255,255,255,0.2); text-align: center;">(-, +, +)</td>
+                                <td style="padding: 10px; border: 1px solid rgba(255,255,255,0.2); text-align: center; font-weight: bold;">IV</td>
+                                <td style="padding: 10px; border: 1px solid rgba(255,255,255,0.2); text-align: center;">Poshtë majtas</td>
+                            </tr>
+                            <tr style="background: rgba(255,255,255,0.05);">
+                                <td style="padding: 10px; border: 1px solid rgba(255,255,255,0.2); text-align: center; font-weight: bold;">III</td>
+                                <td style="padding: 10px; border: 1px solid rgba(255,255,255,0.2); text-align: center;">(-, -, +)</td>
+                                <td style="padding: 10px; border: 1px solid rgba(255,255,255,0.2); text-align: center; font-weight: bold;">III</td>
+                                <td style="padding: 10px; border: 1px solid rgba(255,255,255,0.2); text-align: center;">Lart majtas</td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 10px; border: 1px solid rgba(255,255,255,0.2); text-align: center; font-weight: bold;">IV</td>
+                                <td style="padding: 10px; border: 1px solid rgba(255,255,255,0.2); text-align: center;">(+, -, +)</td>
+                                <td style="padding: 10px; border: 1px solid rgba(255,255,255,0.2); text-align: center; font-weight: bold;">II</td>
+                                <td style="padding: 10px; border: 1px solid rgba(255,255,255,0.2); text-align: center;">Lart djathtas</td>
+                            </tr>
+                            <tr style="background: rgba(255,255,255,0.05);">
+                                <td style="padding: 10px; border: 1px solid rgba(255,255,255,0.2); text-align: center; font-weight: bold;">V</td>
+                                <td style="padding: 10px; border: 1px solid rgba(255,255,255,0.2); text-align: center;">(+, +, -)</td>
+                                <td style="padding: 10px; border: 1px solid rgba(255,255,255,0.2); text-align: center; font-weight: bold;">I</td>
+                                <td style="padding: 10px; border: 1px solid rgba(255,255,255,0.2); text-align: center;">Poshtë djathtas (nën π₁)</td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 10px; border: 1px solid rgba(255,255,255,0.2); text-align: center; font-weight: bold;">VI</td>
+                                <td style="padding: 10px; border: 1px solid rgba(255,255,255,0.2); text-align: center;">(+, -, -)</td>
+                                <td style="padding: 10px; border: 1px solid rgba(255,255,255,0.2); text-align: center; font-weight: bold;">II</td>
+                                <td style="padding: 10px; border: 1px solid rgba(255,255,255,0.2); text-align: center;">Lart djathtas (nën π₁)</td>
+                            </tr>
+                            <tr style="background: rgba(255,255,255,0.05);">
+                                <td style="padding: 10px; border: 1px solid rgba(255,255,255,0.2); text-align: center; font-weight: bold;">VII</td>
+                                <td style="padding: 10px; border: 1px solid rgba(255,255,255,0.2); text-align: center;">(-, -, -)</td>
+                                <td style="padding: 10px; border: 1px solid rgba(255,255,255,0.2); text-align: center; font-weight: bold;">III</td>
+                                <td style="padding: 10px; border: 1px solid rgba(255,255,255,0.2); text-align: center;">Lart majtas (nën π₁)</td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 10px; border: 1px solid rgba(255,255,255,0.2); text-align: center; font-weight: bold;">VIII</td>
+                                <td style="padding: 10px; border: 1px solid rgba(255,255,255,0.2); text-align: center;">(-, +, -)</td>
+                                <td style="padding: 10px; border: 1px solid rgba(255,255,255,0.2); text-align: center; font-weight: bold;">IV</td>
+                                <td style="padding: 10px; border: 1px solid rgba(255,255,255,0.2); text-align: center;">Poshtë majtas (nën π₁)</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <p style="text-align: center; margin-top: 15px; font-size: 0.9em; opacity: 0.9;">
+                        💡 <strong>Rregull:</strong> Projeksioni i parë A'(x, y) varet vetëm nga shenjat e x dhe y (z përcakton nëse është mbi ose nën π₁)
+                    </p>
+                </div>
+                
+                <p><strong>Pjesa a)</strong> A në oktantin I (x > 0, y > 0, z > 0):</p>
+                <ul>
+                    <li>A' = (x, y) ku x > 0 dhe y > 0</li>
+                    <li>Projeksioni i parë A' ndodhet në kuadrantin I (poshtë djathtas) të rrafshit π₁</li>
+                </ul>
+                
+                <p><strong>Pjesa b)</strong> A në oktantin II (x < 0, y > 0, z > 0):</p>
+                <ul>
+                    <li>A' = (x, y) ku x < 0 dhe y > 0</li>
+                    <li>Projeksioni i parë A' ndodhet në kuadrantin IV (poshtë majtas) të rrafshit π₁</li>
+                </ul>
+                
+                <p><strong>Shembull:</strong> Nëse A''(3, 4) dhe A'''(2, 4):</p>
+                <ul>
+                    <li>Pjesa a: A në oktantin I → A(3, 2, 4), pra A'(3, 2) në kuadrantin I (poshtë djathtas)</li>
+                    <li>Pjesa b: A në oktantin II → A(-3, 2, 4), pra A'(-3, 2) në kuadrantin IV (poshtë majtas)</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="diagram">
+            <svg width="800" height="400" viewBox="0 0 800 400">
+                <!-- Pjesa a -->
+                <g transform="translate(200, 200)">
+                    <text x="-80" y="-180" class="axis-label">Pjesa a) Oktanti I</text>
+                    <!-- Boshtet -->
+                    <line x1="-150" y1="0" x2="150" y2="0" class="axis"/>
+                    <line x1="0" y1="-150" x2="0" y2="150" class="axis"/>
+                    <text x="160" y="5" class="axis-label">x</text>
+                    <text x="5" y="165" class="axis-label">y</text>
+                    
+                    <!-- Rrjeta -->
+                    <g opacity="0.3">
+                        <line x1="-150" y1="50" x2="150" y2="50" class="grid-line"/>
+                        <line x1="-150" y1="-50" x2="150" y2="-50" class="grid-line"/>
+                        <line x1="-50" y1="-150" x2="-50" y2="150" class="grid-line"/>
+                        <line x1="50" y1="-150" x2="50" y2="150" class="grid-line"/>
+                    </g>
+                    
+                    <!-- Pika A' në kuadrantin I (poshtë djathtas) -->
+                    <circle cx="60" cy="40" r="5" class="point"/>
+                    <text x="68" y="45" class="point-label">A'(x, y)</text>
+                    <text x="40" y="140" style="font-size: 11px; fill: #666;">x > 0, y > 0</text>
+                    
+                    <!-- Vijat e projeksionit -->
+                    <line x1="60" y1="0" x2="60" y2="40" class="projection-line"/>
+                    <line x1="0" y1="40" x2="60" y2="40" class="projection-line"/>
+                    
+                    <!-- Etiketa e kuadrantit -->
+                    <text x="100" y="100" style="font-size: 16px; fill: #888; font-style: italic;">I</text>
+                </g>
+                
+                <!-- Pjesa b -->
+                <g transform="translate(600, 200)">
+                    <text x="-80" y="-180" class="axis-label">Pjesa b) Oktanti II</text>
+                    <!-- Boshtet -->
+                    <line x1="-150" y1="0" x2="150" y2="0" class="axis"/>
+                    <line x1="0" y1="-150" x2="0" y2="150" class="axis"/>
+                    <text x="160" y="5" class="axis-label">x</text>
+                    <text x="5" y="165" class="axis-label">y</text>
+                    
+                    <!-- Rrjeta -->
+                    <g opacity="0.3">
+                        <line x1="-150" y1="50" x2="150" y2="50" class="grid-line"/>
+                        <line x1="-150" y1="-50" x2="150" y2="-50" class="grid-line"/>
+                        <line x1="-50" y1="-150" x2="-50" y2="150" class="grid-line"/>
+                        <line x1="50" y1="-150" x2="50" y2="150" class="grid-line"/>
+                    </g>
+                    
+                    <!-- Pika A' në kuadrantin IV (poshtë majtas) -->
+                    <circle cx="-60" cy="40" r="5" class="point"/>
+                    <text x="-115" y="45" class="point-label">A'(x, y)</text>
+                    <text x="-120" y="140" style="font-size: 11px; fill: #666;">x < 0, y > 0</text>
+                    
+                    <!-- Vijat e projeksionit -->
+                    <line x1="-60" y1="0" x2="-60" y2="40" class="projection-line"/>
+                    <line x1="0" y1="40" x2="-60" y2="40" class="projection-line"/>
+                    
+                    <!-- Etiketa e kuadrantit -->
+                    <text x="-120" y="100" style="font-size: 16px; fill: #888; font-style: italic;">IV</text>
+                </g>
+            </svg>
+        </div>
+    </div>
+    
+    <!-- Detyra 4 -->
+    <div class="problem-section">
+        <div class="problem">
+            <h2>Detyra 4</h2>
+            <div class="problem-text">
+                Të vizatohen të tri projeksionet e segmentit AB dhe të gjendet madhësia e vërtetë e tij kur janë dhënë:
+                <ul>
+                    <li>a) A(1, 3, 2), B(5, 1, 1)</li>
+                    <li>b) A(-1, 2, 3), B(2, 2, 2)</li>
+                    <li>c) A(2, -3, -4), B(2, -1, 2)</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="solution">
+            <h3>Zgjidhja</h3>
+            <div class="solution-text">
+                <p>Madhësia e vërtetë e segmentit AB llogaritet duke përdorur formulën e distancës në 3D:</p>
+                <p><strong>|AB| = √[(x₂-x₁)² + (y₂-y₁)² + (z₂-z₁)²]</strong></p>
+                
+                <p><strong>Pjesa a)</strong> A(1, 3, 2), B(5, 1, 1):</p>
+                <ul>
+                    <li>Δx = 5 - 1 = 4, Δy = 1 - 3 = -2, Δz = 1 - 2 = -1</li>
+                    <li>|AB| = √(4² + (-2)² + (-1)²) = √(16 + 4 + 1) = √21 ≈ 4.58 njësi</li>
+                    <li>Projeksionet: A'(1,3), B'(5,1); A''(1,2), B''(5,1); A'''(3,2), B'''(1,1)</li>
+                </ul>
+                
+                <p><strong>Pjesa b)</strong> A(-1, 2, 3), B(2, 2, 2):</p>
+                <ul>
+                    <li>Δx = 2 - (-1) = 3, Δy = 2 - 2 = 0, Δz = 2 - 3 = -1</li>
+                    <li>|AB| = √(3² + 0² + (-1)²) = √(9 + 0 + 1) = √10 ≈ 3.16 njësi</li>
+                    <li>Projeksionet: A'(-1,2), B'(2,2); A''(-1,3), B''(2,2); A'''(2,3), B'''(2,2)</li>
+                    <li>Vërejtje: Segmenti është paralel me rrafshin π₂ (koordinata y konstante)</li>
+                </ul>
+                
+                <p><strong>Pjesa c)</strong> A(2, -3, -4), B(2, -1, 2):</p>
+                <ul>
+                    <li>Δx = 2 - 2 = 0, Δy = -1 - (-3) = 2, Δz = 2 - (-4) = 6</li>
+                    <li>|AB| = √(0² + 2² + 6²) = √(0 + 4 + 36) = √40 ≈ 6.32 njësi</li>
+                    <li>Projeksionet: A'(2,-3), B'(2,-1); A''(2,-4), B''(2,2); A'''(-3,-4), B'''(-1,2)</li>
+                    <li>Vërejtje: Segmenti është paralel me rrafshin π₁ (koordinata x konstante)</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="diagram">
+            <!-- Pjesa a: Diagram i Bashkuar Monge -->
+            <h4 style="text-align: center; color: #2c3e50; margin: 20px 0;">a) A(1, 3, 2), B(5, 1, 1) - Projeksionet e Bashkuara</h4>
+            <svg width="900" height="600" viewBox="0 0 900 600">
+                <g transform="translate(450, 300)">
+                    <!-- Vija e tokës (Ground Line - x axis) -->
+                    <line x1="-400" y1="0" x2="400" y2="0" class="axis" stroke-width="3"/>
+                    <text x="410" y="5" class="axis-label" style="font-size: 14px;">x</text>
+                    
+                    <!-- Projeksioni i Parë π₁ (poshtë - xy plane) -->
+                    <text x="-380" y="40" style="font-size: 12px; fill: #3498db; font-weight: bold;">π₁ (xy)</text>
+                    <line x1="0" y1="0" x2="0" y2="250" class="axis" stroke="#3498db" stroke-dasharray="5,5"/>
+                    <text x="5" y="260" style="fill: #3498db; font-size: 12px;">y</text>
+                    
+                    <!-- A' në π₁ -->
+                    <circle cx="20" cy="60" r="6" class="point"/>
+                    <text x="28" y="65" class="point-label" style="font-size: 12px;">A'(1,3)</text>
+                    
+                    <!-- B' në π₁ -->
+                    <circle cx="100" cy="20" r="6" class="point"/>
+                    <text x="108" y="25" class="point-label" style="font-size: 12px;">B'(5,1)</text>
+                    
+                    <!-- Segmenti A'B' -->
+                    <line x1="20" y1="60" x2="100" y2="20" class="line" stroke-width="2.5" stroke="#3498db"/>
+                    
+                    <!-- Projeksioni i Dytë π₂ (lart - xz plane) -->
+                    <text x="-380" y="-40" style="font-size: 12px; fill: #27ae60; font-weight: bold;">π₂ (xz)</text>
+                    <line x1="0" y1="0" x2="0" y2="-250" class="axis" stroke="#27ae60" stroke-dasharray="5,5"/>
+                    <text x="5" y="-260" style="fill: #27ae60; font-size: 12px;">z</text>
+                    
+                    <!-- A'' në π₂ -->
+                    <circle cx="20" cy="-40" r="6" class="point"/>
+                    <text x="28" y="-35" class="point-label" style="font-size: 12px;">A''(1,2)</text>
+                    
+                    <!-- B'' në π₂ -->
+                    <circle cx="100" cy="-20" r="6" class="point"/>
+                    <text x="108" y="-15" class="point-label" style="font-size: 12px;">B''(5,1)</text>
+                    
+                    <!-- Segmenti A''B'' -->
+                    <line x1="20" y1="-40" x2="100" y2="-20" class="line" stroke-width="2.5" stroke="#27ae60"/>
+                    
+                    <!-- Vijat e projeksionit (projection lines) -->
+                    <!-- Nga A' dhe A'' -->
+                    <line x1="20" y1="-40" x2="20" y2="60" class="projection-line"/>
+                    <!-- Nga B' dhe B'' -->
+                    <line x1="100" y1="-20" x2="100" y2="20" class="projection-line"/>
+                    
+                    <!-- Legjenda -->
+                    <text x="-380" y="220" style="font-size: 11px; fill: #666;">Madhësia e vërtetë:</text>
+                    <text x="-380" y="235" style="font-size: 13px; fill: #e74c3c; font-weight: bold;">|AB| = √21 ≈ 4.58</text>
+                </g>
+            </svg>
+            
+            <!-- Pjesa b: Diagram i Bashkuar Monge -->
+            <h4 style="text-align: center; color: #2c3e50; margin: 40px 0 20px 0;">b) A(-1, 2, 3), B(2, 2, 2) - Projeksionet e Bashkuara (Paralel me π₂)</h4>
+            <svg width="900" height="600" viewBox="0 0 900 600">
+                <g transform="translate(450, 300)">
+                    <!-- Vija e tokës (Ground Line - x axis) -->
+                    <line x1="-400" y1="0" x2="400" y2="0" class="axis" stroke-width="3"/>
+                    <text x="410" y="5" class="axis-label" style="font-size: 14px;">x</text>
+                    
+                    <!-- Projeksioni i Parë π₁ (poshtë - xy plane) -->
+                    <text x="-380" y="40" style="font-size: 12px; fill: #3498db; font-weight: bold;">π₁ (xy)</text>
+                    <line x1="0" y1="0" x2="0" y2="250" class="axis" stroke="#3498db" stroke-dasharray="5,5"/>
+                    <text x="5" y="260" style="fill: #3498db; font-size: 12px;">y</text>
+                    
+                    <!-- A' në π₁ -->
+                    <circle cx="-20" cy="40" r="6" class="point"/>
+                    <text x="-50" y="45" class="point-label" style="font-size: 12px;">A'(-1,2)</text>
+                    
+                    <!-- B' në π₁ -->
+                    <circle cx="40" cy="40" r="6" class="point"/>
+                    <text x="48" y="45" class="point-label" style="font-size: 12px;">B'(2,2)</text>
+                    
+                    <!-- Segmenti A'B' (horizontal - y konstante) -->
+                    <line x1="-20" y1="40" x2="40" y2="40" class="line" stroke-width="2.5" stroke="#3498db"/>
+                    <text x="-10" y="65" style="font-size: 10px; fill: #3498db;">y konstante</text>
+                    
+                    <!-- Projeksioni i Dytë π₂ (lart - xz plane) -->
+                    <text x="-380" y="-40" style="font-size: 12px; fill: #27ae60; font-weight: bold;">π₂ (xz)</text>
+                    <line x1="0" y1="0" x2="0" y2="-250" class="axis" stroke="#27ae60" stroke-dasharray="5,5"/>
+                    <text x="5" y="-260" style="fill: #27ae60; font-size: 12px;">z</text>
+                    
+                    <!-- A'' në π₂ -->
+                    <circle cx="-20" cy="-60" r="6" class="point"/>
+                    <text x="-50" y="-55" class="point-label" style="font-size: 12px;">A''(-1,3)</text>
+                    
+                    <!-- B'' në π₂ -->
+                    <circle cx="40" cy="-40" r="6" class="point"/>
+                    <text x="48" y="-35" class="point-label" style="font-size: 12px;">B''(2,2)</text>
+                    
+                    <!-- Segmenti A''B'' - MADHËSIA E VËRTETË -->
+                    <line x1="-20" y1="-60" x2="40" y2="-40" class="line" stroke-width="4" stroke="#e74c3c"/>
+                    <text x="-10" y="-70" style="font-size: 11px; fill: #e74c3c; font-weight: bold;">✓ Madhësia e vërtetë!</text>
+                    
+                    <!-- Vijat e projeksionit -->
+                    <line x1="-20" y1="-60" x2="-20" y2="40" class="projection-line"/>
+                    <line x1="40" y1="-40" x2="40" y2="40" class="projection-line"/>
+                    
+                    <!-- Legjenda -->
+                    <text x="-380" y="220" style="font-size: 11px; fill: #666;">Pasi AB || π₂:</text>
+                    <text x="-380" y="235" style="font-size: 13px; fill: #e74c3c; font-weight: bold;">|AB| = |A''B''| = √10 ≈ 3.16</text>
+                </g>
+            </svg>
+            
+            <!-- Pjesa c: Diagram i Bashkuar Monge -->
+            <h4 style="text-align: center; color: #2c3e50; margin: 40px 0 20px 0;">c) A(2, -3, -4), B(2, -1, 2) - Projeksionet e Bashkuara (Paralel me π₁)</h4>
+            <svg width="900" height="600" viewBox="0 0 900 600">
+                <g transform="translate(450, 300)">
+                    <!-- Vija e tokës (Ground Line - x axis) -->
+                    <line x1="-400" y1="0" x2="400" y2="0" class="axis" stroke-width="3"/>
+                    <text x="410" y="5" class="axis-label" style="font-size: 14px;">x</text>
+                    
+                    <!-- Projeksioni i Parë π₁ (poshtë - xy plane) -->
+                    <text x="-380" y="40" style="font-size: 12px; fill: #3498db; font-weight: bold;">π₁ (xy)</text>
+                    <line x1="0" y1="0" x2="0" y2="250" class="axis" stroke="#3498db" stroke-dasharray="5,5"/>
+                    <text x="5" y="-260" style="fill: #3498db; font-size: 12px;">-y</text>
+                    
+                    <!-- A' në π₁ -->
+                    <circle cx="40" cy="-60" r="6" class="point"/>
+                    <text x="48" y="-55" class="point-label" style="font-size: 12px;">A'(2,-3)</text>
+                    
+                    <!-- B' në π₁ -->
+                    <circle cx="40" cy="-20" r="6" class="point"/>
+                    <text x="48" y="-15" class="point-label" style="font-size: 12px;">B'(2,-1)</text>
+                    
+                    <!-- Segmenti A'B' (vertikal - x konstante) -->
+                    <line x1="40" y1="-60" x2="40" y2="-20" class="line" stroke-width="2.5" stroke="#3498db"/>
+                    <text x="55" y="-35" style="font-size: 10px; fill: #3498db;">x konstante</text>
+                    
+                    <!-- Projeksioni i Dytë π₂ (lart - xz plane) -->
+                    <text x="-380" y="-40" style="font-size: 12px; fill: #27ae60; font-weight: bold;">π₂ (xz)</text>
+                    <line x1="0" y1="0" x2="0" y2="-250" class="axis" stroke="#27ae60" stroke-dasharray="5,5"/>
+                    <text x="5" y="-260" style="fill: #27ae60; font-size: 12px;">z</text>
+                    
+                    <!-- A'' në π₂ -->
+                    <circle cx="40" cy="80" r="6" class="point"/>
+                    <text x="48" y="85" class="point-label" style="font-size: 12px;">A''(2,-4)</text>
+                    
+                    <!-- B'' në π₂ -->
+                    <circle cx="40" cy="-40" r="6" class="point"/>
+                    <text x="48" y="-35" class="point-label" style="font-size: 12px;">B''(2,2)</text>
+                    
+                    <!-- Segmenti A''B'' (vertikal - x konstante) -->
+                    <line x1="40" y1="80" x2="40" y2="-40" class="line" stroke-width="2.5" stroke="#27ae60"/>
+                    <text x="55" y="20" style="font-size: 10px; fill: #27ae60;">x konstante</text>
+                    
+                    <!-- Vijat e projeksionit -->
+                    <line x1="40" y1="80" x2="40" y2="-60" class="projection-line"/>
+                    
+                    <!-- Projeksioni i Tretë π₃ në anë (për të treguar madhësinë e vërtetë) -->
+                    <g transform="translate(-300, 0)">
+                        <text x="0" y="-230" style="font-size: 12px; fill: #e74c3c; font-weight: bold;">π₃ (yz)</text>
+                        <line x1="0" y1="-200" x2="0" y2="200" class="axis" stroke="#e74c3c"/>
+                        <line x1="-100" y1="0" x2="100" y2="0" class="axis" stroke="#e74c3c" stroke-dasharray="5,5"/>
+                        <text x="105" y="5" style="fill: #e74c3c; font-size: 11px;">y</text>
+                        <text x="5" y="-210" style="fill: #e74c3c; font-size: 11px;">z</text>
+                        
+                        <!-- A''' -->
+                        <circle cx="-60" cy="80" r="6" style="fill: #e74c3c;"/>
+                        <text x="-100" y="85" style="fill: #e74c3c; font-size: 12px; font-weight: bold;">A'''(-3,-4)</text>
+                        
+                        <!-- B''' -->
+                        <circle cx="-20" cy="-40" r="6" style="fill: #e74c3c;"/>
+                        <text x="-10" y="-35" style="fill: #e74c3c; font-size: 12px; font-weight: bold;">B'''(-1,2)</text>
+                        
+                        <!-- Segmenti A'''B''' - MADHËSIA E VËRTETË -->
+                        <line x1="-60" y1="80" x2="-20" y2="-40" stroke="#e74c3c" stroke-width="4"/>
+                        <text x="-80" y="110" style="font-size: 11px; fill: #e74c3c; font-weight: bold;">✓ Madhësia e vërtetë!</text>
+                    </g>
+                    
+                    <!-- Legjenda -->
+                    <text x="-380" y="220" style="font-size: 11px; fill: #666;">Pasi AB || π₁:</text>
+                    <text x="-380" y="235" style="font-size: 13px; fill: #e74c3c; font-weight: bold;">|AB| = |A'''B'''| = √40 ≈ 6.32</text>
+                </g>
+            </svg>
+        </div>
+    </div>
+    
+    <!-- Detyra 5 -->
+    <div class="problem-section">
+        <div class="problem">
+            <h2>Detyra 5</h2>
+            <div class="problem-text">
+                Të konstruktohen të tri projeksionet e drejtëzës a=PQ[P(3, 3, 5), Q(1, 4, 3)]! Të caktohen gjurmat e drejtëzës a dhe këndet e pjerrësisë së saj ndaj rrafsheve të projeksioneve π₁, π₂, π₃!
+            </div>
+        </div>
+        
+        <div class="solution">
+            <h3>Zgjidhja</h3>
+            <div class="solution-text">
+                <p><strong>Vektori drejtues:</strong> d = Q - P = (-2, 1, -2)</p>
+                
+                <p><strong>Ekuacionet parametrike:</strong></p>
+                <ul>
+                    <li>x = 3 - 2t</li>
+                    <li>y = 3 + t</li>
+                    <li>z = 5 - 2t</li>
+                </ul>
+                
+                <p><strong>Gjurmat (prerjet me rrafshet e projeksionit):</strong></p>
+                <ul>
+                    <li><strong>A₁</strong> (gjurma me π₁, z=0): 5 - 2t = 0 → t = 2.5 → A₁(-2, 5.5, 0)</li>
+                    <li><strong>A₂</strong> (gjurma me π₂, y=0): 3 + t = 0 → t = -3 → A₂(9, 0, 11)</li>
+                    <li><strong>A₃</strong> (gjurma me π₃, x=0): 3 - 2t = 0 → t = 1.5 → A₃(0, 4.5, 2)</li>
+                </ul>
+                
+                <p><strong>Këndet e pjerrësisë:</strong></p>
+                <p>Duke përdorur vektorin drejtues d = (-2, 1, -2) me |d| = √(4+1+4) = 3:</p>
+                <ul>
+                    <li><strong>α₁</strong> (këndi me π₁): sin(α₁) = |komponenti z|/|d| = 2/3 → α₁ ≈ 41.8°</li>
+                    <li><strong>α₂</strong> (këndi me π₂): sin(α₂) = |komponenti y|/|d| = 1/3 → α₂ ≈ 19.5°</li>
+                    <li><strong>α₃</strong> (këndi me π₃): sin(α₃) = |komponenti x|/|d| = 2/3 → α₃ ≈ 41.8°</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="diagram">
+            <h4 style="text-align: center; color: #2c3e50; margin: 20px 0;">Projeksionet e Bashkuara të Drejtëzës a = PQ</h4>
+            <svg width="900" height="600" viewBox="0 0 900 600">
+                <g transform="translate(450, 300)">
+                    <!-- Vija e tokës (Ground Line - x axis) -->
+                    <line x1="-400" y1="0" x2="400" y2="0" class="axis" stroke-width="3"/>
+                    <text x="410" y="5" class="axis-label" style="font-size: 14px;">x</text>
+                    
+                    <!-- Projeksioni i Parë π₁ (poshtë - xy plane) -->
+                    <text x="-380" y="40" style="font-size: 12px; fill: #3498db; font-weight: bold;">π₁ (xy)</text>
+                    <line x1="0" y1="0" x2="0" y2="250" class="axis" stroke="#3498db" stroke-dasharray="5,5"/>
+                    <text x="5" y="260" style="fill: #3498db; font-size: 12px;">y</text>
+                    
+                    <!-- P' në π₁ -->
+                    <circle cx="60" cy="60" r="6" class="point"/>
+                    <text x="68" y="65" class="point-label" style="font-size: 12px;">P'(3,3)</text>
+                    
+                    <!-- Q' në π₁ -->
+                    <circle cx="20" cy="80" r="6" class="point"/>
+                    <text x="28" y="85" class="point-label" style="font-size: 12px;">Q'(1,4)</text>
+                    
+                    <!-- Segmenti P'Q' -->
+                    <line x1="60" y1="60" x2="20" y2="80" class="line" stroke-width="2.5" stroke="#3498db"/>
+                    
+                    <!-- Gjurma A₁ (z=0) - e zgjatur -->
+                    <line x1="110" y1="10" x2="-40" y2="110" class="line" stroke-dasharray="5,5" opacity="0.3" stroke="#3498db"/>
+                    <circle cx="-40" cy="110" r="6" style="fill: #27ae60;"/>
+                    <text x="-95" y="125" style="fill: #27ae60; font-size: 11px; font-weight: bold;">A₁(-2,5.5,0)</text>
+                    
+                    <!-- Projeksioni i Dytë π₂ (lart - xz plane) -->
+                    <text x="-380" y="-40" style="font-size: 12px; fill: #27ae60; font-weight: bold;">π₂ (xz)</text>
+                    <line x1="0" y1="0" x2="0" y2="-250" class="axis" stroke="#27ae60" stroke-dasharray="5,5"/>
+                    <text x="5" y="-260" style="fill: #27ae60; font-size: 12px;">z</text>
+                    
+                    <!-- P'' në π₂ -->
+                    <circle cx="60" cy="-100" r="6" class="point"/>
+                    <text x="68" y="-95" class="point-label" style="font-size: 12px;">P''(3,5)</text>
+                    
+                    <!-- Q'' në π₂ -->
+                    <circle cx="20" cy="-60" r="6" class="point"/>
+                    <text x="28" y="-55" class="point-label" style="font-size: 12px;">Q''(1,3)</text>
+                    
+                    <!-- Segmenti P''Q'' -->
+                    <line x1="60" y1="-100" x2="20" y2="-60" class="line" stroke-width="2.5" stroke="#27ae60"/>
+                    
+                    <!-- Gjurma A₂ (y=0) - e zgjatur -->
+                    <line x1="-60" y1="20" x2="180" y2="-220" class="line" stroke-dasharray="5,5" opacity="0.3" stroke="#27ae60"/>
+                    <circle cx="180" cy="-220" r="6" style="fill: #27ae60;"/>
+                    <text x="188" y="-215" style="fill: #27ae60; font-size: 11px; font-weight: bold;">A₂(9,0,11)</text>
+                    
+                    <!-- Vijat e projeksionit (projection lines) -->
+                    <!-- Nga P' dhe P'' -->
+                    <line x1="60" y1="-100" x2="60" y2="60" class="projection-line"/>
+                    <!-- Nga Q' dhe Q'' -->
+                    <line x1="20" y1="-60" x2="20" y2="80" class="projection-line"/>
+                    
+                    <!-- Projeksioni i Tretë π₃ në anë -->
+                    <g transform="translate(-300, 0)">
+                        <text x="0" y="-230" style="font-size: 12px; fill: #e74c3c; font-weight: bold;">π₃ (yz)</text>
+                        <line x1="0" y1="-200" x2="0" y2="200" class="axis" stroke="#e74c3c"/>
+                        <line x1="-100" y1="0" x2="100" y2="0" class="axis" stroke="#e74c3c" stroke-dasharray="5,5"/>
+                        <text x="105" y="5" style="fill: #e74c3c; font-size: 11px;">y</text>
+                        <text x="5" y="-210" style="fill: #e74c3c; font-size: 11px;">z</text>
+                        
+                        <!-- P''' -->
+                        <circle cx="60" cy="-100" r="6" style="fill: #e74c3c;"/>
+                        <text x="68" y="-95" style="fill: #e74c3c; font-size: 12px; font-weight: bold;">P'''(3,5)</text>
+                        
+                        <!-- Q''' -->
+                        <circle cx="80" cy="-60" r="6" style="fill: #e74c3c;"/>
+                        <text x="88" y="-55" style="fill: #e74c3c; font-size: 12px; font-weight: bold;">Q'''(4,3)</text>
+                        
+                        <!-- Segmenti P'''Q''' -->
+                        <line x1="60" y1="-100" x2="80" y2="-60" stroke="#e74c3c" stroke-width="2.5"/>
+                        
+                        <!-- Gjurma A₃ (x=0) -->
+                        <circle cx="90" cy="-40" r="6" style="fill: #27ae60;"/>
+                        <text x="98" y="-35" style="fill: #27ae60; font-size: 11px; font-weight: bold;">A₃(0,4.5,2)</text>
+                        
+                        <!-- Vija e zgjatur për A₃ -->
+                        <line x1="50" y1="-120" x2="100" y2="-20" stroke="#e74c3c" stroke-dasharray="5,5" opacity="0.3"/>
+                    </g>
+                    
+                    <!-- Legjenda -->
+                    <text x="-380" y="210" style="font-size: 11px; fill: #666;">Këndet e pjerrësisë:</text>
+                    <text x="-380" y="225" style="font-size: 11px; fill: #666;">α₁ ≈ 41.8°, α₂ ≈ 19.5°, α₃ ≈ 41.8°</text>
+                    <text x="-380" y="240" style="font-size: 11px; fill: #666;">d = (-2, 1, -2), |d| = 3</text>
+                </g>
+            </svg>
+        </div>
+    </div>
+    
+    <!-- Detyra 6 -->
+    <div class="problem-section">
+        <div class="problem">
+            <h2>Detyra 6</h2>
+            <div class="problem-text">
+                Të konstruktohen projeksionet e drejtëzës a=A₁A₂ e cila është dhënë me gjurmat A₁ dhe A₂ kur është:
+                <ul>
+                    <li>a) A₁(3, 3, 0), A₂(6, 0, 5)</li>
+                    <li>b) A₁(5, 1, 0), A₂(7, 0, -3)</li>
+                    <li>c) A₁(3, -3, 0), A₂(-1, 0, -4)</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="solution">
+            <h3>Zgjidhja</h3>
+            <div class="solution-text">
+                <p>A₁ është gjurma me π₁ (z=0), A₂ është gjurma me π₂ (y=0). Drejtëza kalon nëpër këto dy gjurmë.</p>
+                
+                <p><strong>Pjesa a)</strong> A₁(3, 3, 0), A₂(6, 0, 5):</p>
+                <ul>
+                    <li>Vektori drejtues: d = A₂ - A₁ = (3, -3, 5)</li>
+                    <li>Projeksioni i parë a': Vija nga (3,3) në (6,0) në rrafshin xy</li>
+                    <li>Projeksioni i dytë a'': Vija nga (3,0) në (6,5) në rrafshin xz</li>
+                </ul>
+                
+                <p><strong>Pjesa b)</strong> A₁(5, 1, 0), A₂(7, 0, -3):</p>
+                <ul>
+                    <li>Vektori drejtues: d = (2, -1, -3)</li>
+                    <li>Drejtëza shkon në z negativ (nën rrafshin π₁)</li>
+                    <li>A₂ ka z=-3, pra është nën π₁</li>
+                </ul>
+                
+                <p><strong>Pjesa c)</strong> A₁(3, -3, 0), A₂(-1, 0, -4):</p>
+                <ul>
+                    <li>Vektori drejtues: d = (-4, 3, -4)</li>
+                    <li>Drejtëza kalon në rajonet negative y dhe z</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="diagram">
+            <!-- Pjesa a: Diagram i Bashkuar Monge -->
+            <h4 style="text-align: center; color: #2c3e50; margin: 20px 0;">a) A₁(3, 3, 0), A₂(6, 0, 5) - Projeksionet e Bashkuara</h4>
+            <svg width="900" height="600" viewBox="0 0 900 600">
+                <g transform="translate(450, 300)">
+                    <!-- Vija e tokës (Ground Line - x axis) -->
+                    <line x1="-400" y1="0" x2="400" y2="0" class="axis" stroke-width="3"/>
+                    <text x="410" y="5" class="axis-label" style="font-size: 14px;">x</text>
+                    
+                    <!-- Projeksioni i Parë π₁ (poshtë - xy plane) -->
+                    <text x="-380" y="40" style="font-size: 12px; fill: #3498db; font-weight: bold;">π₁ (xy)</text>
+                    <line x1="0" y1="0" x2="0" y2="250" class="axis" stroke="#3498db" stroke-dasharray="5,5"/>
+                    <text x="5" y="260" style="fill: #3498db; font-size: 12px;">y</text>
+                    
+                    <!-- A₁ në π₁ (gjurma) -->
+                    <circle cx="60" cy="60" r="6" style="fill: #27ae60;"/>
+                    <text x="68" y="65" style="fill: #27ae60; font-size: 12px; font-weight: bold;">A₁(3,3,0)</text>
+                    
+                    <!-- a' projeksioni në π₁ - vija nga (3,3) në (6,0) -->
+                    <line x1="60" y1="60" x2="120" y2="0" class="line" stroke-width="2.5" stroke="#3498db"/>
+                    <text x="80" y="35" style="fill: #3498db; font-size: 11px;">a'</text>
+                    
+                    <!-- Projeksioni i Dytë π₂ (lart - xz plane) -->
+                    <text x="-380" y="-40" style="font-size: 12px; fill: #27ae60; font-weight: bold;">π₂ (xz)</text>
+                    <line x1="0" y1="0" x2="0" y2="-250" class="axis" stroke="#27ae60" stroke-dasharray="5,5"/>
+                    <text x="5" y="-260" style="fill: #27ae60; font-size: 12px;">z</text>
+                    
+                    <!-- A₂ në π₂ (gjurma) -->
+                    <circle cx="120" cy="-100" r="6" style="fill: #27ae60;"/>
+                    <text x="128" y="-95" style="fill: #27ae60; font-size: 12px; font-weight: bold;">A₂(6,0,5)</text>
+                    
+                    <!-- a'' projeksioni në π₂ - vija nga (3,0) në (6,5) -->
+                    <line x1="60" y1="0" x2="120" y2="-100" class="line" stroke-width="2.5" stroke="#27ae60"/>
+                    <text x="80" y="-45" style="fill: #27ae60; font-size: 11px;">a''</text>
+                    
+                    <!-- Vijat e projeksionit (projection lines) -->
+                    <line x1="60" y1="0" x2="60" y2="60" class="projection-line"/>
+                    <line x1="120" y1="-100" x2="120" y2="0" class="projection-line"/>
+                    
+                    <!-- Legjenda -->
+                    <text x="-380" y="220" style="font-size: 11px; fill: #666;">Vektori drejtues:</text>
+                    <text x="-380" y="235" style="font-size: 11px; fill: #666;">d = (3, -3, 5)</text>
+                </g>
+            </svg>
+            
+            <!-- Pjesa b: Diagram i Bashkuar Monge -->
+            <h4 style="text-align: center; color: #2c3e50; margin: 40px 0 20px 0;">b) A₁(5, 1, 0), A₂(7, 0, -3) - Projeksionet e Bashkuara</h4>
+            <svg width="900" height="600" viewBox="0 0 900 600">
+                <g transform="translate(450, 300)">
+                    <!-- Vija e tokës (Ground Line - x axis) -->
+                    <line x1="-400" y1="0" x2="400" y2="0" class="axis" stroke-width="3"/>
+                    <text x="410" y="5" class="axis-label" style="font-size: 14px;">x</text>
+                    
+                    <!-- Projeksioni i Parë π₁ (poshtë - xy plane) -->
+                    <text x="-380" y="40" style="font-size: 12px; fill: #3498db; font-weight: bold;">π₁ (xy)</text>
+                    <line x1="0" y1="0" x2="0" y2="250" class="axis" stroke="#3498db" stroke-dasharray="5,5"/>
+                    <text x="5" y="260" style="fill: #3498db; font-size: 12px;">y</text>
+                    
+                    <!-- A₁ në π₁ (gjurma) -->
+                    <circle cx="100" cy="20" r="6" style="fill: #27ae60;"/>
+                    <text x="108" y="25" style="fill: #27ae60; font-size: 12px; font-weight: bold;">A₁(5,1,0)</text>
+                    
+                    <!-- a' projeksioni në π₁ -->
+                    <line x1="100" y1="20" x2="140" y2="0" class="line" stroke-width="2.5" stroke="#3498db"/>
+                    <text x="110" y="15" style="fill: #3498db; font-size: 11px;">a'</text>
+                    
+                    <!-- Projeksioni i Dytë π₂ (lart - xz plane) -->
+                    <text x="-380" y="-40" style="font-size: 12px; fill: #27ae60; font-weight: bold;">π₂ (xz)</text>
+                    <line x1="0" y1="0" x2="0" y2="-250" class="axis" stroke="#27ae60" stroke-dasharray="5,5"/>
+                    <text x="5" y="-260" style="fill: #27ae60; font-size: 12px;">z</text>
+                    
+                    <!-- A₂ në π₂ (gjurma) z=-3 (poshtë π₁) -->
+                    <circle cx="140" cy="60" r="6" style="fill: #27ae60;"/>
+                    <text x="148" y="65" style="fill: #27ae60; font-size: 12px; font-weight: bold;">A₂(7,0,-3)</text>
+                    
+                    <!-- a'' projeksioni në π₂ -->
+                    <line x1="100" y1="0" x2="140" y2="60" class="line" stroke-width="2.5" stroke="#27ae60"/>
+                    <text x="110" y="35" style="fill: #27ae60; font-size: 11px;">a''</text>
+                    
+                    <!-- Vijat e projeksionit -->
+                    <line x1="100" y1="0" x2="100" y2="20" class="projection-line"/>
+                    <line x1="140" y1="0" x2="140" y2="60" class="projection-line"/>
+                    
+                    <!-- Legjenda -->
+                    <text x="-380" y="220" style="font-size: 11px; fill: #666;">Vektori drejtues:</text>
+                    <text x="-380" y="235" style="font-size: 11px; fill: #666;">d = (2, -1, -3)</text>
+                    <text x="-380" y="250" style="font-size: 11px; fill: #e74c3c;">z negativ: drejtëza nën π₁</text>
+                </g>
+            </svg>
+            
+            <!-- Pjesa c: Diagram i Bashkuar Monge -->
+            <h4 style="text-align: center; color: #2c3e50; margin: 40px 0 20px 0;">c) A₁(3, -3, 0), A₂(-1, 0, -4) - Projeksionet e Bashkuara</h4>
+            <svg width="900" height="600" viewBox="0 0 900 600">
+                <g transform="translate(450, 300)">
+                    <!-- Vija e tokës (Ground Line - x axis) -->
+                    <line x1="-400" y1="0" x2="400" y2="0" class="axis" stroke-width="3"/>
+                    <text x="410" y="5" class="axis-label" style="font-size: 14px;">x</text>
+                    
+                    <!-- Projeksioni i Parë π₁ (poshtë - xy plane) -->
+                    <text x="-380" y="40" style="font-size: 12px; fill: #3498db; font-weight: bold;">π₁ (xy)</text>
+                    <line x1="0" y1="0" x2="0" y2="250" class="axis" stroke="#3498db" stroke-dasharray="5,5"/>
+                    <text x="5" y="-260" style="fill: #3498db; font-size: 12px;">-y</text>
+                    
+                    <!-- A₁ në π₁ (gjurma) -->
+                    <circle cx="60" cy="-60" r="6" style="fill: #27ae60;"/>
+                    <text x="68" y="-55" style="fill: #27ae60; font-size: 12px; font-weight: bold;">A₁(3,-3,0)</text>
+                    
+                    <!-- a' projeksioni në π₁ -->
+                    <line x1="60" y1="-60" x2="-20" y2="0" class="line" stroke-width="2.5" stroke="#3498db"/>
+                    <text x="25" y="-25" style="fill: #3498db; font-size: 11px;">a'</text>
+                    
+                    <!-- Projeksioni i Dytë π₂ (lart - xz plane) -->
+                    <text x="-380" y="-40" style="font-size: 12px; fill: #27ae60; font-weight: bold;">π₂ (xz)</text>
+                    <line x1="0" y1="0" x2="0" y2="-250" class="axis" stroke="#27ae60" stroke-dasharray="5,5"/>
+                    <text x="5" y="-260" style="fill: #27ae60; font-size: 12px;">z</text>
+                    
+                    <!-- A₂ në π₂ (gjurma) -->
+                    <circle cx="-20" cy="80" r="6" style="fill: #27ae60;"/>
+                    <text x="-70" y="85" style="fill: #27ae60; font-size: 12px; font-weight: bold;">A₂(-1,0,-4)</text>
+                    
+                    <!-- a'' projeksioni në π₂ -->
+                    <line x1="60" y1="0" x2="-20" y2="80" class="line" stroke-width="2.5" stroke="#27ae60"/>
+                    <text x="25" y="45" style="fill: #27ae60; font-size: 11px;">a''</text>
+                    
+                    <!-- Vijat e projeksionit -->
+                    <line x1="60" y1="-60" x2="60" y2="0" class="projection-line"/>
+                    <line x1="-20" y1="0" x2="-20" y2="80" class="projection-line"/>
+                    
+                    <!-- Legjenda -->
+                    <text x="-380" y="220" style="font-size: 11px; fill: #666;">Vektori drejtues:</text>
+                    <text x="-380" y="235" style="font-size: 11px; fill: #666;">d = (-4, 3, -4)</text>
+                </g>
+            </svg>
+        </div>
+    </div>
+    
+    <!-- Detyra 7 -->
+    <div class="problem-section">
+        <div class="problem">
+            <h2>Detyra 7</h2>
+            <div class="problem-text">
+                Janë dhënë gjurmat A₁ dhe A₃ të vizatohen të tri projeksionet e asaj drejtëze, të caktohet gjurma A₂ dhe këndet e pjerrësisë nësë është:
+                <ul>
+                    <li>a) A₁(3, 2, 0), A₃(0, 5, 3)</li>
+                    <li>b) A₁(5, 2, 0), A₃(0, -3, 3)</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="solution">
+            <h3>Zgjidhja</h3>
+            <div class="solution-text">
+                <p>A₁ është gjurma me π₁ (z=0), A₃ është gjurma me π₃ (x=0). Duhet gjetur A₂ (gjurma me π₂, y=0).</p>
+                
+                <p><strong>Pjesa a)</strong> A₁(3, 2, 0), A₃(0, 5, 3):</p>
+                <ul>
+                    <li>Vektori drejtues: d = A₃ - A₁ = (-3, 3, 3)</li>
+                    <li>Madhësia: |d| = √(9+9+9) = 3√3</li>
+                    <li>Parametrike: (x,y,z) = (3,2,0) + t(-3,3,3)</li>
+                    <li>Për A₂ (y=0): 2 + 3t = 0 → t = -2/3</li>
+                    <li><strong>A₂(5, 0, -2)</strong></li>
+                    <li>Këndet: α₁ ≈ 35.3°, α₂ ≈ 35.3°, α₃ ≈ 35.3° (të barabartë!)</li>
+                </ul>
+                
+                <p><strong>Pjesa b)</strong> A₁(5, 2, 0), A₃(0, -3, 3):</p>
+                <ul>
+                    <li>Vektori drejtues: d = A₃ - A₁ = (-5, -5, 3)</li>
+                    <li>Madhësia: |d| = √(25+25+9) = √59</li>
+                    <li>Parametrike: (x,y,z) = (5,2,0) + t(-5,-5,3)</li>
+                    <li>Për A₂ (y=0): 2 - 5t = 0 → t = 2/5</li>
+                    <li><strong>A₂(3, 0, 1.2)</strong></li>
+                    <li>Këndet: α₁ ≈ 22.9°, α₂ ≈ 40.6°, α₃ ≈ 40.6°</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="diagram">
+            <svg width="900" height="500" viewBox="0 0 900 500">
+                <!-- Pjesa a -->
+                <g transform="translate(220, 250)">
+                    <text x="-120" y="-220" class="axis-label">a) A₁(3,2,0), A₃(0,5,3) → A₂(5,0,-2)</text>
+                    <line x1="-180" y1="0" x2="180" y2="0" class="axis"/>
+                    <line x1="0" y1="-200" x2="0" y2="200" class="axis"/>
+                    <text x="190" y="5" class="axis-label">x</text>
+                    <text x="5" y="215" class="axis-label">y</text>
+                    
+                    <!-- A₁ -->
+                    <circle cx="60" cy="40" r="6" style="fill: #27ae60;"/>
+                    <text x="68" y="55" style="fill: #27ae60; font-size: 12px; font-weight: bold;">A₁(3,2,0)</text>
+                    
+                    <!-- A₃ -->
+                    <circle cx="0" cy="100" r="6" style="fill: #27ae60;"/>
+                    <text x="-80" y="105" style="fill: #27ae60; font-size: 12px; font-weight: bold;">A₃(0,5,3)</text>
+                    
+                    <!-- A₂ (calculated) -->
+                    <circle cx="100" cy="-40" r="6" style="fill: #e74c3c;"/>
+                    <text x="108" y="-30" style="fill: #e74c3c; font-size: 12px; font-weight: bold;">A₂(5,0,-2)</text>
+                    
+                    <!-- Drejtëza -->
+                    <line x1="0" y1="100" x2="100" y2="-40" class="line" stroke-width="3"/>
+                    <line x1="0" y1="100" x2="60" y2="40" class="line" stroke-width="2" stroke-dasharray="5,5" opacity="0.5"/>
+                    
+                    <text x="-160" y="-190" style="font-size: 11px; fill: #666;">Kënde të barabartë:</text>
+                    <text x="-160" y="-175" style="font-size: 10px; fill: #666;">α₁ = α₂ = α₃ ≈ 35.3°</text>
+                </g>
+                
+                <!-- Pjesa b -->
+                <g transform="translate(680, 250)">
+                    <text x="-140" y="-220" class="axis-label">b) A₁(5,2,0), A₃(0,-3,3) → A₂(3,0,1.2)</text>
+                    <line x1="-180" y1="0" x2="180" y2="0" class="axis"/>
+                    <line x1="0" y1="-200" x2="0" y2="200" class="axis"/>
+                    <text x="190" y="5" class="axis-label">x</text>
+                    <text x="5" y="-215" class="axis-label">-y</text>
+                    
+                    <!-- A₁ -->
+                    <circle cx="100" cy="40" r="6" style="fill: #27ae60;"/>
+                    <text x="108" y="55" style="fill: #27ae60; font-size: 12px; font-weight: bold;">A₁(5,2,0)</text>
+                    
+                    <!-- A₃ -->
+                    <circle cx="0" cy="-60" r="6" style="fill: #27ae60;"/>
+                    <text x="-90" y="-55" style="fill: #27ae60; font-size: 12px; font-weight: bold;">A₃(0,-3,3)</text>
+                    
+                    <!-- A₂ (calculated) -->
+                    <circle cx="60" cy="-24" r="6" style="fill: #e74c3c;"/>
+                    <text x="68" y="-15" style="fill: #e74c3c; font-size: 12px; font-weight: bold;">A₂(3,0,1.2)</text>
+                    
+                    <!-- Drejtëza -->
+                    <line x1="0" y1="-60" x2="100" y2="40" class="line" stroke-width="3"/>
+                    <line x1="0" y1="-60" x2="60" y2="-24" class="line" stroke-width="2" stroke-dasharray="5,5" opacity="0.5"/>
+                    
+                    <text x="-160" y="-190" style="font-size: 11px; fill: #666;">Kënde:</text>
+                    <text x="-160" y="-175" style="font-size: 10px; fill: #666;">α₁ ≈ 22.9°</text>
+                    <text x="-160" y="-160" style="font-size: 10px; fill: #666;">α₂ ≈ 40.6°, α₃ ≈ 40.6°</text>
+                </g>
+            </svg>
+        </div>
+    </div>
+    
+    <!-- Detyra 8 -->
+    <div class="problem-section">
+        <div class="problem">
+            <h2>Detyra 8</h2>
+            <div class="problem-text">
+                Të caktohen gjurmat e drejtëzës që kalojnë nëpër pikën P dhe është paralel me drejtëzën a=MN në qoftë se janë:
+                <ul>
+                    <li>a) P(5, 1, 2), M(-2, -1, -2), N(5, 3, 0)</li>
+                    <li>b) P(2, 3, 3), M(1, 1, 2), N(-4, 3, 2)</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="solution">
+            <h3>Zgjidhja</h3>
+            <div class="solution-text">
+                <p>Drejtëzat paralele kanë të njëjtin vektor drejtues.</p>
+                
+                <p><strong>Pjesa a)</strong> P(5, 1, 2), M(-2, -1, -2), N(5, 3, 0):</p>
+                <ul>
+                    <li>Vektori drejtues i a=MN: d = N - M = (7, 4, 2)</li>
+                    <li>Drejtëza paralele nëpër P: (x,y,z) = (5,1,2) + t(7,4,2)</li>
+                    <li><strong>B₁</strong> (z=0): 2 + 2t = 0 → t = -1 → <strong>B₁(-2, -3, 0)</strong></li>
+                    <li><strong>B₂</strong> (y=0): 1 + 4t = 0 → t = -1/4 → <strong>B₂(3.25, 0, 1.5)</strong></li>
+                    <li><strong>B₃</strong> (x=0): 5 + 7t = 0 → t = -5/7 → <strong>B₃(0, -13/7, 4/7)</strong></li>
+                </ul>
+                
+                <p><strong>Pjesa b)</strong> P(2, 3, 3), M(1, 1, 2), N(-4, 3, 2):</p>
+                <ul>
+                    <li>Vektori drejtues: d = N - M = (-5, 2, 0)</li>
+                    <li>Drejtëza nëpër P: (x,y,z) = (2,3,3) + t(-5,2,0)</li>
+                    <li>Vërejtje: z-komponenti = 0, kështu që drejtëza është <strong>paralele me π₁</strong></li>
+                    <li><strong>B₁</strong>: Nuk ka (paralel me π₁)</li>
+                    <li><strong>B₂</strong> (y=0): 3 + 2t = 0 → t = -3/2 → <strong>B₂(9.5, 0, 3)</strong></li>
+                    <li><strong>B₃</strong> (x=0): 2 - 5t = 0 → t = 2/5 → <strong>B₃(0, 3.8, 3)</strong></li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="diagram">
+            <svg width="900" height="550" viewBox="0 0 900 550">
+                <!-- Pjesa a -->
+                <g transform="translate(220, 275)">
+                    <text x="-120" y="-250" class="axis-label">a) Drejtëza nëpër P paralele me MN</text>
+                    <line x1="-200" y1="0" x2="200" y2="0" class="axis"/>
+                    <line x1="0" y1="-220" x2="0" y2="220" class="axis"/>
+                    <text x="210" y="5" class="axis-label">x</text>
+                    <text x="5" y="235" class="axis-label">y</text>
+                    
+                    <!-- Drejtëza origjinale MN (e zbehët) -->
+                    <line x1="-40" y1="-20" x2="100" y2="60" style="stroke: #95a5a6; stroke-width: 2; stroke-dasharray: 5,5; opacity: 0.4;"/>
+                    <circle cx="-40" cy="-20" r="4" style="fill: #95a5a6; opacity: 0.5;"/>
+                    <text x="-60" y="-25" style="fill: #95a5a6; font-size: 10px;">M</text>
+                    <circle cx="100" cy="60" r="4" style="fill: #95a5a6; opacity: 0.5;"/>
+                    <text x="105" y="55" style="fill: #95a5a6; font-size: 10px;">N</text>
+                    
+                    <!-- Pika P -->
+                    <circle cx="100" cy="20" r="6" class="point"/>
+                    <text x="108" y="25" class="point-label">P(5,1,2)</text>
+                    
+                    <!-- Drejtëza paralele nëpër P -->
+                    <line x1="-40" y1="-60" x2="180" y2="100" class="line" stroke-width="3"/>
+                    
+                    <!-- Gjurmë -->
+                    <circle cx="-40" cy="-60" r="5" style="fill: #27ae60;"/>
+                    <text x="-80" y="-55" style="fill: #27ae60; font-size: 11px; font-weight: bold;">B₁(-2,-3,0)</text>
+                    
+                    <circle cx="65" cy="30" r="5" style="fill: #27ae60;"/>
+                    <text x="73" y="35" style="fill: #27ae60; font-size: 11px; font-weight: bold;">B₂</text>
+                    
+                    <text x="-180" y="-220" style="font-size: 10px; fill: #666;">d = (7, 4, 2)</text>
+                </g>
+                
+                <!-- Pjesa b -->
+                <g transform="translate(680, 275)">
+                    <text x="-140" y="-250" class="axis-label">b) Paralele me π₁ (z konstant)</text>
+                    <line x1="-200" y1="0" x2="200" y2="0" class="axis"/>
+                    <line x1="0" y1="-220" x2="0" y2="220" class="axis"/>
+                    <text x="210" y="5" class="axis-label">x</text>
+                    <text x="5" y="235" class="axis-label">y</text>
+                    
+                    <!-- Drejtëza origjinale MN -->
+                    <line x1="20" y1="20" x2="-80" y2="60" style="stroke: #95a5a6; stroke-width: 2; stroke-dasharray: 5,5; opacity: 0.4;"/>
+                    <circle cx="20" cy="20" r="4" style="fill: #95a5a6; opacity: 0.5;"/>
+                    <text x="25" y="15" style="fill: #95a5a6; font-size: 10px;">M</text>
+                    <circle cx="-80" cy="60" r="4" style="fill: #95a5a6; opacity: 0.5;"/>
+                    <text x="-75" y="55" style="fill: #95a5a6; font-size: 10px;">N</text>
+                    
+                    <!-- Pika P -->
+                    <circle cx="40" cy="60" r="6" class="point"/>
+                    <text x="48" y="65" class="point-label">P(2,3,3)</text>
+                    
+                    <!-- Drejtëza paralele (horizontale, z=3) -->
+                    <line x1="-150" y1="60" x2="190" y2="60" class="line" stroke-width="3"/>
+                    
+                    <!-- Gjurmë -->
+                    <circle cx="190" cy="60" r="5" style="fill: #27ae60;"/>
+                    <text x="140" y="50" style="fill: #27ae60; font-size: 11px; font-weight: bold;">B₂(9.5,0,3)</text>
+                    
+                    <circle cx="0" cy="60" r="5" style="fill: #27ae60;"/>
+                    <text x="-70" y="75" style="fill: #27ae60; font-size: 11px; font-weight: bold;">B₃(0,3.8,3)</text>
+                    
+                    <text x="-180" y="-220" style="font-size: 10px; fill: #666;">d = (-5, 2, 0)</text>
+                    <text x="-180" y="-205" style="font-size: 10px; fill: #e74c3c;">z konstant!</text>
+                </g>
+            </svg>
+        </div>
+    </div>
+    
+    <!-- Detyra 9 -->
+    <div class="problem-section">
+        <div class="problem">
+            <h2>Detyra 9</h2>
+            <div class="problem-text">
+                Nëpër pikën P(3, 4, 2) të konstruktohet drejtëza që do ta prejë drejtëzën a=EF[E(-2, 3, 2), F(2, 1, 6)] në pikën që gjendet në rrafshin π₁.
+            </div>
+        </div>
+        
+        <div class="solution">
+            <h3>Zgjidhja</h3>
+            <div class="solution-text">
+                <p>Pika "në rrafshin π₁" do të thotë gjurma e drejtëzës a me π₁ (ku z=0).</p>
+                
+                <p><strong>Hapi 1:</strong> Gjej gjurmën e drejtëzës a=EF me π₁ (z=0)</p>
+                <ul>
+                    <li>Vektori drejtues: d = F - E = (4, -2, 4)</li>
+                    <li>Parametrike: (x,y,z) = (-2,3,2) + t(4,-2,4)</li>
+                    <li>Për z=0: 2 + 4t = 0 → t = -0.5</li>
+                    <li>Pika e prerjes: <strong>Q(-4, 4, 0)</strong></li>
+                </ul>
+                
+                <p><strong>Hapi 2:</strong> Konstrukto drejtëzën b nëpër P dhe Q</p>
+                <ul>
+                    <li>Drejtëza b kalon nëpër P(3, 4, 2) dhe Q(-4, 4, 0)</li>
+                    <li>Vektori drejtues: d_b = Q - P = (-7, 0, -2)</li>
+                    <li>Parametrike: (x,y,z) = (3,4,2) + s(-7,0,-2)</li>
+                    <li>Vërejtje: y-koordinata është konstante (4) → <strong>paralele me π₂</strong></li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="diagram">
+            <svg width="800" height="550" viewBox="0 0 800 550">
+                <g transform="translate(400, 275)">
+                    <text x="-180" y="-245" class="axis-label">Drejtëza b nëpër P që pret a në π₁</text>
+                    
+                    <!-- Boshtet -->
+                    <line x1="-350" y1="0" x2="350" y2="0" class="axis"/>
+                    <line x1="0" y1="-220" x2="0" y2="220" class="axis"/>
+                    <text x="360" y="5" class="axis-label">x</text>
+                    <text x="5" y="235" class="axis-label">y</text>
+                    <text x="5" y="-235" class="axis-label">z</text>
+                    
+                    <!-- Rrafshi π₁ (vija horizontale) -->
+                    <line x1="-350" y1="0" x2="350" y2="0" style="stroke: #3498db; stroke-width: 2; stroke-dasharray: 10,5; opacity: 0.3;"/>
+                    <text x="-340" y="20" style="fill: #3498db; font-size: 12px;">π₁ (z = 0)</text>
+                    
+                    <!-- Drejtëza a = EF -->
+                    <circle cx="-40" cy="40" r="5" style="fill: #95a5a6;"/>
+                    <text x="-60" y="35" style="fill: #95a5a6; font-size: 11px;">E(-2,3,2)</text>
+                    
+                    <circle cx="40" cy="-80" r="5" style="fill: #95a5a6;"/>
+                    <text x="48" y="-75" style="fill: #95a5a6; font-size: 11px;">F(2,1,6)</text>
+                    
+                    <line x1="-80" y1="80" x2="60" y2="-120" style="stroke: #95a5a6; stroke-width: 2; stroke-dasharray: 5,5;"/>
+                    
+                    <!-- Gjurma Q në π₁ -->
+                    <circle cx="-80" cy="0" r="7" style="fill: #27ae60;"/>
+                    <text x="-130" y="15" style="fill: #27ae60; font-size: 12px; font-weight: bold;">Q(-4,4,0)</text>
+                    <text x="-130" y="30" style="fill: #27ae60; font-size: 10px;">Gjurma në π₁</text>
+                    
+                    <!-- Pika P -->
+                    <circle cx="60" cy="40" r="6" class="point"/>
+                    <text x="68" y="45" class="point-label">P(3,4,2)</text>
+                    
+                    <!-- Drejtëza b nëpër P dhe Q -->
+                    <line x1="-80" y1="0" x2="60" y2="40" class="line" stroke-width="3"/>
+                    
+                    <!-- Shënime -->
+                    <text x="-320" y="200" style="font-size: 11px; fill: #666;">Drejtëza b: y = 4 konstant</text>
+                    <text x="-320" y="215" style="font-size: 11px; fill: #666;">(Paralele me π₂)</text>
+                </g>
+            </svg>
+        </div>
+    </div>
+    
+    <!-- Detyra 10 -->
+    <div class="problem-section">
+        <div class="problem">
+            <h2>Detyra 10</h2>
+            <div class="problem-text">
+                Nëpër pikën P(3, 4, 2) të konstruktohet drejtëza b paralele me rrafshin π₂ që e pret drejtëzën a=LK[L(-2, 3, 2), K(2, 1, 6)]!
+            </div>
+        </div>
+        
+        <div class="solution">
+            <h3>Zgjidhja</h3>
+            <div class="solution-text">
+                <p>Paralele me π₂ (xz-plane) do të thotë që y-koordinata është konstante.</p>
+                
+                <p><strong>Hapi 1:</strong> Drejtëza b duhet të kalojë nëpër P dhe të jetë paralele me π₂</p>
+                <ul>
+                    <li>Forma: (x,y,z) = (3,4,2) + t(a,0,c) ku y=4 është konstante</li>
+                </ul>
+                
+                <p><strong>Hapi 2:</strong> Gjej prerjen e b me drejtëzën a=LK</p>
+                <ul>
+                    <li>Drejtëza a: (x,y,z) = (-2,3,2) + s(4,-2,4)</li>
+                    <li>Për y=4: 3 - 2s = 4 → s = -0.5</li>
+                    <li>Pika e prerjes: <strong>Q(-4, 4, 0)</strong></li>
+                </ul>
+                
+                <p><strong>Hapi 3:</strong> Konstrukto drejtëzën b nëpër P dhe Q</p>
+                <ul>
+                    <li>P(3, 4, 2) dhe Q(-4, 4, 0)</li>
+                    <li>Vektori: d = Q - P = (-7, 0, -2)</li>
+                    <li>Verifikim: y-komponenti = 0 → y konstante → <strong>paralele me π₂ ✓</strong></li>
+                </ul>
+                
+                <p><strong>Gjurmë të drejtëzës b:</strong></p>
+                <ul>
+                    <li><strong>B₁</strong> (z=0): Pika Q(-4, 4, 0)</li>
+                    <li><strong>B₂</strong>: Nuk ka (paralele me π₂)</li>
+                    <li><strong>B₃</strong> (x=0): 3 - 7t = 0 → t = 3/7 → <strong>B₃(0, 4, 0.86)</strong></li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="diagram">
+            <svg width="800" height="550" viewBox="0 0 800 550">
+                <g transform="translate(400, 275)">
+                    <text x="-200" y="-245" class="axis-label">Drejtëza b || π₂ që pret a=LK</text>
+                    
+                    <!-- Boshtet -->
+                    <line x1="-350" y1="0" x2="350" y2="0" class="axis"/>
+                    <line x1="0" y1="-220" x2="0" y2="220" class="axis"/>
+                    <text x="360" y="5" class="axis-label">x</text>
+                    <text x="5" y="235" class="axis-label">y</text>
+                    <text x="5" y="-235" class="axis-label">z</text>
+                    
+                    <!-- Drejtëza a = LK -->
+                    <circle cx="-40" cy="40" r="5" style="fill: #95a5a6;"/>
+                    <text x="-60" y="35" style="fill: #95a5a6; font-size: 11px;">L(-2,3,2)</text>
+                    
+                    <circle cx="40" cy="-80" r="5" style="fill: #95a5a6;"/>
+                    <text x="48" y="-75" style="fill: #95a5a6; font-size: 11px;">K(2,1,6)</text>
+                    
+                    <line x1="-80" y1="80" x2="60" y2="-120" style="stroke: #95a5a6; stroke-width: 2; stroke-dasharray: 5,5;"/>
+                    
+                    <!-- Pika e prerjes Q -->
+                    <circle cx="-80" cy="0" r="7" style="fill: #27ae60;"/>
+                    <text x="-130" y="15" style="fill: #27ae60; font-size: 12px; font-weight: bold;">Q(-4,4,0)</text>
+                    
+                    <!-- Pika P -->
+                    <circle cx="60" cy="40" r="6" class="point"/>
+                    <text x="68" y="45" class="point-label">P(3,4,2)</text>
+                    
+                    <!-- Drejtëza b (paralele me π₂) -->
+                    <line x1="-100" y1="-20" x2="80" y2="50" class="line" stroke-width="3"/>
+                    
+                    <!-- B₃ -->
+                    <circle cx="0" cy="17" r="5" style="fill: #27ae60;"/>
+                    <text x="8" y="22" style="fill: #27ae60; font-size: 11px; font-weight: bold;">B₃(0,4,0.86)</text>
+                    
+                    <!-- Rrafshi paralel -->
+                    <rect x="-300" y="-200" width="600" height="400" fill="none" stroke="#e74c3c" stroke-width="2" stroke-dasharray="10,5" opacity="0.2"/>
+                    <text x="-280" y="-180" style="fill: #e74c3c; font-size: 12px;">Paralel me π₂</text>
+                    
+                    <text x="-320" y="200" style="font-size: 11px; fill: #666;">y = 4 (konstante)</text>
+                </g>
+            </svg>
+        </div>
+    </div>
+    
+    <!-- Detyra 11 -->
+    <div class="problem-section">
+        <div class="problem">
+            <h2>Detyra 11</h2>
+            <div class="problem-text">
+                Nëpër pikën P(0, 2, 4) të konstruktohen projeksionet e drejtëzës b e cila e pret drejtëzën a=MN[M(3, -2, -3), N(3, 1, 5)] dhe është paralel me rrafshin π₁!
+            </div>
+        </div>
+        
+        <div class="solution">
+            <h3>Zgjidhja</h3>
+            <div class="solution-text">
+                <p>Paralele me π₁ (xy-plane) do të thotë që z-koordinata është konstante.</p>
+                
+                <p><strong>Hapi 1:</strong> Analizo drejtëzën a=MN</p>
+                <ul>
+                    <li>M(3, -2, -3), N(3, 1, 5)</li>
+                    <li>Vektori: d_a = N - M = (0, 3, 8)</li>
+                    <li>Vërejtje: x-koordinata konstante (3) → <strong>paralele me π₃</strong></li>
+                    <li>Parametrike: (x,y,z) = (3,-2,-3) + t(0,3,8)</li>
+                </ul>
+                
+                <p><strong>Hapi 2:</strong> Gjej prerjen me rrafshin z=4 (nëpër P)</p>
+                <ul>
+                    <li>Drejtëza b duhet të kalojë nëpër P(0, 2, 4) me z=4 konstante</li>
+                    <li>Për drejtëzën a në z=4: -3 + 8t = 4 → t = 7/8</li>
+                    <li>Pika e prerjes: <strong>Q(3, 0.625, 4)</strong></li>
+                </ul>
+                
+                <p><strong>Hapi 3:</strong> Konstrukto drejtëzën b nëpër P dhe Q</p>
+                <ul>
+                    <li>P(0, 2, 4) dhe Q(3, 0.625, 4)</li>
+                    <li>Vektori: d_b = Q - P = (3, -1.375, 0)</li>
+                    <li>Parametrike: (x,y,z) = (0,2,4) + s(3,-1.375,0)</li>
+                    <li>Verifikim: z-komponenti = 0 → <strong>paralele me π₁ ✓</strong></li>
+                </ul>
+                
+                <p><strong>Gjurmë:</strong></p>
+                <ul>
+                    <li><strong>B₁</strong>: Nuk ka (paralele me π₁, z=4 ≠ 0)</li>
+                    <li><strong>B₂</strong> (y=0): Afër pikës Q</li>
+                    <li><strong>B₃</strong> (x=0): Pika P(0, 2, 4)</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="diagram">
+            <svg width="800" height="550" viewBox="0 0 800 550">
+                <g transform="translate(400, 275)">
+                    <text x="-200" y="-245" class="axis-label">Drejtëza b || π₁ që pret a=MN</text>
+                    
+                    <!-- Boshtet -->
+                    <line x1="-350" y1="0" x2="350" y2="0" class="axis"/>
+                    <line x1="0" y1="-220" x2="0" y2="220" class="axis"/>
+                    <text x="360" y="5" class="axis-label">x</text>
+                    <text x="5" y="235" class="axis-label">-y</text>
+                    <text x="5" y="-235" class="axis-label">z</text>
+                    
+                    <!-- Rrafshi π₁ (z=0) -->
+                    <line x1="-350" y1="0" x2="350" y2="0" style="stroke: #3498db; stroke-width: 2; stroke-dasharray: 10,5; opacity: 0.3;"/>
+                    <text x="-340" y="20" style="fill: #3498db; font-size: 12px;">π₁ (z = 0)</text>
+                    
+                    <!-- Drejtëza a = MN (vertikale, x=3) -->
+                    <circle cx="60" cy="60" r="5" style="fill: #95a5a6;"/>
+                    <text x="-20" y="75" style="fill: #95a5a6; font-size: 11px;">M(3,-2,-3)</text>
+                    
+                    <circle cx="60" cy="-100" r="5" style="fill: #95a5a6;"/>
+                    <text x="68" y="-95" style="fill: #95a5a6; font-size: 11px;">N(3,1,5)</text>
+                    
+                    <line x1="60" y1="100" x2="60" y2="-140" style="stroke: #95a5a6; stroke-width: 2; stroke-dasharray: 5,5;"/>
+                    
+                    <!-- Pika P (B₃) -->
+                    <circle cx="0" cy="-80" r="6" class="point"/>
+                    <text x="-60" y="-75" class="point-label">P(0,2,4)</text>
+                    <text x="-60" y="-60" style="fill: #27ae60; font-size: 10px;">(= B₃)</text>
+                    
+                    <!-- Pika Q -->
+                    <circle cx="60" cy="-80" r="7" style="fill: #27ae60;"/>
+                    <text x="68" y="-70" style="fill: #27ae60; font-size: 11px; font-weight: bold;">Q(3,0.625,4)</text>
+                    
+                    <!-- Drejtëza b (horizontale, z=4) -->
+                    <line x1="-80" y1="-80" x2="180" y2="-80" class="line" stroke-width="3"/>
+                    
+                    <!-- Niveli z=4 -->
+                    <line x1="-350" y1="-80" x2="350" y2="-80" style="stroke: #e74c3c; stroke-width: 1; stroke-dasharray: 5,5; opacity: 0.4;"/>
+                    <text x="260" y="-70" style="fill: #e74c3c; font-size: 11px;">z = 4</text>
+                    
+                    <text x="-320" y="200" style="font-size: 11px; fill: #666;">z = 4 (konstante për b)</text>
+                    <text x="-320" y="215" style="font-size: 11px; fill: #666;">x = 3 (konstante për a)</text>
+                </g>
+            </svg>
+        </div>
+    </div>
+    
+    <div style="text-align: center; padding: 40px; color: #888;">
+        <p>Fundi i Detyrave dhe Zgjidhjeve</p>
+        <p style="font-size: 0.9em; margin-top: 10px;">Sistemi i koordinatave ndjek konventën e gjeometrisë pershkruese: boshti pozitiv y tregon poshtë në projeksionin e parë</p>
+    </div>
+    
+</body>
+</html>
