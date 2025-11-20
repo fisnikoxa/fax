@@ -973,43 +973,42 @@
                     <div class="step">
                         <strong>Hapi 1:</strong> Llogaritni vektorin e forcës rezultante
                         <div class="formula">
-                            <p><strong>Mbledhni të gjithë komponentët x:</strong></p>
-                            <p>Nga diagrami: forca në drejtimin x</p>
-                            \[R_x = \sum F_{ix} = 240 \text{ N}\]
+                            <p><strong>Nga diagrami, pozicionet e forcave:</strong></p>
+                            <p>- 160 N poshtë në (250 mm, 0)</p>
+                            <p>- 240 N lart në (500 mm, 0)</p>
+                            <p>- 200 N majtas në (750 mm, 250 mm)</p>
                             
-                            <p><strong>Mbledhni të gjithë komponentët y:</strong></p>
-                            <p>Forcat në drejtimin y (↑ pozitive, ↓ negative)</p>
-                            \[R_y = \sum F_{iy} = -160 + 240 = 80 \text{ N}\]
+                            <p><strong>Mbledhni komponentët:</strong></p>
+                            \[R_x = -200 \text{ N (majtas)}\]
+                            \[R_y = -160 + 240 = 80 \text{ N (lart)}\]
                             
-                            <p><strong>Madhësia rezultante:</strong> Teorema e Pitagorës</p>
-                            \[R = \sqrt{R_x^2 + R_y^2} = \sqrt{240^2 + 80^2} = \sqrt{57600 + 6400} = \sqrt{64000} = 253 \text{ N}\]
+                            <p><strong>Madhësia rezultante:</strong></p>
+                            \[R = \sqrt{200^2 + 80^2} = \sqrt{46400} = 215.4 \text{ N}\]
                             
                             <p><strong>Këndi nga boshti x:</strong></p>
-                            \[\theta = \arctan\left(\frac{R_y}{R_x}\right) = \arctan\left(\frac{80}{240}\right) = \arctan(0.333) = 18.4°\]
+                            \[\theta = 180° - \arctan\left(\frac{80}{200}\right) = 180° - 21.8° = 158.2°\]
                         </div>
                     </div>
 
                     <div class="step">
                         <strong>Hapi 2:</strong> Gjeni prerjen x duke përdorur ekuivalencën e momentit
                         <div class="formula">
-                            <p><strong>Llogaritni momentin total rreth O nga të gjitha forcat origjinale:</strong></p>
-                            <p>Moment = forcë × distancë pingule (CCW pozitiv)</p>
-                            \[M_O = \sum (F_i \times d_i)\]
+                            <p><strong>Momenti total rreth O (CCW pozitiv):</strong></p>
+                            \[M_O = (-160)(0.25) + (240)(0.5) + (-200)(0.25)\]
+                            \[M_O = -40 + 120 - 50 = 30 \text{ N·m}\]
                             
-                            <p><strong>Barazoni me momentin e rezultantes:</strong></p>
-                            <p>Nëse R kalon përmes pikës (x, 0) në boshtin x:</p>
+                            <p><strong>Për R që kalon përmes (x, 0):</strong></p>
                             <p>Vetëm komponenti y i R krijon moment rreth O:</p>
-                            \[M_O = R_y \times x\]
-                            
-                            <p><strong>Zgjidhni për x:</strong></p>
-                            \[x = \frac{M_O}{R_y} = \frac{\sum(F_i \times d_i)}{80}\]
+                            \[R_y \times x = M_O\]
+                            \[80 \times x = 30\]
+                            \[x = 0.375 \text{ m} = 375 \text{ mm}\]
                         </div>
                     </div>
 
                     <div class="step">
                         <strong>✓ Përgjigja:</strong>
-                        <p><strong>R = 253 N në 18.4° nga boshti x</strong></p>
-                        <p><strong>prerja x: x = M_O/R_y (llogaritni nga distancat e diagramit)</strong></p>
+                        <p><strong>R = 215 N në 158° nga boshti +x</strong></p>
+                        <p><strong>Prerja me boshtin x: x = 375 mm nga O</strong></p>
                     </div>
                 </div>
             </div>
@@ -1042,18 +1041,23 @@
                     <div class="step">
                         <strong>Pjesa (a):</strong> Sistemi forcë-çift në O
                         <div class="formula">
-                            <p><strong>Hapi 1: Zbërtheni të gjitha forcat në komponentë x dhe y</strong></p>
-                            <p>360 N, 280 N në 46°, 320 N, 140 N (lexoni drejtimet nga diagrami)</p>
-                            <p>Për forcë të këndëzuar: \(F_x = F\cos\theta\), \(F_y = F\sin\theta\)</p>
+                            <p><strong>Nga diagrami, pozicionet:</strong></p>
+                            <p>- 360 N djathtas në A (0, 1650 mm)</p>
+                            <p>- 280 N në 45° në B (2200 mm, 1650 mm)</p>
+                            <p>- 320 N djathtas në O (0, 0)</p>
+                            <p>- 140 N lart në C (2200 mm, 0)</p>
                             
-                            <p><strong>Hapi 2: Mbledhni komponentët</strong></p>
-                            \[R_x = \sum F_{ix}\]
-                            \[R_y = \sum F_{iy}\]
-                            \[R = \sqrt{R_x^2 + R_y^2}\]
+                            <p><strong>Komponentët e 280 N në 45°:</strong></p>
+                            \[F_x = 280\cos(45°) = 198 \text{ N}, \quad F_y = 280\sin(45°) = 198 \text{ N}\]
                             
-                            <p><strong>Hapi 3: Llogaritni momentin rreth O</strong></p>
-                            \[M_O = \sum (F_i \times d_i)\]
-                            <p>ku d_i është distanca pingule nga O në vijën e veprimit të secilit forcë</p>
+                            <p><strong>Rezultantja:</strong></p>
+                            \[R_x = 360 + 198 + 320 = 878 \text{ N}\]
+                            \[R_y = 198 + 140 = 338 \text{ N}\]
+                            \[R = \sqrt{878^2 + 338^2} = 941 \text{ N}\]
+                            
+                            <p><strong>Momenti rreth O:</strong></p>
+                            \[M_O = 360(1.65) + 198(1.65) - 198(2.2) + 0 - 140(2.2)\]
+                            \[M_O = 594 + 326.7 - 435.6 - 308 = 177 \text{ N·m (CCW)}\]
                         </div>
                     </div>
 
@@ -1061,21 +1065,19 @@
                         <strong>Pjesa (b):</strong> Gjeni prerjet e boshteve
                         <div class="formula">
                             <p><strong>Prerja e boshtit X (ku y = 0):</strong></p>
-                            <p>Në këtë pikë, R krijon moment \(M_O = -R_y \times x_0\)</p>
-                            \[x_0 = -\frac{M_O}{R_y}\]
+                            \[R_y \times x_0 = M_O\]
+                            \[x_0 = \frac{177}{338} = 0.524 \text{ m} = 524 \text{ mm}\]
                             
                             <p><strong>Prerja e boshtit Y (ku x = 0):</strong></p>
-                            <p>Në këtë pikë, R krijon moment \(M_O = R_x \times y_0\)</p>
-                            \[y_0 = \frac{M_O}{R_x}\]
-                            
-                            <p><em>Këto prerje përcaktojnë vijën përmes së cilës vepron R</em></p>
+                            \[R_x \times y_0 = M_O\]
+                            \[y_0 = \frac{177}{878} = 0.202 \text{ m} = 202 \text{ mm}\]
                         </div>
                     </div>
 
                     <div class="step">
                         <strong>✓ Përgjigja:</strong>
-                        <p><strong>(a) R = (llogaritni), M_O = (llogaritni)</strong></p>
-                        <p><strong>(b) prerja x = -M_O/R_y, prerja y = M_O/R_x</strong></p>
+                        <p><strong>(a) R = 941 N, M_O = 177 N·m (CCW)</strong></p>
+                        <p><strong>(b) prerja x = 524 mm, prerja y = 202 mm</strong></p>
                     </div>
                 </div>
             </div>
@@ -1106,46 +1108,52 @@
                     <div class="step">
                         <strong>Hapi 1:</strong> Llogaritni forcën rezultante në A
                         <div class="formula">
-                            <p><strong>Mbledhni të gjithë komponentët e forcës:</strong></p>
-                            <p>Nga diagrami: 10 kN (↓), 3.2 kN në 30°, 4.8 kN (↓)</p>
+                            <p><strong>Nga diagrami:</strong></p>
+                            <p>- 10 kN poshtë në B (1.2 m nga A)</p>
+                            <p>- 3.2 kN në 30° lart (nga horizontalja) në C</p>
+                            <p>- 4.8 kN poshtë në E</p>
                             
-                            <p><strong>Komponentët X:</strong></p>
-                            \[R_x = 3.2\cos(30°) = 3.2 \times 0.866 = 2.77 \text{ kN (→)}\]
+                            <p><strong>Komponentët e 3.2 kN:</strong></p>
+                            \[F_x = 3.2\cos(30°) = 2.77 \text{ kN (→)}\]
+                            \[F_y = 3.2\sin(30°) = 1.6 \text{ kN (↑)}\]
                             
-                            <p><strong>Komponentët Y:</strong> (↓ negative)</p>
-                            \[R_y = -10 - 3.2\sin(30°) - 4.8 = -10 - 1.6 - 4.8 = -16.4 \text{ kN}\]
-                            
-                            <p><strong>Madhësia:</strong></p>
-                            \[R = \sqrt{R_x^2 + R_y^2} = \sqrt{2.77^2 + 16.4^2} = 16.6 \text{ kN}\]
+                            <p><strong>Rezultantja:</strong></p>
+                            \[R_x = 2.77 \text{ kN}\]
+                            \[R_y = -10 + 1.6 - 4.8 = -13.2 \text{ kN (↓)}\]
+                            \[R = \sqrt{2.77^2 + 13.2^2} = 13.5 \text{ kN}\]
                         </div>
                     </div>
 
                     <div class="step">
                         <strong>Hapi 2:</strong> Llogaritni momentin rreth A
                         <div class="formula">
-                            <p><strong>Formulë:</strong> \(M_A = \sum (F_i \times d_i)\)</p>
-                            <p>Llogaritni momentin e secilit forcë rreth pikës A</p>
-                            <p>Përdorni distancat pingule nga A në vijën e veprimit të secilit forcë</p>
-                            \[M_A = M_1 + M_2 + M_3\]
+                            <p><strong>Nga diagrami (gjeometria e shtyllës së përkulur):</strong></p>
+                            <p>10 kN në 1.2 m djathtas A:</p>
+                            \[M_1 = -10 \times 1.2 = -12 \text{ kN·m (CW)}\]
+                            
+                            <p>3.2 kN në C (afërsisht 1.8 m djathtas, në kënd):</p>
+                            <p>Përafrim: \(M_2 \approx 2.77 \times 0.6 - 1.6 \times 1.8 \approx -1.2\) kN·m</p>
+                            
+                            <p>4.8 kN në E (afërsisht 2.7 m djathtas):</p>
+                            \[M_3 = -4.8 \times 2.7 = -13 \text{ kN·m}\]
+                            
+                            \[M_A \approx -12 - 1.2 - 13 = -26.2 \text{ kN·m}\]
                         </div>
                     </div>
 
                     <div class="step">
-                        <strong>Hapi 3:</strong> Gjeni prerjen x të vijës së veprimit të rezultantes
+                        <strong>Hapi 3:</strong> Gjeni prerjen x
                         <div class="formula">
-                            <p><strong>Formulë:</strong> Në boshtin x (y=0), momenti duhet të barazohet me M_A</p>
-                            \[M_A = -R_y \times x\]
-                            
-                            <p><strong>Zgjidhni për x:</strong></p>
-                            \[x = -\frac{M_A}{R_y}\]
-                            
-                            <p><em>Shenja negative merr parasysh konvencionet e shenjave</em></p>
+                            <p><strong>Për R që kalon përmes (x, 0):</strong></p>
+                            \[R_y \times x = M_A\]
+                            \[(-13.2) \times x = -26.2\]
+                            \[x = 1.98 \text{ m}\]
                         </div>
                     </div>
 
                     <div class="step">
                         <strong>✓ Përgjigja:</strong>
-                        <p><strong>R = 16.6 kN, M_A = (llogaritni), prerja x = -M_A/R_y</strong></p>
+                        <p><strong>R = 13.5 kN, M_A = 26.2 kN·m, prerja x ≈ 2.0 m</strong></p>
                     </div>
                 </div>
             </div>
@@ -1248,17 +1256,24 @@
                         <strong>Hapi 2:</strong> Lokalizoni rezultanten
                         <div class="formula">
                             <p><strong>Metoda:</strong> Përdorni balancimin e momentit rreth vijës qendrore të avionit</p>
-                            <p><strong>Nga simetria:</strong> Motorët 1 dhe 2 në një anë, motori 4 në tjetrën</p>
-                            <p>Lini vijën qendrore të jetë referenca. Llogaritni momentet nga secili motor</p>
-                            \[R \times y_{rezultante} = \sum (F_i \times y_i)\]
-                            <p>Zgjidhni për \(y_{rezultante}\) (distanca pingule nga vija qendrore)</p>
-                            \[y_{rezultante} = \frac{\sum (F_i \times y_i)}{R} = \frac{90y_1 + 90y_2 + 90y_4}{270}\]
+                            <p><strong>Nga diagrami, pozicionet e motorëve nga vija qendrore:</strong></p>
+                            <p>- Motori 1: 9 m majtas (y = -9 m)</p>
+                            <p>- Motori 2: 12 m majtas (y = -12 m)</p>
+                            <p>- Motori 3: DËSHTUAR (pa shtysë)</p>
+                            <p>- Motori 4: 9 m djathtas (y = +9 m)</p>
+                            
+                            <p><strong>Momenti total rreth vijës qendrore:</strong></p>
+                            \[M = 90(-9) + 90(-12) + 90(+9)\]
+                            \[M = -810 - 1080 + 810 = -1080 \text{ kN·m}\]
+                            
+                            <p><strong>Pozicioni i rezultantes:</strong></p>
+                            \[y_{rezultante} = \frac{M}{R} = \frac{-1080}{270} = -4 \text{ m}\]
                         </div>
                     </div>
 
                     <div class="step">
                         <strong>✓ Përgjigja:</strong>
-                        <p><strong>R = 270 kN përpara, e lokalizuar në y = (llogaritni nga pozicionet e motorëve)</strong></p>
+                        <p><strong>R = 270 kN përpara, e lokalizuar 4 m majtas vijës qendrore</strong></p>
                         <p><em>Asimetria shkakton moment devijimi në avion</em></p>
                     </div>
                 </div>
