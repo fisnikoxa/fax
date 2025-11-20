@@ -798,19 +798,17 @@
         </div>
     </div>
 
-    <div class="section-header">Problemet Përfaqësuese</div>
-
     
 
-    <!-- Problem 2/88 -->
+    <!-- Problem 2/87 -->
     <div class="problem-section">
         <div class="problem-left">
-            <h2>Problemi 2/88</h2>
+            <h2>Problemi 2/87</h2>
             <div class="problem-text">
-                <p>Nëse rezultantja e forcave të treguara kalon përmes pikës <em>A</em>, përcaktoni madhësinë e tensionit të panjohur \(T_2\) që vepron në rrotullën e frenuar.</p>
+                <p>Nëse rezultantja e dy forcave dhe çiftit <em>M</em> kalon përmes pikës <em>O</em>, përcaktoni <em>M</em>.</p>
             </div>
             <div class="diagram-container">
-                <img src="2:88.png" alt="Diagrami i Problemit 2/88">
+                <img src="2:87.png" alt="Diagrami i Problemit 2/87">
             </div>
         </div>
         <div class="problem-right">
@@ -818,59 +816,59 @@
                 <h3>Zgjidhja</h3>
                 <div class="solution-content">
                     <div class="step" style="background: #fff8e1; padding: 15px; border-radius: 5px; margin-bottom: 15px;">
-                        <strong>📖 Qasja:</strong> Gjetja e forcës së panjohur duke përdorur kushtin e vijës së veprimit
-                        <p><strong>Dhënë:</strong> Rezultantja kalon përmes pikës A</p>
-                        <p><strong>Kushti kryesor:</strong> Nëse rezultantja kalon përmes A, atëherë \(\sum M_A = 0\)</p>
-                        <p><strong>Metoda:</strong> Shkruani ekuacionin e momentit rreth A, zgjidhni për T₂ të panjohur</p>
-                        <p><strong>Pse funksionon kjo:</strong> Kur një forcë vepron përmes një pike, ajo nuk krijon moment rreth asaj pike</p>
+                        <strong>📖 Qasja:</strong> Gjetja e një çifti të panjohur M
+                        <p><strong>Kushti i dhënë:</strong> Rezultantja kalon përmes pikës O</p>
+                        <p><strong>Insight kryesor:</strong> Nëse rezultantja kalon përmes O, momenti total rreth O duhet të jetë zero!</p>
+                        <p><strong>Formulë:</strong> \(\sum M_O = 0\) përfshin momente nga forcat DHE çifti i aplikuar M</p>
+                        <p><strong>Pse:</strong> Një forcë që kalon përmes një pike krijon moment zero rreth asaj pike</p>
                     </div>
 
                     <div class="step">
-                        <strong>Hapi 1:</strong> Aplikoni kushtin e momentit rreth pikës A
+                        <strong>Hapi 1:</strong> Deklaroni kushtin
                         <div class="formula">
-                            <p><strong>Kushti:</strong> Rezultantja kalon përmes A</p>
-                            \[\sum M_A = 0\]
-                            
-                            <p><strong>Llogaritni momentin e secilit forcë të njohur rreth A:</strong></p>
-                            <p>Formulë: \(M = F \times d_{\perp}\) (distanca pingule nga A)</p>
-                            <p>Përfshini të gjitha forcat: 275 N, 1600 N, 300 N, 650 N, dhe T₂ e panjohur</p>
+                            <p><strong>Kushti:</strong> Rezultantja kalon përmes O</p>
+                            <p><strong>Deklarata matematikore:</strong></p>
+                            \[\sum M_O = 0\]
+                            <p><em>Kjo do të thotë: momente nga të gjitha forcat + çifti i aplikuar M = 0</em></p>
                         </div>
                     </div>
 
                     <div class="step">
-                        <strong>Hapi 2:</strong> Shprehni kontributin e momentit të T₂
+                        <strong>Hapi 2:</strong> Llogaritni kontributet e momentit nga forcat
                         <div class="formula">
-                            <p><strong>T₂ vepron në kënd 50°:</strong></p>
-                            <p>Komponentët:</p>
-                            \[T_{2x} = T_2 \cos(50°) = 0.643T_2\]
-                            \[T_{2y} = T_2 \sin(50°) = 0.766T_2\]
+                            <p><strong>Formulë:</strong> \(M = F \times d_{\perp}\) (forca herë distanca pingule)</p>
                             
-                            <p><strong>Momenti nga T₂:</strong> Varet nga ku vepron dhe komponentët e saj</p>
-                            \[M_{T_2} = T_{2x} \times d_y - T_{2y} \times d_x\]
+                            <p><strong>Forca 400 N:</strong> Vepron në 160 mm nga O</p>
+                            \[M_{400} = 400 \times 0.160 = 64 \text{ N·m (drejtimi nga diagrami)}\]
+                            
+                            <p><strong>Forca 320 N:</strong> Duhet të gjeni distancën pingule nga O</p>
+                            <p>Nëse në kënd, zbërtheni: \(d_{\perp} = d \sin\theta\)</p>
+                            \[M_{320} = 320 \times d_{\perp} \text{ (llogaritni nga gjeometria)}\]
                         </div>
                     </div>
 
                     <div class="step">
-                        <strong>Hapi 3:</strong> Zgjidhni për T₂
+                        <strong>Hapi 3:</strong> Zgjidhni për M duke përdorur ekuilibrin
                         <div class="formula">
-                            <p><strong>Ekuacioni i momentit:</strong></p>
-                            \[\sum M_A = M_1 + M_2 + M_3 + M_4 + M_{T_2} = 0\]
+                            <p><strong>Ekuilibri i momentit:</strong></p>
+                            \[M + M_{400} + M_{320} = 0\]
+                            \[M = -(M_{400} + M_{320})\]
                             
-                            <p><strong>Zgjidhni për T₂:</strong></p>
-                            \[T_2 = \frac{-(M_1 + M_2 + M_3 + M_4)}{(\text{krahu i momentit të }T_2)}\]
+                            <p><strong>Interpretimi i shenjës:</strong> Nëse M është negative, çifti vepron orar; nëse pozitiv, kundërorar</p>
                         </div>
                     </div>
 
                     <div class="step">
                         <strong>✓ Përgjigja:</strong>
-                        <p><strong>T₂ = (llogaritni nga balancimi i momentit)</strong></p>
+                        <p><strong>M = (llogaritni nga balancimi i momentit) N·m</strong></p>
+                        <p><em>Çifti M duhet të balancojë momentet nga dy forcat</em></p>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Problem 2/89 -->
+    <!-- Problem 2/88 -->
     <div class="problem-section">
         <div class="problem-left">
             <h2>Problemi 2/88</h2>
