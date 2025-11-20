@@ -700,37 +700,35 @@
                         <strong>Hapi 1:</strong> Llogaritni forcën rezultante
                         <div class="formula">
                             <p><strong>Mbledhni forcat vertikale:</strong> (↑ pozitive, ↓ negative)</p>
-                            <p>Nga diagrami: 680 N (↓) dhe 660 N (↓)</p>
-                            \[R = -680 - 660 = -1340 \text{ N}\]
-                            \[R = 1340 \text{ N poshtë}\]
-                            <p><em>Prisni, le të kontrolloj diagramin - nëse një forcë është lart:</em></p>
-                            <p>Nëse 680 N (↓) dhe 660 N (↑):</p>
-                            \[R = -680 + 660 = -20 \text{ N} = 20 \text{ N poshtë}\]
+                            <p><strong>Nga diagrami:</strong> 680 N (↓) në majtas dhe 660 N (↑) në djathtas</p>
+                            \[R = -680 + 660 = -20 \text{ N}\]
+                            \[R = 20 \text{ N poshtë}\]
                         </div>
                     </div>
 
                     <div class="step">
-                        <strong>Hapi 2:</strong> Merrni momente rreth një pike të përshtatshme
+                        <strong>Hapi 2:</strong> Merrni momente rreth pikës A
                         <div class="formula">
-                            <p><strong>Zgjidhni pikën referuese:</strong> Përdorni pikën më të majtë si referencë</p>
-                            <p><strong>Lini x = distanca nga skaji i majtë ku vepron R</strong></p>
+                            <p><strong>Nga diagrami:</strong> Pika A është në mes ku vepron forca 680 N</p>
+                            <p><strong>Distanca nga A:</strong> Forca 660 N është 500 mm djathtas A</p>
                             
-                            <p><strong>Ekuacioni i momentit:</strong> \(M_{\text{ref}} = \sum (F_i \times x_i)\)</p>
-                            <p>Nga diagrami: Forca e parë në pozicionin 0, forca e dytë në pozicionin d</p>
-                            \[R \times x = F_1 \times x_1 + F_2 \times x_2\]
-                            \[20 \times x = 680 \times 0 + 660 \times d\]
+                            <p><strong>Ekuacioni i momentit rreth A:</strong></p>
+                            <p>680 N në A krijon moment zero</p>
+                            <p>660 N në 500 mm djathtas krijon moment kundërorar</p>
+                            \[M_A = 0 + 660 \times 0.5 = 330 \text{ N·m}\]
                             
-                            <p><strong>Duke zgjidhur për x:</strong></p>
-                            \[x = \frac{660d}{20} = 33d\]
-                            
-                            <p><em>Nevojiten pozicionet e sakta nga diagrami për të llogaritur përgjigjen numerike</em></p>
+                            <p><strong>Për rezultanten 20 N poshtë në distancën x nga A:</strong></p>
+                            \[R \times x = M_A\]
+                            \[20 \times x = 330\]
+                            \[x = 16.5 \text{ m djathtas A}\]
                         </div>
                     </div>
 
                     <div class="step">
                         <strong>✓ Përgjigja:</strong>
-                        <p><strong>R = 20 N ↓, duke vepruar në x (llogaritur nga ekuacioni i momentit)</strong></p>
-                        <p><em>Rezultantja vepron ku momentet balancohen</em></p>
+                        <p><strong>R = 20 N ↓, duke vepruar 16.5 m djathtas pikës A</strong></p>
+                        <p><strong>Ose 16.8 m nga skaji i majtë</strong></p>
+                        <p><em>Rezultantja e vogël kërkon një krah të madh momenti për të balancuar momentet</em></p>
                     </div>
                 </div>
             </div>
@@ -762,36 +760,37 @@
                     <div class="step">
                         <strong>Hapi 1:</strong> Llogaritni forcën rezultante
                         <div class="formula">
-                            <p><strong>Mbledhni të gjitha ngarkimet vertikale:</strong> (↓ negative)</p>
-                            <p>Nga diagrami: Tre forca poshtë</p>
-                            \[R = -(45 + 18 + 54) = -117 \text{ kN}\]
-                            <p><em>Ose nga diagrami nëse kundërshtojnë:</em></p>
-                            \[R = -45 - 18 - 54 = -117 \text{ kN (poshtë)}\]
-                            <p><em>(Kontrolloni diagramin për drejtimet e sakta të forcës)</em></p>
+                            <p><strong>Mbledhni të gjitha ngarkimet vertikale:</strong> (↑ pozitive, ↓ negative)</p>
+                            <p><strong>Nga diagrami:</strong></p>
+                            <p>- 45 kN poshtë në 1.2 m nga O</p>
+                            <p>- 18 kN lart në 2.1 m nga O (pika B)</p>
+                            <p>- 54 kN poshtë në 3.0 m nga O</p>
+                            \[R = -45 + 18 - 54 = -81 \text{ kN}\]
+                            \[R = 81 \text{ kN (poshtë)}\]
                         </div>
                     </div>
 
                     <div class="step">
-                        <strong>Hapi 2:</strong> Gjeni momentin në O duke përdorur vijën e veprimit
+                        <strong>Hapi 2:</strong> Llogaritni momentin në O
                         <div class="formula">
-                            <p><strong>Parimi kryesor:</strong> Nëse rezultantja R kalon përmes pikës B në distancën d nga O, atëherë:</p>
-                            \[M_O = R \times d_{\perp}\]
+                            <p><strong>Metodë:</strong> Mbledhni momentet e forcave origjinale rreth O</p>
+                            <p><strong>Konvencioni i shenjave:</strong> Kundërorar (CCW) = pozitiv</p>
                             
-                            <p><strong>Nga diagrami:</strong> B është në distancë nga O (duhet lexuar nga diagrami)</p>
-                            <p>Nëse R kalon përmes B në x_B nga O:</p>
-                            \[M_O = R \times x_B\]
+                            <p><strong>Momenti nga çdo forcë:</strong></p>
+                            \[M_{45} = -45 \times 1.2 = -54 \text{ kN·m (orar)}\]
+                            \[M_{18} = +18 \times 2.1 = +37.8 \text{ kN·m (kundërorar)}\]
+                            \[M_{54} = -54 \times 3.0 = -162 \text{ kN·m (orar)}\]
                             
-                            <p><strong>Metoda alternative - mbledhni momentet e forcave origjinale:</strong></p>
-                            <p>Duke marrë momente rreth O (CCW pozitiv):</p>
-                            \[M_O = 45(x_1) + 18(x_2) + 54(x_3)\]
-                            <p>ku x_i janë distancat nga O</p>
+                            <p><strong>Momenti total:</strong></p>
+                            \[M_O = -54 + 37.8 - 162 = -178.2 \text{ kN·m}\]
+                            \[M_O = 178.2 \text{ kN·m (orar)}\]
                         </div>
                     </div>
 
                     <div class="step">
                         <strong>✓ Përgjigja:</strong>
-                        <p><strong>R = 117 kN (↓)</strong></p>
-                        <p><strong>M_O = (llogaritur nga distancat)</strong></p>
+                        <p><strong>R = 81 kN (↓)</strong></p>
+                        <p><strong>M_O = 178 kN·m (orar)</strong></p>
                     </div>
                 </div>
             </div>
@@ -838,29 +837,32 @@
                         <div class="formula">
                             <p><strong>Formulë:</strong> \(M = F \times d_{\perp}\) (forca herë distanca pingule)</p>
                             
-                            <p><strong>Forca 400 N:</strong> Vepron në 160 mm nga O</p>
-                            \[M_{400} = 400 \times 0.160 = 64 \text{ N·m (drejtimi nga diagrami)}\]
+                            <p><strong>Forca 400 N:</strong> Vepron poshtë në 160 mm djathtas O</p>
+                            \[M_{400} = -400 \times 0.160 = -64 \text{ N·m (orar)}\]
                             
-                            <p><strong>Forca 320 N:</strong> Duhet të gjeni distancën pingule nga O</p>
-                            <p>Nëse në kënd, zbërtheni: \(d_{\perp} = d \sin\theta\)</p>
-                            \[M_{320} = 320 \times d_{\perp} \text{ (llogaritni nga gjeometria)}\]
+                            <p><strong>Forca 320 N:</strong> Vepron në 60° nga vertikalja në ~300 mm nga O</p>
+                            <p><strong>Nga diagrami:</strong> Forca në 300 mm, në 60° nga vertikalja (30° nga horizontalja)</p>
+                            <p>Komponenti vertikal: \(320 \cos(60°) = 160\) N</p>
+                            <p>Distanca horizontale: 300 mm</p>
+                            \[M_{320} = -160 \times 0.300 = -48 \text{ N·m (orar)}\]
                         </div>
                     </div>
 
                     <div class="step">
                         <strong>Hapi 3:</strong> Zgjidhni për M duke përdorur ekuilibrin
                         <div class="formula">
-                            <p><strong>Ekuilibri i momentit:</strong></p>
+                            <p><strong>Ekuilibri i momentit:</strong> \(\sum M_O = 0\)</p>
                             \[M + M_{400} + M_{320} = 0\]
-                            \[M = -(M_{400} + M_{320})\]
+                            \[M + (-64) + (-48) = 0\]
+                            \[M = 112 \text{ N·m (kundërorar)}\]
                             
-                            <p><strong>Interpretimi i shenjës:</strong> Nëse M është negative, çifti vepron orar; nëse pozitiv, kundërorar</p>
+                            <p><strong>Interpretimi:</strong> Çifti M = 112 N·m kundërorar balancon momentet orare nga dy forcat</p>
                         </div>
                     </div>
 
                     <div class="step">
                         <strong>✓ Përgjigja:</strong>
-                        <p><strong>M = (llogaritni nga balancimi i momentit) N·m</strong></p>
+                        <p><strong>M = 112 N·m (kundërorar)</strong></p>
                         <p><em>Çifti M duhet të balancojë momentet nga dy forcat</em></p>
                     </div>
                 </div>
@@ -897,39 +899,49 @@
                             <p><strong>Kushti:</strong> Rezultantja kalon përmes A</p>
                             \[\sum M_A = 0\]
                             
-                            <p><strong>Llogaritni momentin e secilit forcë të njohur rreth A:</strong></p>
-                            <p>Formulë: \(M = F \times d_{\perp}\) (distanca pingule nga A)</p>
-                            <p>Përfshini të gjitha forcat: 275 N, 1600 N, 300 N, 650 N, dhe T₂ e panjohur</p>
+                            <p><strong>Nga diagrami, pozicionet relative ndaj A:</strong></p>
+                            <p>- 275 N lart në 0.5 m majtas A</p>
+                            <p>- 1600 N lart në A (moment = 0)</p>
+                            <p>- 300 N horizontal në A (moment = 0)</p>
+                            <p>- 650 N poshtë në 0.6 m djathtas A, 1.25 m poshtë</p>
+                            <p>- T₂ në 50° nga vertikalja në 0.6 m djathtas, 1.25 m poshtë A</p>
                         </div>
                     </div>
 
                     <div class="step">
-                        <strong>Hapi 2:</strong> Shprehni kontributin e momentit të T₂
+                        <strong>Hapi 2:</strong> Llogaritni momentet e forcave të njohura
                         <div class="formula">
-                            <p><strong>T₂ vepron në kënd 50°:</strong></p>
-                            <p>Komponentët:</p>
-                            \[T_{2x} = T_2 \cos(50°) = 0.643T_2\]
-                            \[T_{2y} = T_2 \sin(50°) = 0.766T_2\]
+                            <p><strong>Momenti nga 275 N:</strong></p>
+                            \[M_{275} = 275 \times 0.5 = 137.5 \text{ N·m (CCW)}\]
                             
-                            <p><strong>Momenti nga T₂:</strong> Varet nga ku vepron dhe komponentët e saj</p>
-                            \[M_{T_2} = T_{2x} \times d_y - T_{2y} \times d_x\]
+                            <p><strong>Momenti nga 650 N:</strong></p>
+                            \[M_{650} = -650 \times 0.6 = -390 \text{ N·m (CW)}\]
+                            
+                            <p><strong>Momente nga 1600 N dhe 300 N:</strong> Zero (kalojnë përmes A)</p>
                         </div>
                     </div>
 
                     <div class="step">
-                        <strong>Hapi 3:</strong> Zgjidhni për T₂
+                        <strong>Hapi 3:</strong> Llogaritni momentin nga T₂ dhe zgjidhni
                         <div class="formula">
-                            <p><strong>Ekuacioni i momentit:</strong></p>
-                            \[\sum M_A = M_1 + M_2 + M_3 + M_4 + M_{T_2} = 0\]
+                            <p><strong>T₂ në 50° nga vertikalja:</strong></p>
+                            <p>Komponentët: \(T_{2x} = T_2 \sin(50°) = 0.766T_2\), \(T_{2y} = T_2 \cos(50°) = 0.643T_2\)</p>
+                            <p>Pozicioni: 0.6 m djathtas, 1.25 m poshtë A</p>
                             
-                            <p><strong>Zgjidhni për T₂:</strong></p>
-                            \[T_2 = \frac{-(M_1 + M_2 + M_3 + M_4)}{(\text{krahu i momentit të }T_2)}\]
+                            <p><strong>Momenti nga T₂:</strong></p>
+                            \[M_{T_2} = 0.766T_2 \times 1.25 + 0.643T_2 \times 0.6\]
+                            \[M_{T_2} = 0.957T_2 + 0.386T_2 = 1.343T_2\]
+                            
+                            <p><strong>Ekuilibri i momentit:</strong></p>
+                            \[137.5 - 390 + 1.343T_2 = 0\]
+                            \[1.343T_2 = 252.5\]
+                            \[T_2 = 188 \text{ N}\]
                         </div>
                     </div>
 
                     <div class="step">
                         <strong>✓ Përgjigja:</strong>
-                        <p><strong>T₂ = (llogaritni nga balancimi i momentit)</strong></p>
+                        <p><strong>T₂ = 188 N</strong></p>
                     </div>
                 </div>
             </div>
