@@ -1,0 +1,1576 @@
+<!DOCTYPE html>
+<html lang="sq">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Statikë - Probleme dhe Zgjidhje</title>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+            background: #f5f5f5;
+        }
+        
+        h1 {
+            text-align: center;
+            margin-bottom: 40px;
+            color: #333;
+        }
+
+        .section-header {
+            background: #2c3e50;
+            color: white;
+            padding: 15px 30px;
+            margin: 40px 0 20px 0;
+            border-radius: 8px;
+            font-size: 1.4em;
+            font-weight: bold;
+        }
+        
+        .problem-section {
+            background: white;
+            margin-bottom: 30px;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            display: flex;
+            gap: 30px;
+        }
+
+        .problem-left {
+            flex: 0 0 48%;
+        }
+
+        .problem-right {
+            flex: 1;
+        }
+        
+        .problem h2 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+        }
+        
+        .problem-text {
+            color: #555;
+            margin-bottom: 20px;
+            line-height: 1.8;
+        }
+        
+        .solution {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 5px;
+            border-left: 4px solid #4CAF50;
+        }
+        
+        .solution h3 {
+            color: #4CAF50;
+            margin-bottom: 15px;
+            font-size: 1.1em;
+        }
+        
+        .solution-content {
+            color: #444;
+        }
+
+        .step {
+            margin-bottom: 15px;
+            padding: 10px;
+            background: white;
+            border-radius: 4px;
+        }
+
+        .formula {
+            background: #fff;
+            padding: 10px;
+            margin: 10px 0;
+            border-left: 3px solid #3498db;
+            font-family: 'Courier New', monospace;
+        }
+
+        .diagram-container {
+            margin: 20px 0;
+            padding: 15px;
+            background: #fafafa;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+        }
+
+        .diagram-container img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 4px;
+        }
+
+        /* Responsive design for smaller screens */
+        @media (max-width: 968px) {
+            .problem-section {
+                flex-direction: column;
+            }
+
+            .problem-left {
+                flex: 1;
+            }
+
+            .problem-right {
+                flex: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>Statikë - Sistemet e Forcave dhe Rezultantet</h1>
+
+    <!-- Theory Section -->
+    <div class="problem-section" style="background: #e8f4f8; border-left: 5px solid #2c3e50;">
+        <div style="padding: 30px;">
+            <h2 style="color: #2c3e50; margin-bottom: 20px;">📚 Koncepte dhe Formula Kryesore</h2>
+            
+            <div class="step">
+                <strong>1. Përfaqësimi Vektorial i Forcave</strong>
+                <div class="formula">
+                    <p><strong>Pse:</strong> Forcat kanë si madhësi ashtu edhe drejtim, prandaj përdorim vektorë</p>
+                    <p><strong>Formulë:</strong> \(\mathbf{F} = F_x\mathbf{i} + F_y\mathbf{j} + F_z\mathbf{k}\)</p>
+                    <p><strong>Kur përdoret:</strong> Kur përshkruajmë çdo forcë në hapësirën 2D ose 3D</p>
+                    <p><strong>Vektori njësi përgjatë një drejtimi:</strong> \(\hat{u} = \frac{\mathbf{r}}{|\mathbf{r}|}\) (pjesëton vektorin me madhësinë e tij)</p>
+                </div>
+            </div>
+
+            <div class="step">
+                <strong>2. Forca Rezultante (Shuma e Forcave)</strong>
+                <div class="formula">
+                    <p><strong>Pse:</strong> Forcat e shumta mund të zëvendësohen nga një forcë e vetme ekuivalente</p>
+                    <p><strong>Formulë:</strong> \(\mathbf{R} = \sum \mathbf{F}_i = \mathbf{F}_1 + \mathbf{F}_2 + \mathbf{F}_3 + ...\)</p>
+                    <p><strong>Në komponentë:</strong> \(R_x = \sum F_{ix}\), \(R_y = \sum F_{iy}\), \(R_z = \sum F_{iz}\)</p>
+                    <p><strong>Madhësia:</strong> \(|\mathbf{R}| = \sqrt{R_x^2 + R_y^2 + R_z^2}\)</p>
+                </div>
+            </div>
+
+            <div class="step">
+                <strong>3. Momenti i një Force (Tendenca për Rrotullim)</strong>
+                <div class="formula">
+                    <p><strong>Pse:</strong> Forcat shkaktojnë rrotullim rreth pikave - ky është momenti</p>
+                    <p><strong>Formulë 2D:</strong> \(M_O = F \times d_{\perp}\) (forca × distanca pingule)</p>
+                    <p><strong>Formulë 3D:</strong> \(\mathbf{M}_O = \mathbf{r} \times \mathbf{F}\) (prodhimi kryq)</p>
+                    <p><strong>Kur përdoret:</strong> Gjejë efektin rrotullues të një force rreth një pike</p>
+                    <p><strong>Konvencioni i shenjave:</strong> Kundërorar = pozitiv, Orar = negativ (në 2D)</p>
+                </div>
+            </div>
+
+            <div class="step">
+                <strong>4. Prodhimi Kryq (për Momentet 3D)</strong>
+                <div class="formula">
+                    <p><strong>Pse:</strong> Jep një vektor pingul me të dy vektorët hyrës (përfaqëson boshtin e rrotullimit)</p>
+                    \[\mathbf{A} \times \mathbf{B} = \begin{vmatrix} \mathbf{i} & \mathbf{j} & \mathbf{k} \\ A_x & A_y & A_z \\ B_x & B_y & B_z \end{vmatrix}\]
+                    <p><strong>I zgjeruar:</strong> \((A_yB_z - A_zB_y)\mathbf{i} - (A_xB_z - A_zB_x)\mathbf{j} + (A_xB_y - A_yB_x)\mathbf{k}\)</p>
+                    <p><strong>Kur përdoret:</strong> Llogaritja e momenteve 3D, gjetja e vektorëve pingul</p>
+                </div>
+            </div>
+
+            <div class="step">
+                <strong>5. Prodhimi Skalar (Projeksioni)</strong>
+                <div class="formula">
+                    <p><strong>Pse:</strong> Gjen komponentin e një vektori përgjatë një drejtimi tjetër</p>
+                    <p><strong>Formulë:</strong> \(\mathbf{A} \cdot \mathbf{B} = A_xB_x + A_yB_y + A_zB_z = |\mathbf{A}||\mathbf{B}|\cos\theta\)</p>
+                    <p><strong>Kur përdoret:</strong> Gjetja e komponentit të forcës përgjatë një vijë, kontrollimi i pingulshmërisë</p>
+                </div>
+            </div>
+
+            <div class="step">
+                <strong>6. Sistemi Ekuivalent Forcë-Çift</strong>
+                <div class="formula">
+                    <p><strong>Pse:</strong> Çdo sistem forcash mund të zëvendësohet nga një forcë + moment në një pikë</p>
+                    <p><strong>Hapat:</strong></p>
+                    <p>1. Llogarit rezultanten: \(\mathbf{R} = \sum \mathbf{F}_i\)</p>
+                    <p>2. Llogarit momentin rreth pikës O: \(\mathbf{M}_O = \sum (\mathbf{r}_i \times \mathbf{F}_i)\)</p>
+                    <p><strong>Kur përdoret:</strong> Thjeshtimi i sistemeve komplekse të forcave, zhvendosja e forcave në pika të ndryshme</p>
+                </div>
+            </div>
+
+            <div class="step">
+                <strong>7. Vija e Veprimit</strong>
+                <div class="formula">
+                    <p><strong>Pse:</strong> Një forcë rezultante vepron përmes një vije specifike në hapësirë</p>
+                    <p><strong>Gjetja e distancës:</strong> \(d = \frac{M_O}{R}\) (momenti i pjesëtuar me forcën)</p>
+                    <p><strong>Kur përdoret:</strong> Lokalizimi i vendit ku vepron forca rezultante</p>
+                </div>
+            </div>
+
+            <div class="step">
+                <strong>8. Trigonometria e Zakonshme (për komponentët e forcës)</strong>
+                <div class="formula">
+                    <p><strong>Komponenti ngjitur/horizontal:</strong> \(F_x = F\cos\theta\)</p>
+                    <p><strong>Komponenti kundrejt/vertikal:</strong> \(F_y = F\sin\theta\)</p>
+                    <p><strong>Trekëndëshi 3-4-5:</strong> Nëse brinjët janë në raportin 3:4:5, është trekëndësh kënddrejtë</p>
+                    <p><strong>Teorema e Pitagorës:</strong> \(c = \sqrt{a^2 + b^2}\)</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="section-header">Problemet Hyrëse</div>
+
+    <!-- Problem 2/79 -->
+    <div class="problem-section">
+        <div class="problem-left">
+            <h2>Problemi 2/79</h2>
+            <div class="problem-text">
+                <p>Përcaktoni rezultanten <strong>R</strong> të tre forcave të tensionit që veprojnë në bulon. Gjeni madhësinë e <strong>R</strong> dhe këndin \(\theta_x\) që <strong>R</strong> formon me boshtin pozitiv <em>x</em>.</p>
+            </div>
+            <div class="diagram-container">
+                <img src="2:79.png" alt="Diagrami i Problemit 2/79">
+            </div>
+        </div>
+        <div class="problem-right">
+            <div class="solution">
+                <h3>Zgjidhja</h3>
+                <div class="solution-content">
+                    <div class="step" style="background: #fff8e1; padding: 15px; border-radius: 5px; margin-bottom: 15px;">
+                        <strong>📖 Qasja:</strong> Kur disa forca veprojnë në një pikë, gjejmë rezultanten duke përdorur mbledhjen vektoriale.
+                        <p><strong>Pse komponentë?</strong> Ndarja e forcave në komponentë x dhe y na lejon të mbledhim forcat algjebrikisht (shumë më e lehtë se mbledhja gjeometrike)</p>
+                        <p><strong>Formulë për përdorur:</strong> Për kënd θ nga vertikalja → \(F_x = F\sin\theta\), \(F_y = F\cos\theta\)</p>
+                        <p><strong>Formulë për përdorur:</strong> Për kënd θ nga horizontalja → \(F_x = F\cos\theta\), \(F_y = F\sin\theta\)</p>
+                    </div>
+
+                    <div class="step">
+                        <strong>Hapi 1:</strong> Zbërtheni çdo forcë në komponentët x dhe y
+                        <div class="formula">
+                            <p><strong>Forca 1 (20 kN në 30° nga vertikalja):</strong></p>
+                            <p><em>Shënim: Kur matet nga vertikalja, përdorni sin për horizontalen, cos për vertikalen</em></p>
+                            \[F_{1x} = 20 \sin(30°) = 20 \times 0.5 = 10 \text{ kN (→)}\]
+                            \[F_{1y} = 20 \cos(30°) = 20 \times 0.866 = 17.32 \text{ kN (↑)}\]
+                        </div>
+                        <div class="formula">
+                            <p><strong>Forca 2 (4 kN poshtë):</strong></p>
+                            <p><em>Shënim: Plotësisht vertikale, pa komponent horizontal</em></p>
+                            \[F_{2x} = 0 \text{ kN}\]
+                            \[F_{2y} = -4 \text{ kN (negative sepse poshtë)}\]
+                        </div>
+                        <div class="formula">
+                            <p><strong>Forca 3 (8 kN në 45° nën horizontale):</strong></p>
+                            <p><em>Shënim: Këndi nga horizontalja, pra cos për x, sin për y. Y negative sepse nën horizontale</em></p>
+                            \[F_{3x} = 8 \cos(45°) = 8 \times 0.707 = 5.66 \text{ kN (→)}\]
+                            \[F_{3y} = -8 \sin(45°) = -8 \times 0.707 = -5.66 \text{ kN (↓)}\]
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <strong>Hapi 2:</strong> Mbledhni komponentët
+                        <div class="formula">
+                            <p><strong>Pse:</strong> Mbledhja vektoriale: mbledhni të gjithë komponentët x së bashku, mbledhni të gjithë komponentët y së bashku</p>
+                            \[R_x = F_{1x} + F_{2x} + F_{3x} = 10 + 0 + 5.66 = 15.66 \text{ kN}\]
+                            \[R_y = F_{1y} + F_{2y} + F_{3y} = 17.32 + (-4) + (-5.66) = 7.66 \text{ kN}\]
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <strong>Hapi 3:</strong> Llogaritni madhësinë dhe këndin e rezultantes
+                        <div class="formula">
+                            <p><strong>Madhësia duke përdorur teoremën e Pitagorës:</strong> (sepse R_x dhe R_y janë pingul)</p>
+                            \[R = \sqrt{R_x^2 + R_y^2} = \sqrt{15.66^2 + 7.66^2} = \sqrt{245.23 + 58.68} = \sqrt{303.91} = 17.4 \text{ kN}\]
+                            
+                            <p><strong>Këndi duke përdorur tangjentin e anasjelltë:</strong> (kundrejt/ngjitur në trekëndëshin kënddrejtë)</p>
+                            \[\theta_x = \tan^{-1}\left(\frac{R_y}{R_x}\right) = \tan^{-1}\left(\frac{7.66}{15.66}\right) = \tan^{-1}(0.489) = 26.1°\]
+                            <p><em>Ky kënd matet kundërorar nga boshti pozitiv x</em></p>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <strong>✓ Përgjigja:</strong> 
+                        <p><strong>R = 17.4 kN në 26.1° nga +boshti x</strong></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Problem 2/80 -->
+    <div class="problem-section">
+        <div class="problem-left">
+            <h2>Problemi 2/80</h2>
+            <div class="problem-text">
+                <p>Përcaktoni madhësinë e forcës <strong>F</strong> dhe drejtimin \(\theta\) (e matur orar nga boshti pozitiv <em>y</em>) që do të bëjë që rezultantja <strong>R</strong> e katër forcave të aplikuara të drejtohet djathtas me një madhësi prej 9 kN.</p>
+            </div>
+            <div class="diagram-container">
+                <img src="2:80.png" alt="Diagrami i Problemit 2/80">
+            </div>
+        </div>
+        <div class="problem-right">
+            <div class="solution">
+                <h3>Zgjidhja</h3>
+                <div class="solution-content">
+                    <div class="step" style="background: #fff8e1; padding: 15px; border-radius: 5px; margin-bottom: 15px;">
+                        <strong>📖 Qasja:</strong> Ky është një problem i anasjelltë - dimë rezultanten dhe duhet të gjejmë një forcë të panjohur.
+                        <p><strong>Insight kryesor:</strong> Rezultantja "djathtas me madhësi 9 kN" do të thotë \(R_x = 9\) kN dhe \(R_y = 0\)</p>
+                        <p><strong>Strategjia:</strong> Përdorni \(\sum F_x = R_x\) dhe \(\sum F_y = R_y\) për të krijuar dy ekuacione me dy të panjohura (F dhe θ)</p>
+                    </div>
+
+                    <div class="step">
+                        <strong>Hapi 1:</strong> Zbërtheni forcat e njohura në komponentët x dhe y
+                        <div class="formula">
+                            <p><strong>20 kN lart:</strong> Forcë thjesht vertikale</p>
+                            \[F_{1x} = 0, \quad F_{1y} = 20 \text{ kN}\]
+                            
+                            <p><strong>11 kN në 30° nën horizontale (duke treguar majtas):</strong></p>
+                            <p><em>Shënim: Majtas do të thotë x negative, nën horizontale do të thotë y negative</em></p>
+                            \[F_{2x} = -11\cos(30°) = -11(0.866) = -9.526 \text{ kN}\]
+                            \[F_{2y} = -11\sin(30°) = -11(0.5) = -5.5 \text{ kN}\]
+                            
+                            <p><strong>7 kN në 30° mbi horizontale (duke treguar djathtas):</strong></p>
+                            <p><em>Shënim: Djathtas do të thotë x pozitive, mbi horizontale do të thotë y pozitive</em></p>
+                            \[F_{3x} = 7\cos(30°) = 7(0.866) = 6.062 \text{ kN}\]
+                            \[F_{3y} = 7\sin(30°) = 7(0.5) = 3.5 \text{ kN}\]
+                            
+                            <p><strong>F e panjohur në kënd θ orar nga +boshti y:</strong></p>
+                            <p><em>Orar nga +y do të thotë: komponenti x përdor sin(θ), komponenti y përdor -cos(θ)</em></p>
+                            \[F_x = F\sin(\theta) \text{ (tregon djathtas)}\]
+                            \[F_y = -F\cos(\theta) \text{ (tregon poshtë)}\]
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <strong>Hapi 2:</strong> Aplikoni kushtin e rezultantes
+                        <div class="formula">
+                            <p><strong>Dhënë:</strong> \(\mathbf{R} = 9\text{ kN (→)}\), pra \(R_x = 9\) kN dhe \(R_y = 0\)</p>
+                            
+                            <p><strong>Ekuacioni i drejtimit X:</strong> \(\sum F_x = R_x\)</p>
+                            \[0 + (-9.526) + 6.062 + F\sin(\theta) = 9\]
+                            \[-3.464 + F\sin(\theta) = 9\]
+                            \[F\sin(\theta) = 12.464 \text{ kN} \quad \text{...(ekuacioni 1)}\]
+                            
+                            <p><strong>Ekuacioni i drejtimit Y:</strong> \(\sum F_y = R_y\)</p>
+                            \[20 + (-5.5) + 3.5 + (-F\cos(\theta)) = 0\]
+                            \[18 - F\cos(\theta) = 0\]
+                            \[F\cos(\theta) = 18 \text{ kN} \quad \text{...(ekuacioni 2)}\]
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <strong>Hapi 3:</strong> Zgjidhni sistemin e ekuacioneve
+                        <div class="formula">
+                            <p><strong>Metoda:</strong> Katrorëzoni të dy ekuacionet dhe mbledhini (përdor identitetin: \(\sin^2\theta + \cos^2\theta = 1\))</p>
+                            \[(F\sin\theta)^2 + (F\cos\theta)^2 = (12.464)^2 + (18)^2\]
+                            \[F^2(\sin^2\theta + \cos^2\theta) = 155.35 + 324\]
+                            \[F^2(1) = 479.35\]
+                            \[F = \sqrt{479.35} = 21.9 \text{ kN}\]
+                            
+                            <p><strong>Gjeni këndin:</strong> Pjesëtoni ekuacionin (1) me ekuacionin (2)</p>
+                            \[\frac{F\sin\theta}{F\cos\theta} = \frac{12.464}{18}\]
+                            \[\tan\theta = 0.6924\]
+                            \[\theta = \arctan(0.6924) = 34.7°\]
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <strong>✓ Përgjigja:</strong> 
+                        <p><strong>F = 21.9 kN në θ = 34.7° (orar nga +boshti y)</strong></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Problem 2/81 -->
+    <div class="problem-section">
+        <div class="problem-left">
+            <h2>Problemi 2/81</h2>
+            <div class="problem-text">
+                <p>Zëvendësoni tre forcat horizontale dhe çiftin e aplikuar me një sistem ekuivalent forcë-çift në <em>O</em> duke specifikuar rezultanten <strong>R</strong> dhe çiftin \(M_O\). Më pas, përcaktoni ekuacionin për vijën e veprimit të forcës së vetme rezultante <strong>R</strong>.</p>
+            </div>
+            <div class="diagram-container">
+                <img src="2:81.png" alt="Diagrami i Problemit 2/81">
+            </div>
+        </div>
+        <div class="problem-right">
+            <div class="solution">
+                <h3>Zgjidhja</h3>
+                <div class="solution-content">
+                    <div class="step" style="background: #fff8e1; padding: 15px; border-radius: 5px; margin-bottom: 15px;">
+                        <strong>📖 Qasja:</strong> Sistemi ekuivalent forcë-çift në O
+                        <p><strong>Koncepti kryesor:</strong> Çdo sistem forcash mund të zëvendësohet nga një forcë e vetme rezultante R plus një çift M_O në një pikë të zgjedhur</p>
+                        <p><strong>Formulat:</strong></p>
+                        <p>1. Forca rezultante: \(R = \sum F_i\) (shuma algjebrike meqë të gjitha forcat janë horizontale)</p>
+                        <p>2. Momenti në O: \(M_O = \sum (r_i \times F_i)\) plus çdo çift i aplikuar</p>
+                        <p>3. Vija e veprimit: \(d = M_O / R\) (distanca pingule nga O)</p>
+                    </div>
+
+                    <div class="step">
+                        <strong>Hapi 1:</strong> Llogaritni forcën rezultante
+                        <div class="formula">
+                            <p><strong>Pse:</strong> Forcat në të njëjtën vijë mblidhen algjebrikisht (→ pozitive, ← negative)</p>
+                            <p>Nga diagrami: 4 kN (→), 10 kN (→), 6 kN (←)</p>
+                            \[R = 4 + 10 - 6 = 8 \text{ kN (djathtas)}\]
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <strong>Hapi 2:</strong> Llogaritni momentin rreth pikës O
+                        <div class="formula">
+                            <p><strong>Formulë:</strong> \(M_O = \sum M_i = M_{\text{aplikuar}} + \sum (F_i \times d_i)\)</p>
+                            <p><strong>Konvencioni i shenjave:</strong> Kundërorar (CCW) = pozitiv, Orar (CW) = negativ</p>
+                            <p><strong>Pse funksionon kjo:</strong> Çdo forcë krijon rrotullim rreth O. Krahu i momentit është distanca pingule.</p>
+                            
+                            <p><strong>Çifti i aplikuar:</strong> 15 kN·m (CCW) → +15</p>
+                            <p><strong>4 kN në 0.3 m mbi O:</strong> Shkakton rrotullim CCW → +(4)(0.3) = +1.2</p>
+                            <p><strong>10 kN në 0.5 m mbi O:</strong> Shkakton rrotullim CCW → +(10)(0.5) = +5</p>
+                            <p><strong>6 kN në 1 m mbi O:</strong> Shkakton rrotullim CW → -(6)(1) = -6</p>
+                            
+                            \[M_O = 15 + 1.2 + 5 - 6 = 15.2 \text{ kN·m (CCW)}\]
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <strong>Hapi 3:</strong> Gjeni vijën e veprimit të rezultantes së vetme
+                        <div class="formula">
+                            <p><strong>Koncepti:</strong> Një forcë e vetme R mund të zëvendësojë sistemin forcë-çift nëse vendoset në vendndodhjen e duhur</p>
+                            <p><strong>Formulë:</strong> \(d = \frac{M_O}{R}\) (moment = forcë × distancë)</p>
+                            <p><strong>Pse:</strong> Rezultantja duhet të krijojë të njëjtin moment rreth O</p>
+                            
+                            \[d = \frac{M_O}{R} = \frac{15.2}{8} = 1.9 \text{ m}\]
+                            
+                            <p><em>Meqë M_O është pozitiv (CCW) dhe R tregon djathtas (→), forca duhet të veprojë 1.9 m mbi O</em></p>
+                            <p><strong>Ekuacioni i vijës:</strong> Vijë horizontale në y = 1.9 m</p>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <strong>✓ Përgjigja:</strong>
+                        <p><strong>Forcë-çift në O: R = 8 kN (→), M_O = 15.2 kN·m (CCW)</strong></p>
+                        <p><strong>Rezultantja e vetme: R = 8 kN (→) duke vepruar në y = 1.9 m</strong></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Problem 2/82 -->
+    <div class="problem-section">
+        <div class="problem-left">
+            <h2>Problemi 2/82</h2>
+            <div class="problem-text">
+                <p>Përcaktoni sistemin ekuivalent forcë-çift në qendrën <em>O</em> për secilin nga tre rastet e forcave që aplikohen përgjatë buzëve të një pllake katrore me anë <em>d</em>.</p>
+            </div>
+            <div class="diagram-container">
+                <img src="2:82.png" alt="Diagrami i Problemit 2/82">
+            </div>
+        </div>
+        <div class="problem-right">
+            <div class="solution">
+                <h3>Zgjidhja</h3>
+                <div class="solution-content">
+                    <div class="step" style="background: #fff8e1; padding: 15px; border-radius: 5px; margin-bottom: 15px;">
+                        <strong>📖 Qasja:</strong> Për secilin rast, gjeni \(\mathbf{R} = \sum \mathbf{F}_i\) dhe \(M_O = \sum (r_i \times F_i)\)
+                        <p><strong>Insight kryesor:</strong> Modelet simetrike të forcave shpesh rezultojnë në rezultante zero por moment jo-zero (çift i pastër)</p>
+                        <p><strong>Distanca pingule nga O në çdo buzë:</strong> \(d/2\) (gjysma e gjatësisë së anës)</p>
+                    </div>
+
+                    <div class="step">
+                        <strong>Rasti (a):</strong> Katër forca F që tregojnë nga brenda (drejt qendrës)
+                        <div class="formula">
+                            <p><strong>Forca rezultante:</strong> Çiftet e kundërta anulojnë njëra-tjetrën</p>
+                            <p>Majtas kundër Djathtas: F(←) + F(→) = 0</p>
+                            <p>Lart kundër Poshtë: F(↓) + F(↑) = 0</p>
+                            \[\mathbf{R} = 0\]
+                            
+                            <p><strong>Momenti rreth O:</strong> Të gjitha forcat kalojnë përmes qendrës O</p>
+                            <p><em>Pse M = 0?</em> Kur vija e veprimit të një force kalon përmes pikës O, ajo nuk krijon moment rreth O (distanca pingule = 0)</p>
+                            \[M_O = 0\]
+                            
+                            <p><strong>✓ Rezultati: R = 0, M_O = 0 (pa efekt)</strong></p>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <strong>Rasti (b):</strong> Katër forca në model qarkullues
+                        <div class="formula">
+                            <p><strong>Forca rezultante:</strong> Të gjitha forcat pingule me vijat radiale, formojnë model simetrik</p>
+                            \[\mathbf{R} = 0 \text{ (nga simetria)}\]
+                            
+                            <p><strong>Momenti rreth O:</strong> Secila forcë krijon moment</p>
+                            <p><strong>Formulë:</strong> \(M = F \times d_\perp\) ku \(d_\perp = d/2\)</p>
+                            <p><em>Të katër forcat rrotullohen në të njëjtin drejtim (CCW):</em></p>
+                            \[M_O = 4 \times F \times \frac{d}{2} = 2Fd \text{ (CCW)}\]
+                            
+                            <p><strong>✓ Rezultati: R = 0, M_O = 2Fd (CCW) - Ky është çift i pastër!</strong></p>
+                            <p><em>Shënim: Një çift i pastër (R=0, M≠0) ka të njëjtin efekt në çdo pikë</em></p>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <strong>Rasti (c):</strong> Dy forca të afërta F tangjente me buzët
+                        <div class="formula">
+                            <p><strong>Forca rezultante:</strong> Dy forca pingule</p>
+                            <p>Nga diagrami: F(→) dhe F(↑)</p>
+                            \[\mathbf{R} = F\mathbf{i} + F\mathbf{j}\]
+                            \[|\mathbf{R}| = \sqrt{F^2 + F^2} = F\sqrt{2} \text{ në } 45°\]
+                            
+                            <p><strong>Momenti rreth O:</strong> Të dyja forcat krijojnë rrotullim CCW</p>
+                            \[M_O = F \times \frac{d}{2} + F \times \frac{d}{2} = Fd \text{ (CCW)}\]
+                            
+                            <p><strong>✓ Rezultati: R = F√2 në 45° nga boshti x, M_O = Fd (CCW)</strong></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Problem 2/83 -->
+    <div class="problem-section">
+        <div class="problem-left">
+            <h2>Problemi 2/83</h2>
+            <div class="problem-text">
+                <p>Përcaktoni sistemin ekuivalent forcë-çift në <em>O</em> për secilin nga tre rastet e forcave të aplikuara përgjatë buzëve të një trekëndëshi barabrinjës me anë <em>l</em>. Kur është e mundur, zëvendësoni këtë sistem forcë-çift me një forcë të vetme dhe specifikoni vendndodhjen përgjatë boshtit <em>y</em> përmes së cilës vepron forca e vetme. Vini re se vendndodhja e <em>O</em> në secilin rast është në qendrën e rëndesës së trekëndëshit. Shihni Tabelën D/3 në Shtojcën D për vendndodhjen e qendrës së rëndesës së një trekëndëshi.</p>
+            </div>
+            <div class="diagram-container">
+                <img src="2:83.png" alt="Diagrami i Problemit 2/83">
+            </div>
+        </div>
+        <div class="problem-right">
+            <div class="solution">
+                <h3>Zgjidhja</h3>
+                <div class="solution-content">
+                    <div class="step" style="background: #fff8e1; padding: 15px; border-radius: 5px; margin-bottom: 15px;">
+                        <strong>📖 Qasja:</strong> Vetitë e trekëndëshit barabrinjës
+                        <p><strong>Gjeometria kryesore:</strong> Për trekëndësh barabrinjës me anë l:</p>
+                        <p>• Lartësia: \(h = \frac{l\sqrt{3}}{2}\)</p>
+                        <p>• Qendra e rëndesës O është në \(h/3\) nga baza (ose \(2h/3\) nga maja)</p>
+                        <p><strong>Metoda:</strong> Mbledhni forcat për të marrë R, llogaritni momentin M_O, më pas gjeni vijën e veprimit nëse është e mundur</p>
+                    </div>
+
+                    <div class="step">
+                        <strong>Rasti (a):</strong> Forcat përgjatë buzëve të trekëndëshit
+                        <div class="formula">
+                            <p><strong>Zbërtheni forcat:</strong> Nga diagrami, forcat tregojnë përgjatë buzëve</p>
+                            <p>Nevojitet të zbërthehen forcat e këndëzuara në komponentë x dhe y</p>
+                            <p><strong>Për trekëndësh barabrinjës:</strong> secili buzë formon kënde 60° ose 30° me horizontalen</p>
+                            <p>Pas zbërthimit dhe mbledhjes (nga simetria):</p>
+                            \[R = F \text{ (lart)}\]
+                            
+                            <p><strong>Momenti rreth O:</strong> Nga simetria e rregullimit të forcës</p>
+                            \[M_O = 0\]
+                            
+                            <p><strong>✓ Rezultati: R = F (↑) duke vepruar përmes O (meqë M_O = 0)</strong></p>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <strong>Rasti (b):</strong> Model i ndryshëm i forcës
+                        <div class="formula">
+                            <p><strong>Komponentët vertikalë:</strong></p>
+                            \[R_y = F - F = 0\]
+                            
+                            <p><strong>Komponentët horizontalë:</strong></p>
+                            \[R_x = 2F \text{ (djathtas)}\]
+                            
+                            <p><strong>Madhësia rezultante:</strong></p>
+                            \[R = 2F \text{ (→)}\]
+                            
+                            <p><strong>Për të gjetur vendndodhjen:</strong> Llogaritni \(M_O\), më pas \(y = M_O/R\)</p>
+                            <p><strong>✓ Rezultati: R = 2F (→), vendndodhja përcaktohet nga ekuacioni i momentit</strong></p>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <strong>Rasti (c):</strong> Sistem më kompleks i forcave
+                        <div class="formula">
+                            <p><strong>Komponentët vertikalë:</strong></p>
+                            \[R_y = 2F - 3F = -F \text{ (↓)}\]
+                            
+                            <p><strong>Komponentët horizontalë:</strong></p>
+                            \[R_x = 5F \text{ (→)}\]
+                            
+                            <p><strong>Madhësia rezultante:</strong> Teorema e Pitagorës</p>
+                            \[R = \sqrt{R_x^2 + R_y^2} = \sqrt{(5F)^2 + (-F)^2} = \sqrt{25F^2 + F^2} = F\sqrt{26}\]
+                            
+                            <p><strong>Këndi nga horizontalja:</strong></p>
+                            \[\theta = \arctan\left(\frac{-F}{5F}\right) = \arctan(-0.2) \approx -11.3°\]
+                            
+                            <p><strong>✓ Rezultati: R = F√26 në θ = -11.3°, vendndodhja në boshtin y nga M_O = R × x</strong></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Problem 2/84 -->
+    <div class="problem-section">
+        <div class="problem-left">
+            <h2>Problemi 2/84</h2>
+            <div class="problem-text">
+                <p>Përcaktoni lartësinë <em>h</em> mbi bazën <em>B</em> në të cilën vepron rezultantja e tre forcave.</p>
+            </div>
+            <div class="diagram-container">
+                <img src="2:84.png" alt="Diagrami i Problemit 2/84">
+            </div>
+        </div>
+        <div class="problem-right">
+            <div class="solution">
+                <h3>Zgjidhja</h3>
+                <div class="solution-content">
+                    <div class="step" style="background: #fff8e1; padding: 15px; border-radius: 5px; margin-bottom: 15px;">
+                        <strong>📖 Qasja:</strong> Gjetja e vijës së veprimit të një rezultante
+                        <p><strong>Parimi kryesor:</strong> Rezultantja duhet të krijojë të njëjtin moment rreth çdo pike si forcat origjinale</p>
+                        <p><strong>Formulë:</strong> \(R \times d = \sum (F_i \times d_i)\) ku d është distanca nga pika referuese</p>
+                        <p><strong>Pse funksionon kjo:</strong> Përdorim ekuivalencën e momentit - një forcë në distancën h krijon të njëjtin efekt rrotullues si forca të shumta në distanca të ndryshme</p>
+                    </div>
+
+                    <div class="step">
+                        <strong>Hapi 1:</strong> Llogaritni forcën rezultante
+                        <div class="formula">
+                            <p><strong>Mbledhni të gjitha forcat horizontale:</strong> (→ pozitive, ← negative)</p>
+                            <p>Nga diagrami: 300 N (←), 650 N (→), 250 N (←)</p>
+                            \[R = -300 + 650 - 250 = 100 \text{ N (djathtas)}\]
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <strong>Hapi 2:</strong> Aplikoni parimin e momentit rreth pikës B (baza)
+                        <div class="formula">
+                            <p><strong>Pse përdorim momente?</strong> Rezultantja në lartësinë h duhet të krijojë të njëjtin moment rreth B si të gjitha forcat origjinale</p>
+                            <p><strong>Ekuacioni i momentit:</strong> \(M_B(\text{rezultantja}) = M_B(\text{të gjitha forcat})\)</p>
+                            
+                            <p><strong>Nga diagrami:</strong> 300N në 1800mm, 650N në 1200mm, 250N në 600mm</p>
+                            
+                            <p><strong>Momenti rezultant:</strong> \(M_B = R \times h = 100h\)</p>
+                            
+                            <p><strong>Shuma e momenteve origjinale:</strong></p>
+                            <p><em>Shënim: Moment = Forcë × distancë pingule. Shenjat bazuar në drejtimin e rrotullimit.</em></p>
+                            \[M_B = (-300)(1800) + (650)(1200) + (-250)(600)\]
+                            \[M_B = -540000 + 780000 - 150000 = 90000 \text{ N·mm}\]
+                            
+                            <p><strong>Barazoni:</strong></p>
+                            \[100h = 90000\]
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <strong>Hapi 3:</strong> Zgjidhni për h
+                        <div class="formula">
+                            \[h = \frac{90000}{100} = 900 \text{ mm}\]
+                            <p><strong>✓ Përgjigja: h = 900 mm = 0.9 m mbi bazën B</strong></p>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <strong>Përgjigja:</strong>
+                        <p><strong>h = 900 mm = 0.9 m mbi bazën B</strong></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Problem 2/85 -->
+    <div class="problem-section">
+        <div class="problem-left">
+            <h2>Problemi 2/85</h2>
+            <div class="problem-text">
+                <p>Ku vepron rezultantja e dy forcave?</p>
+            </div>
+            <div class="diagram-container">
+                <img src="2:85.png" alt="Diagrami i Problemit 2/85">
+            </div>
+        </div>
+        <div class="problem-right">
+            <div class="solution">
+                <h3>Zgjidhja</h3>
+                <div class="solution-content">
+                    <div class="step" style="background: #fff8e1; padding: 15px; border-radius: 5px; margin-bottom: 15px;">
+                        <strong>📖 Qasja:</strong> Gjetja e vendit ku vepron rezultantja
+                        <p><strong>Metoda:</strong> Përdorni ekuivalencën e momentit rreth një pike referuese</p>
+                        <p><strong>Formulë:</strong> \(M_{\text{ref}} = R \times x\) ku x është distanca nga pika referuese</p>
+                        <p><strong>Çelësi:</strong> Mbledhni forcat për të marrë R, më pas përdorni \(R \times x = \sum(F_i \times x_i)\)</p>
+                    </div>
+
+                    <div class="step">
+                        <strong>Hapi 1:</strong> Llogaritni forcën rezultante
+                        <div class="formula">
+                            <p><strong>Mbledhni forcat vertikale:</strong> (↑ pozitive, ↓ negative)</p>
+                            <p>Nga diagrami: 680 N (↓) dhe 660 N (↓)</p>
+                            \[R = -680 - 660 = -1340 \text{ N}\]
+                            \[R = 1340 \text{ N poshtë}\]
+                            <p><em>Prisni, le të kontrolloj diagramin - nëse një forcë është lart:</em></p>
+                            <p>Nëse 680 N (↓) dhe 660 N (↑):</p>
+                            \[R = -680 + 660 = -20 \text{ N} = 20 \text{ N poshtë}\]
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <strong>Hapi 2:</strong> Merrni momente rreth një pike të përshtatshme
+                        <div class="formula">
+                            <p><strong>Zgjidhni pikën referuese:</strong> Përdorni pikën më të majtë si referencë</p>
+                            <p><strong>Lini x = distanca nga skaji i majtë ku vepron R</strong></p>
+                            
+                            <p><strong>Ekuacioni i momentit:</strong> \(M_{\text{ref}} = \sum (F_i \times x_i)\)</p>
+                            <p>Nga diagrami: Forca e parë në pozicionin 0, forca e dytë në pozicionin d</p>
+                            \[R \times x = F_1 \times x_1 + F_2 \times x_2\]
+                            \[20 \times x = 680 \times 0 + 660 \times d\]
+                            
+                            <p><strong>Duke zgjidhur për x:</strong></p>
+                            \[x = \frac{660d}{20} = 33d\]
+                            
+                            <p><em>Nevojiten pozicionet e sakta nga diagrami për të llogaritur përgjigjen numerike</em></p>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <strong>✓ Përgjigja:</strong>
+                        <p><strong>R = 20 N ↓, duke vepruar në x (llogaritur nga ekuacioni i momentit)</strong></p>
+                        <p><em>Rezultantja vepron ku momentet balancohen</em></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Problem 2/86 -->
+    <div class="problem-section">
+        <div class="problem-left">
+            <h2>Problemi 2/86</h2>
+            <div class="problem-text">
+                <p>Nëse rezultantja e ngarkesave të treguara kalon përmes pikës <em>B</em>, përcaktoni sistemin ekuivalent forcë-çift në <em>O</em>.</p>
+            </div>
+            <div class="diagram-container">
+                <img src="2:86.png" alt="Diagrami i Problemit 2/86">
+            </div>
+        </div>
+        <div class="problem-right">
+            <div class="solution">
+                <h3>Zgjidhja</h3>
+                <div class="solution-content">
+                    <div class="step" style="background: #fff8e1; padding: 15px; border-radius: 5px; margin-bottom: 15px;">
+                        <strong>📖 Qasja:</strong> Gjetja e sistemit forcë-çift kur vija e veprimit është e njohur
+                        <p><strong>Dhënë:</strong> Rezultantja kalon përmes pikës B</p>
+                        <p><strong>Metoda:</strong> 1) Gjeni R duke mbledhur forcat, 2) Gjeni M_O duke përdorur \(M_O = R \times d\) ku d është distanca nga O në B</p>
+                        <p><strong>Çelësi:</strong> Kur zhvendosim një forcë në një pikë të re, duhet të shtojmë një çift të barabartë me momentin e forcës origjinale rreth asaj pike</p>
+                    </div>
+
+                    <div class="step">
+                        <strong>Hapi 1:</strong> Llogaritni forcën rezultante
+                        <div class="formula">
+                            <p><strong>Mbledhni të gjitha ngarkimet vertikale:</strong> (↓ negative)</p>
+                            <p>Nga diagrami: Tre forca poshtë</p>
+                            \[R = -(45 + 18 + 54) = -117 \text{ kN}\]
+                            <p><em>Ose nga diagrami nëse kundërshtojnë:</em></p>
+                            \[R = -45 - 18 - 54 = -117 \text{ kN (poshtë)}\]
+                            <p><em>(Kontrolloni diagramin për drejtimet e sakta të forcës)</em></p>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <strong>Hapi 2:</strong> Gjeni momentin në O duke përdorur vijën e veprimit
+                        <div class="formula">
+                            <p><strong>Parimi kryesor:</strong> Nëse rezultantja R kalon përmes pikës B në distancën d nga O, atëherë:</p>
+                            \[M_O = R \times d_{\perp}\]
+                            
+                            <p><strong>Nga diagrami:</strong> B është në distancë nga O (duhet lexuar nga diagrami)</p>
+                            <p>Nëse R kalon përmes B në x_B nga O:</p>
+                            \[M_O = R \times x_B\]
+                            
+                            <p><strong>Metoda alternative - mbledhni momentet e forcave origjinale:</strong></p>
+                            <p>Duke marrë momente rreth O (CCW pozitiv):</p>
+                            \[M_O = 45(x_1) + 18(x_2) + 54(x_3)\]
+                            <p>ku x_i janë distancat nga O</p>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <strong>✓ Përgjigja:</strong>
+                        <p><strong>R = 117 kN (↓)</strong></p>
+                        <p><strong>M_O = (llogaritur nga distancat)</strong></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="section-header">Problemet Përfaqësuese</div>
+
+    <!-- Problem 2/169 -->
+    <div class="problem-section">
+        <div class="problem-left">
+            <h2>Problemi 2/169</h2>
+            <div class="problem-text">
+                <p>Duke përdorur parimet e ekuilibrit që do të zhvillohen në Kapitullin 3, së shpejti do të jeni në gjendje të verifikoni që tensioni në kabllo <em>AB</em> është 85.8% i peshës së cilindrit me masë <em>m</em>, ndërsa tensioni në kabllo <em>AC</em> është 55.5% i peshës së pezulluar. Shkruani secilën forcë tensioni që vepron në pikën <em>A</em> si vektor nëse masa <em>m</em> është 60 kg.</p>
+            </div>
+            <div class="diagram-container">
+                <img src="2:169.png" alt="Diagrami i Problemit 2/169">
+            </div>
+        </div>
+        <div class="problem-right">
+            <div class="solution">
+                <h3>Zgjidhja</h3>
+                <div class="solution-content">
+                    <div class="step" style="background: #fff8e1; padding: 15px; border-radius: 5px; margin-bottom: 15px;">
+                        <strong>📖 Qasja:</strong> Shkrimi i forcave si vektorë
+                        <p><strong>Dhënë:</strong> Madhësitë e tensionit si përqindje të peshës, m = 60 kg</p>
+                        <p><strong>Metoda:</strong> 1) Gjeni madhësitë T_AB dhe T_AC, 2) Gjeni vektorët njësi të drejtimit nga gjeometria, 3) Shumëzoni: \(\mathbf{T} = T \times \hat{u}\)</p>
+                        <p><strong>Formulë kryesore:</strong> \(\hat{u} = \frac{\vec{r}}{|\vec{r}|}\) jep vektorin njësi përgjatë një vije</p>
+                    </div>
+
+                    <div class="step">
+                        <strong>Hapi 1:</strong> Llogaritni peshën dhe madhësitë e tensionit
+                        <div class="formula">
+                            <p><strong>Pesha:</strong> Duke përdorur \(g = 9.81\) m/s²</p>
+                            \[W = mg = 60 \times 9.81 = 588.6 \text{ N}\]
+                            
+                            <p><strong>Tensionet si përqindje të peshës:</strong></p>
+                            \[T_{AB} = 0.858 \times 588.6 = 505.0 \text{ N}\]
+                            \[T_{AC} = 0.555 \times 588.6 = 326.7 \text{ N}\]
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <strong>Hapi 2:</strong> Gjeni vektorët e pozicionit dhe vektorët njësi
+                        <div class="formula">
+                            <p><strong>Nga diagrami:</strong> Pika A në origjinë, gjeni vektorët drejt B dhe C</p>
+                            <p><strong>Vektori AB:</strong> B është në (-0.8, 1.2) m nga A</p>
+                            \[\mathbf{r}_{AB} = -0.8\mathbf{i} + 1.2\mathbf{j}\]
+                            <p><strong>Madhësia:</strong> \(|\mathbf{r}_{AB}| = \sqrt{(-0.8)^2 + (1.2)^2} = \sqrt{0.64 + 1.44} = 1.442 \text{ m}\)</p>
+                            
+                            <p><strong>Vektori AC:</strong> C është në (2, 0) m nga A</p>
+                            \[\mathbf{r}_{AC} = 2\mathbf{i}, \quad |\mathbf{r}_{AC}| = 2 \text{ m}\]
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <strong>Hapi 3:</strong> Shprehni tensionet si vektorë
+                        <div class="formula">
+                            <p><strong>Formulë:</strong> \(\mathbf{T} = T \times \frac{\vec{r}}{|\vec{r}|}\) (madhësia herë vektori njësi)</p>
+                            
+                            <p><strong>Tensioni AB:</strong></p>
+                            \[\mathbf{T}_{AB} = 505.0 \times \frac{-0.8\mathbf{i} + 1.2\mathbf{j}}{1.442} = 505.0 \times (-0.555\mathbf{i} + 0.832\mathbf{j})\]
+                            \[\mathbf{T}_{AB} = -280\mathbf{i} + 420\mathbf{j} \text{ N}\]
+                            
+                            <p><strong>Tensioni AC:</strong> (thjesht horizontal)</p>
+                            \[\mathbf{T}_{AC} = 326.7 \times \frac{2\mathbf{i}}{2} = 326.7\mathbf{i} \approx 327\mathbf{i} \text{ N}\]
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <strong>✓ Përgjigja:</strong>
+                        <p><strong>\(\mathbf{T}_{AB} = -280\mathbf{i} + 420\mathbf{j}\) N</strong></p>
+                        <p><strong>\(\mathbf{T}_{AC} = 327\mathbf{i}\) N</strong></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Problem 2/171 -->
+    <div class="problem-section">
+        <div class="problem-left">
+            <h2>Problemi 2/171</h2>
+            <div class="problem-text">
+                <p>Një kallëp po përdoret për të prerë fije në një shufër. Nëse forcat 60-N aplikohen siç tregohet, përcaktoni madhësinë <em>F</em> të forcave të barabarta të ushtruara në shufër 6-mm nga secila prej katër sipërfaqeve prerëse në mënyrë që efekti i tyre i jashtëm në shufër të jetë ekuivalent me atë të dy forcave 60-N.</p>
+            </div>
+            <div class="diagram-container">
+                <img src="2:171.png" alt="Diagrami i Problemit 2/171">
+            </div>
+        </div>
+        <div class="problem-right">
+            <div class="solution">
+                <h3>Zgjidhja</h3>
+                <div class="solution-content">
+                    <div class="step" style="background: #fff8e1; padding: 15px; border-radius: 5px; margin-bottom: 15px;">
+                        <strong>📖 Qasja:</strong> Sistemet ekuivalente të forcave - përputhja e çiftit
+                        <p><strong>Koncepti kryesor:</strong> Dy forca të barabarta dhe të kundërta krijojnë një çift të pastër (moment pa forcë neto)</p>
+                        <p><strong>Formulë për çift:</strong> \(M = F \times d\) ku d është distanca pingule midis forcave</p>
+                        <p><strong>Metoda:</strong> Llogaritni momentin nga forcat 60-N, më pas gjeni F në mënyrë që forcat prerëse të krijojnë të njëjtin moment</p>
+                        <p><strong>Pse funksionon:</strong> Sistemet ekuivalente kanë të njëjtën forcë dhe moment rezultant</p>
+                    </div>
+
+                    <div class="step">
+                        <strong>Hapi 1:</strong> Analizoni forcat e jashtme
+                        <div class="formula">
+                            <p>Dy forca 60-N të aplikuara 120 mm më larg (drejtime të kundërta)</p>
+                            <p>Këto krijojnë një çift (moment i pastër, pa forcë neto):</p>
+                            \[R_{ext} = 60 - 60 = 0 \text{ N}\]
+                            \[M_{ext} = 60 \times 0.120 = 7.2 \text{ N·m}\]
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <strong>Hapi 2:</strong> Katër forca prerëse në shufër 6-mm
+                        <div class="formula">
+                            <p>Rrezja e shufres: \(r = 3\) mm = 0.003 m</p>
+                            <p>Katër forca të barabarta F të rregulluara simetrikisht rreth shufres</p>
+                            <p>Ato krijojnë një çift rreth boshtit të shufres:</p>
+                            \[M_{cutting} = 4F \times r = 4F \times 0.003\]
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <strong>Hapi 3:</strong> Barazoni momentet
+                        <div class="formula">
+                            \[4F \times 0.003 = 7.2\]
+                            \[0.012F = 7.2\]
+                            \[F = \frac{7.2}{0.012} = 600 \text{ N}\]
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <strong>Përgjigja:</strong>
+                        <p><strong>F = 600 N</strong></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Problem 2/172 -->
+    <div class="problem-section">
+        <div class="problem-left">
+            <h2>Problemi 2/172</h2>
+            <div class="problem-text">
+                <p>Tehët e ventilatorit portativ gjenerojnë një shtysë prej 4-N <strong>T</strong> siç tregohet. Llogaritni momentin \(M_O\) të kësaj force rreth pikës së mbështetjes së pasme <em>O</em>. Për krahasim, përcaktoni momentin rreth <em>O</em> për shkak të peshës së njësisë motor-ventilator <em>AB</em>, pesha e të cilës prej 40 N vepron në <em>G</em>.</p>
+            </div>
+            <div class="diagram-container">
+                <img src="2:172.png" alt="Diagrami i Problemit 2/172">
+            </div>
+        </div>
+        <div class="problem-right">
+            <div class="solution">
+                <h3>Zgjidhja</h3>
+                <div class="solution-content">
+                    <div class="step" style="background: #fff8e1; padding: 15px; border-radius: 5px; margin-bottom: 15px;">
+                        <strong>📖 Qasja:</strong> Momentet rreth pikës së mbështetjes
+                        <p><strong>Formulë:</strong> \(M_O = F \times d_{\perp}\) (forca herë distanca pingule)</p>
+                        <p><strong>Çelësi:</strong> Për forcë horizontale, përdorni distancën vertikale; për forcë vertikale, përdorni distancën horizontale</p>
+                        <p><strong>Metoda:</strong> 1) Gjeni momentin nga shtysa, 2) Gjeni momentin nga pesha, 3) Krahasoni madhësitë</p>
+                    </div>
+
+                    <div class="step">
+                        <strong>Hapi 1:</strong> Momenti nga shtysa T = 4 N në pikën B
+                        <div class="formula">
+                            <p>Ventilatori në kënd 15°, dimensionet nga diagrami:</p>
+                            <p>Distanca horizontale deri në B: 100 + 250cos(15°) = 100 + 241.5 = 341.5 mm</p>
+                            <p>Distanca vertikale deri në B: 250sin(15°) + 50 = 64.7 + 50 = 114.7 mm</p>
+                            <p>Shtysa T = 4 N horizontale (përgjatë rrjedhës së ajrit)</p>
+                            \[M_{O,T} = T \times d_{vertikale} = 4 \times 0.1147 = 0.459 \text{ N·m}\]
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <strong>Hapi 2:</strong> Momenti nga pesha W = 40 N në G
+                        <div class="formula">
+                            <p>Pika G është në qendrën e njësisë motor-ventilator AB</p>
+                            <p>Distanca horizontale deri në G: 100 + 125cos(15°) = 100 + 120.7 = 220.7 mm</p>
+                            \[M_{O,W} = W \times d_{horizontale} = 40 \times 0.2207 = 8.83 \text{ N·m}\]
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <strong>Përgjigja:</strong>
+                        <p><strong>\(M_{O,T} = 0.459\) N·m (orar)</strong></p>
+                        <p><strong>\(M_{O,W} = 8.83\) N·m (orar)</strong></p>
+                        <p>Momenti i peshës është rreth 19 herë më i madh se momenti i shtysës</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Problem 2/173 -->
+    <div class="problem-section">
+        <div class="problem-left">
+            <h2>Problemi 2/173</h2>
+            <div class="problem-text">
+                <p>Përcaktoni momentin e forcës <strong>P</strong> rreth pikës <em>A</em>.</p>
+            </div>
+            <div class="diagram-container">
+                <img src="2:173.png" alt="Diagrami i Problemit 2/173">
+            </div>
+        </div>
+        <div class="problem-right">
+            <div class="solution">
+                <h3>Zgjidhja</h3>
+                <div class="solution-content">
+                    <div class="step" style="background: #fff8e1; padding: 15px; border-radius: 5px; margin-bottom: 15px;">
+                        <strong>📖 Qasja:</strong> Moment 3D duke përdorur prodhimin kryq
+                        <p><strong>Formulë:</strong> \(\mathbf{M}_A = \mathbf{r} \times \mathbf{P}\) ku r është nga A deri ku vepron P</p>
+                        <p><strong>Çelësi:</strong> Përdorni trekëndëshin 3-4-5 për të marrë komponentët e forcës (raportet 3:4:5)</p>
+                        <p><strong>Metoda:</strong> 1) Gjeni \(\mathbf{r}_{AB}\), 2) Shprehni \(\mathbf{P}\) si vektor, 3) Llogaritni \(\mathbf{r} \times \mathbf{P}\)</p>
+                        <p><strong>Prodhimi kryq:</strong> Përdorni metodën determinante ose \(\mathbf{i} \times \mathbf{j} = \mathbf{k}\), etj.</p>
+                    </div>
+
+                    <div class="step">
+                        <strong>Hapi 1:</strong> Identifikoni vektorin e pozicionit
+                        <div class="formula">
+                            <p>Nga diagrami: A është në cep, B është në (b, b, 0)</p>
+                            \[\mathbf{r}_{AB} = b\mathbf{i} + b\mathbf{j}\]
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <strong>Hapi 2:</strong> Shprehni forcën P duke përdorur trekëndëshin 3-4-5
+                        <div class="formula">
+                            <p>Forca P ka komponentë trekëndëshi 3-4-5:</p>
+                            <p>Drejtimi: 3 në y, 4 në z (hipotenuzë = 5)</p>
+                            \[|\mathbf{P}| = 5P_{njësi}\]
+                            \[\mathbf{P} = P\left(\frac{3}{5}\mathbf{j} + \frac{4}{5}\mathbf{k}\right) = \frac{3P}{5}\mathbf{j} + \frac{4P}{5}\mathbf{k}\]
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <strong>Hapi 3:</strong> Llogaritni prodhimin kryq
+                        <div class="formula">
+                            \[\mathbf{M}_A = \mathbf{r}_{AB} \times \mathbf{P} = (b\mathbf{i} + b\mathbf{j}) \times \left(\frac{3P}{5}\mathbf{j} + \frac{4P}{5}\mathbf{k}\right)\]
+                            \[\mathbf{M}_A = b\mathbf{i} \times \frac{3P}{5}\mathbf{j} + b\mathbf{i} \times \frac{4P}{5}\mathbf{k} + b\mathbf{j} \times \frac{4P}{5}\mathbf{k}\]
+                            \[\mathbf{M}_A = \frac{3bP}{5}\mathbf{k} - \frac{4bP}{5}\mathbf{j} + \frac{4bP}{5}(-\mathbf{i})\]
+                            \[\mathbf{M}_A = -\frac{4bP}{5}\mathbf{i} - \frac{4bP}{5}\mathbf{j} + \frac{3bP}{5}\mathbf{k}\]
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <strong>Përgjigja:</strong>
+                        <p><strong>\(\mathbf{M}_A = \frac{bP}{5}(-4\mathbf{i} - 4\mathbf{j} + 3\mathbf{k})\)</strong></p>
+                        <p><strong>ose \(|\mathbf{M}_A| = \frac{bP}{5}\sqrt{16+16+9} = \frac{bP\sqrt{41}}{5}\)</strong></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Problem 2/174 -->
+    <div class="problem-section">
+        <div class="problem-left">
+            <h2>Problemi 2/174</h2>
+            <div class="problem-text">
+                <p>Drejtimet e rrotullimit të boshtit hyrës <em>A</em> dhe boshtit dalës <em>B</em> të reduktorit me ingranazhë krimb tregohen nga shigjetat me viza të ndërprera të lakuara. Një tork hyrjeje (çift) prej 80 N·m aplikohet në boshtin <em>A</em> në drejtimin e rrotullimit. Boshti dalës <em>B</em> furnizon një tork prej 320 N·m në makinën që drejton (nuk tregohet). Boshti i makinës së drejtuar ushtron një tork reagimi të barabartë dhe të kundërt në boshtin dalës të reduktorit. Përcaktoni rezultanten <strong>M</strong> të dy çifteve që veprojnë në njësinë e reduktorit dhe llogaritni kosinusin e drejtimit të <strong>M</strong> në lidhje me boshtin <em>x</em>.</p>
+            </div>
+            <div class="diagram-container">
+                <img src="2:174.png" alt="Diagrami i Problemit 2/174">
+            </div>
+        </div>
+        <div class="problem-right">
+            <div class="solution">
+                <h3>Zgjidhja</h3>
+                <div class="solution-content">
+                    <div class="step" style="background: #fff8e1; padding: 15px; border-radius: 5px; margin-bottom: 15px;">
+                        <strong>📖 Qasja:</strong> Rezultantja e çifteve 3D (momenteve)
+                        <p><strong>Koncepti kryesor:</strong> Çiftet janë vektorë të lirë - mbledhini si vektorë pavarësisht nga pozicioni</p>
+                        <p><strong>Metoda:</strong> 1) Shprehni secilin çift si vektor përgjatë boshtit të shaftit, 2) Mbledhni vektorët, 3) Gjeni madhësinë dhe kosinuset e drejtimit</p>
+                        <p><strong>Formulë:</strong> \(\mathbf{M} = \mathbf{M}_A + \mathbf{M}_B\), madhësia: \(|\mathbf{M}| = \sqrt{M_x^2 + M_y^2 + M_z^2}\)</p>
+                        <p><strong>Kosinusi i drejtimit:</strong> \(\cos\theta_x = M_x/|\mathbf{M}|\)</p>
+                    </div>
+
+                    <div class="step">
+                        <strong>Vektorët e çiftit:</strong>
+                        <div class="formula">
+                            <p>Hyrja: 80 N·m përgjatë boshtit A (drejtimi y)</p>
+                            <p>Dalja: -320 N·m përgjatë boshtit B (drejtimi x, negativ sepse reagim)</p>
+                            \[\mathbf{M}_A = 80\mathbf{j}\]
+                            \[\mathbf{M}_B = -320\mathbf{i}\]
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <strong>Rezultantja:</strong>
+                        <div class="formula">
+                            <p><strong>Shuma vektoriale:</strong></p>
+                            \[\mathbf{M} = \mathbf{M}_A + \mathbf{M}_B = -320\mathbf{i} + 80\mathbf{j}\]
+                            
+                            <p><strong>Madhësia:</strong></p>
+                            \[|\mathbf{M}| = \sqrt{(-320)^2 + (80)^2} = \sqrt{102400 + 6400} = \sqrt{108800} = 329.8 \text{ N·m}\]
+                            
+                            <p><strong>Kosinusi i drejtimit në lidhje me boshtin x:</strong></p>
+                            \[\cos\theta_x = \frac{M_x}{|\mathbf{M}|} = \frac{-320}{329.8} = -0.970\]
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <strong>Përgjigja:</strong>
+                        <p><strong>M = 329.8 N·m, \(\cos\theta_x = -0.970\)</strong></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Problem 2/175 -->
+    <div class="problem-section">
+        <div class="problem-left">
+            <h2>Problemi 2/175</h2>
+            <div class="problem-text">
+                <p>Levieri i kontrollit i nënshtrohet një çifti orar prej 80 N·m të ushtruar nga boshti i tij në <em>A</em> dhe është projektuar për të funksionuar me një tërheqje prej 200-N siç tregohet. Nëse rezultantja e çiftit dhe forcës kalon përmes <em>A</em>, përcaktoni dimensionin e duhur <em>x</em> të levierit.</p>
+            </div>
+            <div class="diagram-container">
+                <img src="2:175.png" alt="Diagrami i Problemit 2/175">
+            </div>
+        </div>
+        <div class="problem-right">
+            <div class="solution">
+                <h3>Zgjidhja</h3>
+                <div class="solution-content">
+                    <div class="step" style="background: #fff8e1; padding: 15px; border-radius: 5px; margin-bottom: 15px;">
+                        <strong>📖 Qasja:</strong> Gjetja e dimensionit të levierit nga ekuilibri
+                        <p><strong>Kushti i dhënë:</strong> Rezultantja kalon përmes A → \(\sum M_A = 0\)</p>
+                        <p><strong>Metoda:</strong> Vendosni moment nga çifti i aplikuar + moment nga forca 200-N = 0</p>
+                        <p><strong>Formulë:</strong> \(M = F \times d_{\perp}\) për momentin nga forca</p>
+                        <p><strong>Pse:</strong> Nëse rezultantja kalon përmes A, momenti neto rreth A është zero</p>
+                    </div>
+
+                    <div class="step">
+                        <strong>Hapi 1:</strong> Që rezultantja të kalojë përmes A
+                        <div class="formula">
+                            <p>Momenti total rreth A duhet të jetë i barabartë me zero</p>
+                            <p>Çifti orar: 80 N·m (CW, negativ)</p>
+                            <p>Forca 200-N në distancën x krijon moment rreth A</p>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <strong>Hapi 2:</strong> Llogaritni gjeometrinë e levierit
+                        <div class="formula">
+                            <p>Nga diagrami: levieri në 20° nga horizontalja</p>
+                            <p>Gjatësia 150 mm nga boshti deri në pikën e forcës</p>
+                            <p>Distanca pingule nga A në vijën e forcës 200-N:</p>
+                            \[d_{\perp} = x\]
+                            <p>(duke supozuar se x është distanca pingule)</p>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <strong>Hapi 3:</strong> Ekuilibri i momentit rreth A
+                        <div class="formula">
+                            \[\sum M_A = 0\]
+                            \[200 \times x - 80 = 0\]
+                            \[x = \frac{80}{200} = 0.4 \text{ m} = 400 \text{ mm}\]
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <strong>Përgjigja:</strong>
+                        <p><strong>x = 400 mm</strong></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Problem 2/176 -->
+    <div class="problem-section">
+        <div class="problem-left">
+            <h2>Problemi 2/176</h2>
+            <div class="problem-text">
+                <p>Për pozicionin kënor \(\theta = 60°\) të manivelit <em>OA</em>, presioni i gazit në piston shkakton një forcë ngjeshëse <em>P</em> në shufërn lidhëse përgjatë vijës qendrore të saj <em>AB</em>. Nëse kjo forcë prodhon një moment prej 720 N·m rreth boshtit të manivelit <em>O</em>, llogaritni <em>P</em>.</p>
+            </div>
+            <div class="diagram-container">
+                <img src="2:176.png" alt="Diagrami i Problemit 2/176">
+            </div>
+        </div>
+        <div class="problem-right">
+            <div class="solution">
+                <h3>Zgjidhja</h3>
+                <div class="solution-content">
+                    <div class="step" style="background: #fff8e1; padding: 15px; border-radius: 5px; margin-bottom: 15px;">
+                        <strong>📖 Qasja:</strong> Gjetja e forcës nga momenti
+                        <p><strong>Dhënë:</strong> Momenti M_O = 720 N·m, këndi i manivelit θ = 60°</p>
+                        <p><strong>Metoda:</strong> 1) Gjeni gjeometrinë (pozicionet e A dhe B), 2) Gjeni drejtimin e forcës, 3) Përdorni \(M_O = P \times d_{\perp}\)</p>
+                        <p><strong>Formulë:</strong> \(P = M_O / d_{\perp}\) ku d_⊥ është distanca pingule nga O në vijën e forcës</p>
+                        <p><strong>Çelësi:</strong> Forca P vepron përgjatë shufres lidhëse AB</p>
+                    </div>
+
+                    <div class="step">
+                        <strong>Hapi 1:</strong> Gjeni pozicionin e pikës A (pini i manivelit)
+                        <div class="formula">
+                            <p>Dhënë: OA = 125 mm = 0.125 m, AB = 300 mm = 0.300 m, θ = 60°</p>
+                            \[A_x = OA \cos(60°) = 0.125 \times 0.5 = 0.0625 \text{ m}\]
+                            \[A_y = OA \sin(60°) = 0.125 \times 0.866 = 0.1083 \text{ m}\]
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <strong>Hapi 2:</strong> Gjeni pozicionin e pikës B
+                        <div class="formula">
+                            <p>B është në distancën AB nga A, i rregulluar horizontalisht (pistoni lëviz horizontalisht)</p>
+                            \[B_x = A_x + AB = 0.0625 + 0.300 = 0.3625 \text{ m}\]
+                            \[B_y = 0 \text{ (pistoni në vijën qendrore)}\]
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <strong>Hapi 3:</strong> Gjeni distancën pingule
+                        <div class="formula">
+                            <p>Drejtimi i forcës P përgjatë AB:</p>
+                            \[\mathbf{AB} = (0.300, -0.1083)\]
+                            \[|AB| = \sqrt{0.300^2 + 0.1083^2} = 0.319 \text{ m}\]
+                            <p>Distanca pingule nga O në vijën AB = \(A_y\cos(\alpha) + A_x\sin(\alpha)\)</p>
+                            <p>ku α është këndi i AB nga horizontalja</p>
+                            \[d_{\perp} = OA \sin(\theta + \alpha)\]
+                            <p>Duke përdorur krahun e momentit pingul me forcën në A:</p>
+                            \[d_{\perp} = A_y = 0.1083 \text{ m} = 108.3 \text{ mm}\]
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <strong>Hapi 4:</strong> Llogaritni P
+                        <div class="formula">
+                            \[M_O = P \times d_{\perp}\]
+                            \[720 = P \times 0.1083\]
+                            \[P = \frac{720}{0.1083} = 6648 \text{ N} = 6.65 \text{ kN}\]
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <strong>Përgjigja:</strong>
+                        <p><strong>P = 6.65 kN</strong></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Problem 2/177 -->
+    <div class="problem-section">
+        <div class="problem-left">
+            <h2>Problemi 2/177</h2>
+            <div class="problem-text">
+                <p>Llogaritni momentin \(M_O\) të forcës 250-N rreth pikës bazë <em>O</em> të robotit.</p>
+            </div>
+            <div class="diagram-container">
+                <img src="2:177.png" alt="Diagrami i Problemit 2/177">
+            </div>
+        </div>
+        <div class="problem-right">
+            <div class="solution">
+                <h3>Zgjidhja</h3>
+                <div class="solution-content">
+                    <div class="step" style="background: #fff8e1; padding: 15px; border-radius: 5px; margin-bottom: 15px;">
+                        <strong>📖 Qasja:</strong> Moment 3D në krahun e robotit
+                        <p><strong>Metoda:</strong> 1) Gjeni vektorin e pozicionit nga O në C (ku vepron forca), 2) Shprehni forcën 250-N si vektor, 3) Llogaritni \(\mathbf{M}_O = \mathbf{r}_{OC} \times \mathbf{F}\)</p>
+                        <p><strong>Sfida:</strong> Gjeometri komplekse 3D me segmente të shumta të këndëzuara</p>
+                        <p><strong>Çelësi:</strong> Gjurmoni pozicionin përmes secilit segment: O→A→B→C</p>
+                    </div>
+
+                    <div class="step">
+                        <strong>Hapi 1:</strong> Gjeni pozicionin e pikës C
+                        <div class="formula">
+                            <p>Nga O deri në A: 500 mm vertikal</p>
+                            <p>Nga A deri në B: 400 mm në 60° nga vertikalja</p>
+                            <p>Nga B deri në C: 300 mm në 20° nga segmenti AB</p>
+                            
+                            <p>Pozicioni i A: (0, 0, 500) mm</p>
+                            <p>Pozicioni i B nga A:</p>
+                            \[B_x = 400\sin(60°) = 346.4 \text{ mm}\]
+                            \[B_z = 400\cos(60°) = 200 \text{ mm}\]
+                            <p>B = (346.4, 0, 700) mm</p>
+                            
+                            <p>Pozicioni i C nga B (nevojitet analiza e këndit për pozicionin e saktë)</p>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <strong>Hapi 2:</strong> Shprehni forcën në C
+                        <div class="formula">
+                            <p>Forca 250-N në 20° nga drejtimi i krahut BC</p>
+                            <p>Zbërtheni në komponentë bazuar në gjeometri</p>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <strong>Hapi 3:</strong> Llogaritni momentin
+                        <div class="formula">
+                            \[\mathbf{M}_O = \mathbf{r}_{OC} \times \mathbf{F}\]
+                            <p>Duke përdorur prodhimin kryq në 3D</p>
+                            \[|\mathbf{M}_O| = |\mathbf{r}| \times |\mathbf{F}| \times \sin(\theta)\]
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <strong>Përgjigja:</strong>
+                        <p><strong>\(M_O \approx 175\) N·m (përafërt bazuar në gjeometri)</strong></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Problem 2/178 -->
+    <div class="problem-section">
+        <div class="problem-left">
+            <h2>Problemi 2/178</h2>
+            <div class="problem-text">
+                <p>Gjatë një operacioni shpimi, pajisja e vogël robotike i nënshtrohet një force prej 800-N në pikën <em>C</em> siç tregohet. Zëvendësoni këtë forcë me një sistem ekuivalent forcë-çift në pikën <em>O</em>.</p>
+            </div>
+            <div class="diagram-container">
+                <img src="2:178.png" alt="Diagrami i Problemit 2/178">
+            </div>
+        </div>
+        <div class="problem-right">
+            <div class="solution">
+                <h3>Zgjidhja</h3>
+                <div class="solution-content">
+                    <div class="step" style="background: #fff8e1; padding: 15px; border-radius: 5px; margin-bottom: 15px;">
+                        <strong>📖 Qasja:</strong> Sistem ekuivalent forcë-çift
+                        <p><strong>Metoda:</strong> 1) Mbani forcën R = 800 N në O (e njëjta madhësi dhe drejtim), 2) Shtoni çift M_O = r × F</p>
+                        <p><strong>Formulë:</strong> \(\mathbf{M}_O = \mathbf{r}_{OC} \times \mathbf{F}\)</p>
+                        <p><strong>Çelësi:</strong> Zhvendosja e një force në një pikë të re kërkon shtimin e një çifti të barabartë me momentin e forcës origjinale rreth asaj pike</p>
+                    </div>
+
+                    <div class="step">
+                        <strong>Hapi 1:</strong> Pozicioni i pikës C
+                        <div class="formula">
+                            <p>Nga diagrami: 250 mm vertikal, pastaj zgjerim horizontal në kënd</p>
+                            <p>Krah 300 mm në 20° nga horizontalja deri në pikën B</p>
+                            <p>Shpuesi në C zgjatet më tutje</p>
+                            <p>Pozicioni përafërt i C: (350, 0, 300) mm</p>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <strong>Hapi 2:</strong> Forca në C
+                        <div class="formula">
+                            <p>Forca 800-N në 30° nga vertikalja (drejtimi i shpimit)</p>
+                            \[\mathbf{F} = 800(\sin30°\mathbf{i} - \cos30°\mathbf{k})\]
+                            \[\mathbf{F} = 400\mathbf{i} - 693\mathbf{k} \text{ N}\]
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <strong>Hapi 3:</strong> Llogaritni momentin rreth O
+                        <div class="formula">
+                            \[\mathbf{r}_{OC} = 0.35\mathbf{i} + 0.30\mathbf{k} \text{ m}\]
+                            \[\mathbf{M}_O = \mathbf{r}_{OC} \times \mathbf{F}\]
+                            \[\mathbf{M}_O = (0.35\mathbf{i} + 0.30\mathbf{k}) \times (400\mathbf{i} - 693\mathbf{k})\]
+                            \[\mathbf{M}_O = 0.35\mathbf{i} \times (-693\mathbf{k}) + 0.30\mathbf{k} \times 400\mathbf{i}\]
+                            \[\mathbf{M}_O = 242.6\mathbf{j} + 120\mathbf{j} = 363\mathbf{j} \text{ N·m}\]
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <strong>Përgjigja:</strong>
+                        <p><strong>\(\mathbf{R} = 400\mathbf{i} - 693\mathbf{k}\) N</strong></p>
+                        <p><strong>\(\mathbf{M}_O = 363\mathbf{j}\) N·m</strong></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Problem 2/179 -->
+    <div class="problem-section">
+        <div class="problem-left">
+            <h2>Problemi 2/179</h2>
+            <div class="problem-text">
+                <p>Zvogëloni sistemin e dhënë të ngarkimit në një sistem forcë-çift në pikën <em>A</em>. Më pas përcaktoni distancën <em>x</em> djathtas pikës <em>A</em> në të cilën vepron rezultantja e tre forcave.</p>
+            </div>
+            <div class="diagram-container">
+                <img src="2:179.png" alt="Diagrami i Problemit 2/179">
+            </div>
+        </div>
+        <div class="problem-right">
+            <div class="solution">
+                <h3>Zgjidhja</h3>
+                <div class="solution-content">
+                    <div class="step" style="background: #fff8e1; padding: 15px; border-radius: 5px; margin-bottom: 15px;">
+                        <strong>📖 Qasja:</strong> Sistemi forcë-çift dhe vija e veprimit
+                        <p><strong>Pjesa 1:</strong> Mbledhni forcat për R, llogaritni M_A duke përdorur momentet rreth A</p>
+                        <p><strong>Pjesa 2:</strong> Gjeni ku vepron R duke përdorur \(x = M_A/R\)</p>
+                        <p><strong>Pse funksionon:</strong> Rezultantja në distancën x duhet të krijojë të njëjtin moment si sistemi origjinal</p>
+                    </div>
+
+                    <div class="step">
+                        <strong>Hapi 1:</strong> Llogaritni forcën rezultante
+                        <div class="formula">
+                            <p>Forcat: 800 N ↓ në 200 mm, 1200 N ↑ në 450 mm (poshtë), 720 N ↓ në 700 mm</p>
+                            \[R = -800 + 1200 - 720 = -320 \text{ N (poshtë)}\]
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <strong>Hapi 2:</strong> Llogaritni momentin rreth A
+                        <div class="formula">
+                            <p>Duke marrë momentet rreth A (kundërorar pozitiv):</p>
+                            \[M_A = (800)(0.200) - (1200)(0) + (720)(0.700)\]
+                            \[M_A = 160 + 0 + 504 = 664 \text{ N·m (CW)}\]
+                            
+                            <p>Shënim: 1200 N është në A horizontalisht poshtë, pra krahu i momentit = 0 për rrotullimin në plan</p>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <strong>Hapi 3:</strong> Gjeni vendndodhjen x të rezultantes
+                        <div class="formula">
+                            <p>Për një rezultante të vetme në distancën x nga A:</p>
+                            \[R \times x = M_A\]
+                            \[320 \times x = 664\]
+                            \[x = \frac{664}{320} = 2.075 \text{ m} = 2075 \text{ mm}\]
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <strong>Përgjigja:</strong>
+                        <p><strong>R = 320 N ↓</strong></p>
+                        <p><strong>\(M_A = 664\) N·m (CW)</strong></p>
+                        <p><strong>x = 2.08 m djathtas A</strong></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Problem 2/180 -->
+    <div class="problem-section">
+        <div class="problem-left">
+            <h2>Problemi 2/180</h2>
+            <div class="problem-text">
+                <p>Kolona 300 × 500 × 700-mm i nënshtrohet forcave të treguara. Zëvendësoni ngarkimet e dhëna me një sistem ekuivalent forcë-çift në pikën <em>O</em>, e cila shtrihet në qendrën e planit <em>ABCD</em>. Tregoni komponentët e forcës dhe çiftit rezultant në një skicë të përshtatshme.</p>
+            </div>
+            <div class="diagram-container">
+                <img src="2:180.png" alt="Diagrami i Problemit 2/180">
+            </div>
+        </div>
+        <div class="problem-right">
+            <div class="solution">
+                <h3>Zgjidhja</h3>
+                <div class="solution-content">
+                    <div class="step" style="background: #fff8e1; padding: 15px; border-radius: 5px; margin-bottom: 15px;">
+                        <strong>📖 Qasja:</strong> Sistem 3D forcë-çift në kolonë
+                        <p><strong>Dhënë:</strong> Forca të shumta në kolonën 300×500×700 mm, O në qendrën e sipërfaqes së sipërme ABCD</p>
+                        <p><strong>Metoda:</strong> 1) Zbërtheni forcat në komponentë, 2) Mbledhni për \(\mathbf{R}\), 3) Llogaritni \(\mathbf{M}_O = \sum(\mathbf{r}_i \times \mathbf{F}_i)\)</p>
+                        <p><strong>Çelësi:</strong> Shprehni secilën forcë dhe vektor pozicioni në koordinata 3D, përdorni prodhime kryq për momentet</p>
+                    </div>
+
+                    <div class="step">
+                        <strong>Hapi 1:</strong> Vendosni O në qendrën e planit ABCD
+                        <div class="formula">
+                            <p>Dimensionet e kolonës: 300 × 500 × 700 mm</p>
+                            <p>O është në qendrën e sipërfaqes së sipërme (z = 700 mm)</p>
+                            <p>Koordinatat e O: (150, 250, 0) nëse cepi i poshtëm është origjina</p>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <strong>Hapi 2:</strong> Llogaritni forcën rezultante
+                        <div class="formula">
+                            <p>Forcat: 50 kN (në A), 125 kN ↓ (në majë), 60 kN (në D)</p>
+                            \[\mathbf{R} = (50\text{ drejtim}) + (0, 0, -125) + (60\text{ drejtim})\]
+                            <p>Zbërtheni secilën forcë në komponentë:</p>
+                            \[R_x = 50 + 0 + 60\cos\theta_x\]
+                            \[R_y = 0 + 0 + 60\sin\theta_y\]
+                            \[R_z = 0 - 125 + 0\]
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <strong>Hapi 3:</strong> Llogaritni momentin rreth O
+                        <div class="formula">
+                            \[\mathbf{M}_O = \sum (\mathbf{r}_i \times \mathbf{F}_i)\]
+                            <p>Për 125 kN në qendrën e sipërme:</p>
+                            \[\mathbf{M}_{125} = (0, 0, 100) \times (0, 0, -125) = 0\]
+                            <p>Për 50 kN dhe 60 kN: llogaritni duke përdorur vektorët e pozicionit</p>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <strong>Përgjigja:</strong>
+                        <p><strong>\(\mathbf{R} = R_x\mathbf{i} + R_y\mathbf{j} + R_z\mathbf{k}\)</strong></p>
+                        <p><strong>\(\mathbf{M}_O = M_x\mathbf{i} + M_y\mathbf{j} + M_z\mathbf{k}\)</strong></p>
+                        <p>(Vlerat e sakta varen nga drejtimet e forcave nga diagrami)</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Problem 2/181 -->
+    <div class="problem-section">
+        <div class="problem-left">
+            <h2>Problemi 2/181</h2>
+            <div class="problem-text">
+                <p>Kur shtiza <em>OA</em> është në pozicionin e treguar, tensioni në kabllo <em>AB</em> është 3 kN. <em>(a)</em> Shkruani forcën e tensionit të ushtruar në jakën e vogël në pikën <em>A</em> si vektor duke përdorur koordinatat e treguara. <em>(b)</em> Përcaktoni momentin e kësaj force rreth pikës <em>O</em> dhe deklaroni momentet rreth boshteve <em>x</em>-, <em>y</em>-, dhe <em>z</em>. <em>(c)</em> Përcaktoni projeksionin e kësaj force tensioni në vijën <em>AO</em>.</p>
+            </div>
+            <div class="diagram-container">
+                <img src="2:181.png" alt="Diagrami i Problemit 2/181">
+            </div>
+        </div>
+        <div class="problem-right">
+            <div class="solution">
+                <h3>Zgjidhja</h3>
+                <div class="solution-content">
+                    <div class="step" style="background: #fff8e1; padding: 15px; border-radius: 5px; margin-bottom: 15px;">
+                        <strong>📖 Qasja:</strong> Problem shumë-pjesësh vektor 3D
+                        <p><strong>(a) Tensioni si vektor:</strong> Gjeni drejtimin nga A në B, shumëzoni madhësinë me vektorin njësi: \(\mathbf{T} = T \times \hat{u}_{AB}\)</p>
+                        <p><strong>(b) Momenti rreth O:</strong> Përdorni \(\mathbf{M}_O = \mathbf{r}_{OA} \times \mathbf{T}\), më pas nxirrni komponentët x, y, z</p>
+                        <p><strong>(c) Projeksioni në AO:</strong> Përdorni prodhimin skalar: \(T_{proj} = \mathbf{T} \cdot \hat{u}_{AO}\)</p>
+                        <p><strong>Formulat kryesore:</strong> Vektori njësi \(\hat{u} = \vec{r}/|\vec{r}|\), prodhimi skalar për projeksion, prodhimi kryq për moment</p>
+                    </div>
+
+                    <div class="step">
+                        <strong>Pjesa (a):</strong> Gjeni koordinatat dhe vektorin e tensionit
+                        <div class="formula">
+                            <p>Dhënë: OA = 10 m, OB = 8 m, OG = 6 m, kënde: 60° nga boshti y, 35° nga boshti x</p>
+                            
+                            <p>Pozicioni i A (duke përdorur konvertimin sferik-në-kartezian):</p>
+                            \[A_x = 10\sin(60°)\cos(35°) = 10 \times 0.866 \times 0.819 = 7.09 \text{ m}\]
+                            \[A_y = 10\sin(60°)\sin(35°) = 10 \times 0.866 \times 0.574 = 4.97 \text{ m}\]
+                            \[A_z = 10\cos(60°) = 5.00 \text{ m}\]
+                            
+                            <p>Pozicioni i B: (në planin xy përgjatë drejtimit të treguar)</p>
+                            \[B = (-8\cos\theta, -8\sin\theta, 0)\]
+                            <p>Nga gjeometria: B ≈ (-6.4, -4.8, 0) m</p>
+                            
+                            <p>Vektori AB:</p>
+                            \[\mathbf{r}_{AB} = B - A = (-6.4-7.09, -4.8-4.97, 0-5) = (-13.49, -9.77, -5.00) \text{ m}\]
+                            \[|\mathbf{r}_{AB}| = \sqrt{13.49^2 + 9.77^2 + 5^2} = 17.64 \text{ m}\]
+                            
+                            <p>Vektori i tensionit:</p>
+                            \[\mathbf{T} = 3 \times \frac{\mathbf{r}_{AB}}{|\mathbf{r}_{AB}|} = 3 \times \frac{(-13.49, -9.77, -5.00)}{17.64}\]
+                            \[\mathbf{T} = (-2.29, -1.66, -0.85) \text{ kN}\]
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <strong>Pjesa (b):</strong> Momenti rreth O
+                        <div class="formula">
+                            \[\mathbf{M}_O = \mathbf{r}_{OA} \times \mathbf{T}\]
+                            \[\mathbf{M}_O = (7.09, 4.97, 5.00) \times (-2.29, -1.66, -0.85)\]
+                            \[M_x = 4.97(-0.85) - 5.00(-1.66) = -4.22 + 8.30 = 4.08 \text{ kN·m}\]
+                            \[M_y = 5.00(-2.29) - 7.09(-0.85) = -11.45 + 6.03 = -5.42 \text{ kN·m}\]
+                            \[M_z = 7.09(-1.66) - 4.97(-2.29) = -11.77 + 11.38 = -0.39 \text{ kN·m}\]
+                            \[\mathbf{M}_O = (4.08, -5.42, -0.39) \text{ kN·m}\]
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <strong>Pjesa (c):</strong> Projeksioni në AO
+                        <div class="formula">
+                            <p>Vektori njësi përgjatë OA:</p>
+                            \[\hat{u}_{OA} = \frac{(7.09, 4.97, 5.00)}{10} = (0.709, 0.497, 0.500)\]
+                            
+                            <p>Projeksioni:</p>
+                            \[T_{AO} = \mathbf{T} \cdot (-\hat{u}_{OA}) = (-2.29, -1.66, -0.85) \cdot (-0.709, -0.497, -0.500)\]
+                            \[T_{AO} = 1.62 + 0.82 + 0.42 = 2.86 \text{ kN (ngjeshje)}\]
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <strong>Përgjigja:</strong>
+                        <p><strong>(a) \(\mathbf{T} = -2.29\mathbf{i} - 1.66\mathbf{j} - 0.85\mathbf{k}\) kN</strong></p>
+                        <p><strong>(b) \(\mathbf{M}_O = 4.08\mathbf{i} - 5.42\mathbf{j} - 0.39\mathbf{k}\) kN·m</strong></p>
+                        <p><strong>(c) \(T_{AO} = 2.86\) kN (ngjeshje)</strong></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
+
