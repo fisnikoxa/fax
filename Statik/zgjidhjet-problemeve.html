@@ -871,6 +871,79 @@
         </div>
     </div>
 
+    <!-- Problem 2/170 -->
+    <div class="problem-section">
+        <div class="problem-left">
+            <h2>Problemi 2/170</h2>
+            <div class="problem-text">
+                <p>Tre forcat veprojnë pingul me pllakën drejtkëndore siç tregohet. Përcaktoni momentet \(\mathbf{M}_1\) të \(\mathbf{F}_1\), \(\mathbf{M}_2\) të \(\mathbf{F}_2\), dhe \(\mathbf{M}_3\) të \(\mathbf{F}_3\), të gjitha rreth pikës <em>O</em>.</p>
+            </div>
+            <div class="diagram-container">
+                <img src="2:170.png" alt="Diagrami i Problemit 2/170">
+            </div>
+        </div>
+        <div class="problem-right">
+            <div class="solution">
+                <h3>Zgjidhja</h3>
+                <div class="solution-content">
+                    <div class="step" style="background: #fff8e1; padding: 15px; border-radius: 5px; margin-bottom: 15px;">
+                        <strong>📖 Qasja:</strong> Momente 3D rreth pikës O
+                        <p><strong>Formulë:</strong> \(\mathbf{M}_O = \mathbf{r} \times \mathbf{F}\) (prodhimi kryq)</p>
+                        <p><strong>Çelësi:</strong> Për secilin forcë, gjeni vektorin e pozicionit nga O, më pas llogaritni prodhimin kryq</p>
+                        <p><strong>Rregulli i prodhimit kryq:</strong> \(\mathbf{i} \times \mathbf{j} = \mathbf{k}\), \(\mathbf{j} \times \mathbf{k} = \mathbf{i}\), \(\mathbf{k} \times \mathbf{i} = \mathbf{j}\)</p>
+                        <p><strong>Shënim:</strong> Forca në O krijon moment zero (r = 0)</p>
+                    </div>
+
+                    <div class="step">
+                        <strong>Konfigurimi:</strong> Dimensionet e pllakës janë <em>a</em> × <em>c</em> me O në qendër
+                        <div class="formula">
+                            <p>F₁ vepron në buzën e sipërme (pingul jashtë, +drejtimi z)</p>
+                            <p>F₂ vepron në qendër (pingul brenda, -drejtimi z)</p>
+                            <p>F₃ vepron në cepin poshtë-majtas (pingul jashtë, +drejtimi z)</p>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <strong>Momenti M₁:</strong> Forca F₁ në buzën e sipërme
+                        <div class="formula">
+                            <p>Pozicioni nga O: \(\mathbf{r}_1 = 0\mathbf{i} + \frac{c}{2}\mathbf{j}\)</p>
+                            <p>Forca: \(\mathbf{F}_1 = F_1\mathbf{k}\)</p>
+                            \[\mathbf{M}_1 = \mathbf{r}_1 \times \mathbf{F}_1 = \left(0\mathbf{i} + \frac{c}{2}\mathbf{j}\right) \times (F_1\mathbf{k})\]
+                            \[\mathbf{M}_1 = -\frac{cF_1}{2}\mathbf{i}\]
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <strong>Momenti M₂:</strong> Forca F₂ në qendër
+                        <div class="formula">
+                            <p>Pozicioni nga O: \(\mathbf{r}_2 = 0\)</p>
+                            <p>Forca: \(\mathbf{F}_2 = -F_2\mathbf{k}\)</p>
+                            \[\mathbf{M}_2 = \mathbf{r}_2 \times \mathbf{F}_2 = 0\]
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <strong>Momenti M₃:</strong> Forca F₃ në poshtë-majtas
+                        <div class="formula">
+                            <p>Pozicioni nga O: \(\mathbf{r}_3 = -\frac{a}{2}\mathbf{i} - \frac{c}{2}\mathbf{j}\)</p>
+                            <p>Forca: \(\mathbf{F}_3 = F_3\mathbf{k}\)</p>
+                            \[\mathbf{M}_3 = \left(-\frac{a}{2}\mathbf{i} - \frac{c}{2}\mathbf{j}\right) \times (F_3\mathbf{k})\]
+                            \[\mathbf{M}_3 = -\frac{aF_3}{2}\mathbf{j} + \frac{cF_3}{2}\mathbf{i}\]
+                            \[\mathbf{M}_3 = \frac{cF_3}{2}\mathbf{i} - \frac{aF_3}{2}\mathbf{j}\]
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <strong>Përgjigja:</strong>
+                        <p><strong>\(\mathbf{M}_1 = -\frac{cF_1}{2}\mathbf{i}\)</strong></p>
+                        <p><strong>\(\mathbf{M}_2 = 0\)</strong></p>
+                        <p><strong>\(\mathbf{M}_3 = \frac{cF_3}{2}\mathbf{i} - \frac{aF_3}{2}\mathbf{j}\)</strong></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Problem 2/171 -->
     <div class="problem-section">
         <div class="problem-left">
@@ -1639,80 +1712,7 @@
         </div>
     </div>
 
-    <!-- Problem 2/170 -->
-    <div class="problem-section">
-        <div class="problem-left">
-            <h2>Problemi 2/170</h2>
-            <div class="problem-text">
-                <p>Tre forcat veprojnë pingul me pllakën drejtkëndore siç tregohet. Përcaktoni momentet \(\mathbf{M}_1\) të \(\mathbf{F}_1\), \(\mathbf{M}_2\) të \(\mathbf{F}_2\), dhe \(\mathbf{M}_3\) të \(\mathbf{F}_3\), të gjitha rreth pikës <em>O</em>.</p>
-            </div>
-            <div class="diagram-container">
-                <img src="2:170.png" alt="Diagrami i Problemit 2/170">
-            </div>
-        </div>
-        <div class="problem-right">
-            <div class="solution">
-                <h3>Zgjidhja</h3>
-                <div class="solution-content">
-                    <div class="step" style="background: #fff8e1; padding: 15px; border-radius: 5px; margin-bottom: 15px;">
-                        <strong>📖 Qasja:</strong> Momente 3D rreth pikës O
-                        <p><strong>Formulë:</strong> \(\mathbf{M}_O = \mathbf{r} \times \mathbf{F}\) (prodhimi kryq)</p>
-                        <p><strong>Çelësi:</strong> Për secilin forcë, gjeni vektorin e pozicionit nga O, më pas llogaritni prodhimin kryq</p>
-                        <p><strong>Rregulli i prodhimit kryq:</strong> \(\mathbf{i} \times \mathbf{j} = \mathbf{k}\), \(\mathbf{j} \times \mathbf{k} = \mathbf{i}\), \(\mathbf{k} \times \mathbf{i} = \mathbf{j}\)</p>
-                        <p><strong>Shënim:</strong> Forca në O krijon moment zero (r = 0)</p>
-                    </div>
-
-                    <div class="step">
-                        <strong>Konfigurimi:</strong> Dimensionet e pllakës janë <em>a</em> × <em>c</em> me O në qendër
-                        <div class="formula">
-                            <p>F₁ vepron në buzën e sipërme (pingul jashtë, +drejtimi z)</p>
-                            <p>F₂ vepron në qendër (pingul brenda, -drejtimi z)</p>
-                            <p>F₃ vepron në cepinposhtë-majtas (pingul jashtë, +drejtimi z)</p>
-                        </div>
-                    </div>
-
-                    <div class="step">
-                        <strong>Momenti M₁:</strong> Forca F₁ në buzën e sipërme
-                        <div class="formula">
-                            <p>Pozicioni nga O: \(\mathbf{r}_1 = 0\mathbf{i} + \frac{c}{2}\mathbf{j}\)</p>
-                            <p>Forca: \(\mathbf{F}_1 = F_1\mathbf{k}\)</p>
-                            \[\mathbf{M}_1 = \mathbf{r}_1 \times \mathbf{F}_1 = \left(0\mathbf{i} + \frac{c}{2}\mathbf{j}\right) \times (F_1\mathbf{k})\]
-                            \[\mathbf{M}_1 = -\frac{cF_1}{2}\mathbf{i}\]
-                        </div>
-                    </div>
-
-                    <div class="step">
-                        <strong>Momenti M₂:</strong> Forca F₂ në qendër
-                        <div class="formula">
-                            <p>Pozicioni nga O: \(\mathbf{r}_2 = 0\)</p>
-                            <p>Forca: \(\mathbf{F}_2 = -F_2\mathbf{k}\)</p>
-                            \[\mathbf{M}_2 = \mathbf{r}_2 \times \mathbf{F}_2 = 0\]
-                        </div>
-                    </div>
-
-                    <div class="step">
-                        <strong>Momenti M₃:</strong> Forca F₃ në poshtë-majtas
-                        <div class="formula">
-                            <p>Pozicioni nga O: \(\mathbf{r}_3 = -\frac{a}{2}\mathbf{i} - \frac{c}{2}\mathbf{j}\)</p>
-                            <p>Forca: \(\mathbf{F}_3 = F_3\mathbf{k}\)</p>
-                            \[\mathbf{M}_3 = \left(-\frac{a}{2}\mathbf{i} - \frac{c}{2}\mathbf{j}\right) \times (F_3\mathbf{k})\]
-                            \[\mathbf{M}_3 = -\frac{aF_3}{2}\mathbf{j} + \frac{cF_3}{2}\mathbf{i}\]
-                            \[\mathbf{M}_3 = \frac{cF_3}{2}\mathbf{i} - \frac{aF_3}{2}\mathbf{j}\]
-                        </div>
-                    </div>
-
-                    <div class="step">
-                        <strong>Përgjigja:</strong>
-                        <p><strong>\(\mathbf{M}_1 = -\frac{cF_1}{2}\mathbf{i}\)</strong></p>
-                        <p><strong>\(\mathbf{M}_2 = 0\)</strong></p>
-                        <p><strong>\(\mathbf{M}_3 = \frac{cF_3}{2}\mathbf{i} - \frac{aF_3}{2}\mathbf{j}\)</strong></p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Problem 2/88 -->
+    <!-- Problem 2/87 -->
     <div class="problem-section">
         <div class="problem-left">
             <h2>Problemi 2/88</h2>
