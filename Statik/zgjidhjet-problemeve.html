@@ -936,6 +936,74 @@
         </div>
     </div>
 
+    <!-- Problem 2/89 -->
+    <div class="problem-section">
+        <div class="problem-left">
+            <h2>Problemi 2/89</h2>
+            <div class="problem-text">
+                <p>Zëvendësoni tre forcat që veprojnë në tubin e përkulur me një forcë të vetme ekuivalente <strong>R</strong>. Specifikoni distancën <em>x</em> nga pika <em>O</em> në pikën në boshtin <em>x</em> përmes së cilës kalon vija e veprimit të <strong>R</strong>.</p>
+            </div>
+            <div class="diagram-container">
+                <img src="2:89.png" alt="Diagrami i Problemit 2/89">
+            </div>
+        </div>
+        <div class="problem-right">
+            <div class="solution">
+                <h3>Zgjidhja</h3>
+                <div class="solution-content">
+                    <div class="step" style="background: #fff8e1; padding: 15px; border-radius: 5px; margin-bottom: 15px;">
+                        <strong>📖 Qasja:</strong> Zëvendësoni forca të shumta me një rezultante të vetme
+                        <p><strong>Metoda:</strong> 1) Gjeni R me mbledhje vektoriale, 2) Gjeni ku vepron R duke përdorur ekuivalencën e momentit</p>
+                        <p><strong>Formulë kryesore:</strong> \(R \times x = \sum (F_i \times x_i)\) për vijën e veprimit në boshtin x</p>
+                        <p><strong>Pse:</strong> Forca e vetme R duhet të krijojë të njëjtin moment rreth O si të gjitha forcat origjinale</p>
+                    </div>
+
+                    <div class="step">
+                        <strong>Hapi 1:</strong> Llogaritni vektorin e forcës rezultante
+                        <div class="formula">
+                            <p><strong>Mbledhni të gjithë komponentët x:</strong></p>
+                            <p>Nga diagrami: forca në drejtimin x</p>
+                            \[R_x = \sum F_{ix} = 240 \text{ N}\]
+                            
+                            <p><strong>Mbledhni të gjithë komponentët y:</strong></p>
+                            <p>Forcat në drejtimin y (↑ pozitive, ↓ negative)</p>
+                            \[R_y = \sum F_{iy} = -160 + 240 = 80 \text{ N}\]
+                            
+                            <p><strong>Madhësia rezultante:</strong> Teorema e Pitagorës</p>
+                            \[R = \sqrt{R_x^2 + R_y^2} = \sqrt{240^2 + 80^2} = \sqrt{57600 + 6400} = \sqrt{64000} = 253 \text{ N}\]
+                            
+                            <p><strong>Këndi nga boshti x:</strong></p>
+                            \[\theta = \arctan\left(\frac{R_y}{R_x}\right) = \arctan\left(\frac{80}{240}\right) = \arctan(0.333) = 18.4°\]
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <strong>Hapi 2:</strong> Gjeni prerjen x duke përdorur ekuivalencën e momentit
+                        <div class="formula">
+                            <p><strong>Llogaritni momentin total rreth O nga të gjitha forcat origjinale:</strong></p>
+                            <p>Moment = forcë × distancë pingule (CCW pozitiv)</p>
+                            \[M_O = \sum (F_i \times d_i)\]
+                            
+                            <p><strong>Barazoni me momentin e rezultantes:</strong></p>
+                            <p>Nëse R kalon përmes pikës (x, 0) në boshtin x:</p>
+                            <p>Vetëm komponenti y i R krijon moment rreth O:</p>
+                            \[M_O = R_y \times x\]
+                            
+                            <p><strong>Zgjidhni për x:</strong></p>
+                            \[x = \frac{M_O}{R_y} = \frac{\sum(F_i \times d_i)}{80}\]
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <strong>✓ Përgjigja:</strong>
+                        <p><strong>R = 253 N në 18.4° nga boshti x</strong></p>
+                        <p><strong>prerja x: x = M_O/R_y (llogaritni nga distancat e diagramit)</strong></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Problem 2/90 -->
     <div class="problem-section">
         <div class="problem-left">
