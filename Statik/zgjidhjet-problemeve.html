@@ -1529,28 +1529,39 @@
                     <div class="step">
                         <strong>Hapi 1:</strong> Zbërtheni të gjitha forcat
                         <div class="formula">
-                            <p><strong>Forcat e dhëna:</strong> 4 kN, 3 kN, 0.6 kN, 0.8 kN, dhe F = 5 kN në 30°</p>
-                            <p>Zbërtheni forcën 5 kN: \(F_x = 5\cos(30°) = 4.33\) kN, \(F_y = 5\sin(30°) = 2.5\) kN</p>
-                            <p>Mbledhni të gjithë komponentët:</p>
-                            \[R_x = \sum F_{ix}\]
-                            \[R_y = \sum F_{iy}\]
+                            <p><strong>Nga diagrami:</strong></p>
+                            <p>- 4 kN majtas në y ≈ 335 mm</p>
+                            <p>- 3 kN majtas në y = 280 mm</p>
+                            <p>- 0.6 kN djathtas në y ≈ 55 mm</p>
+                            <p>- 0.8 kN djathtas në y ≈ 0</p>
+                            <p>- 5 kN në 30° nga vertikalja: \(F_x = 5\sin(30°) = 2.5\) kN, \(F_y = -5\cos(30°) = -4.33\) kN</p>
+                            
+                            <p><strong>Rezultantja:</strong></p>
+                            \[R_x = -4 - 3 + 0.6 + 0.8 + 2.5 = -3.1 \text{ kN (majtas)}\]
+                            \[R_y = -4.33 \text{ kN (poshtë)}\]
                         </div>
                     </div>
 
                     <div class="step">
                         <strong>Hapi 2:</strong> Llogaritni M_O dhe gjeni prerjen y
                         <div class="formula">
-                            <p><strong>Momenti rreth origjinës:</strong></p>
-                            \[M_O = \sum (F_i \times d_i)\]
+                            <p><strong>Momenti rreth O (në qendër të karocës):</strong></p>
+                            <p>Duke supozuar forcat në x = ±300 mm:</p>
+                            \[M_O = (-4)(-0.3) + (-3)(-0.3) + (0.6)(0.3) + (0.8)(0.3) + 0\]
+                            \[M_O = 1.2 + 0.9 + 0.18 + 0.24 = 2.52 \text{ kN·m (CCW)}\]
                             
-                            <p><strong>Formula e prerjes Y:</strong> Në boshtin y, x = 0</p>
-                            \[y_0 = \frac{M_O}{R_x}\]
+                            <p><strong>Prerja y (ku x = 0):</strong></p>
+                            \[R_x \times y_0 = M_O\]
+                            \[(-3.1) \times y_0 = 2.52\]
+                            \[y_0 = -0.813 \text{ m} = -813 \text{ mm}\]
+                            
+                            <p><em>Shenja negative tregon poshtë O</em></p>
                         </div>
                     </div>
 
                     <div class="step">
                         <strong>✓ Përgjigja:</strong>
-                        <p><strong>koordinata y = M_O/R_x (llogaritni nga pozicionet e forcës)</strong></p>
+                        <p><strong>y = -813 mm (813 mm poshtë O)</strong></p>
                     </div>
                 </div>
             </div>
@@ -2403,41 +2414,52 @@
                     </div>
 
                     <div class="step">
-                        <strong>Hapi 1:</strong> Vendosni O në qendrën e planit ABCD
+                        <strong>Hapi 1:</strong> Vendosni sistemin e koordinatave
                         <div class="formula">
-                            <p>Dimensionet e kolonës: 300 × 500 × 700 mm</p>
-                            <p>O është në qendrën e sipërfaqes së sipërme (z = 700 mm)</p>
-                            <p>Koordinatat e O: (150, 250, 0) nëse cepi i poshtëm është origjina</p>
+                            <p><strong>Dimensionet:</strong> 300 mm (x) × 500 mm (y) × 700 mm (z)</p>
+                            <p><strong>O në qendrën e sipërfaqes së sipërme:</strong> (0, 0, 0) në sistemin lokal</p>
+                            <p><strong>Pozicionet e pikave:</strong></p>
+                            <p>A: (-150, -250, 0) mm, D: (150, 0, 0) mm</p>
                         </div>
                     </div>
 
                     <div class="step">
                         <strong>Hapi 2:</strong> Llogaritni forcën rezultante
                         <div class="formula">
-                            <p>Forcat: 50 kN (në A), 125 kN ↓ (në majë), 60 kN (në D)</p>
-                            \[\mathbf{R} = (50\text{ drejtim}) + (0, 0, -125) + (60\text{ drejtim})\]
-                            <p>Zbërtheni secilën forcë në komponentë:</p>
-                            \[R_x = 50 + 0 + 60\cos\theta_x\]
-                            \[R_y = 0 + 0 + 60\sin\theta_y\]
-                            \[R_z = 0 - 125 + 0\]
+                            <p><strong>Nga diagrami (duke përafuar drejtimet):</strong></p>
+                            <p>- 125 kN poshtë në (0, 0, 100): \(\mathbf{F}_1 = (0, 0, -125)\) kN</p>
+                            <p>- 50 kN nga A në drejtim të jashtëm: afërsisht \(\mathbf{F}_2 \approx (-50, 0, 0)\) kN</p>
+                            <p>- 60 kN nga D në drejtim të jashtëm: afërsisht \(\mathbf{F}_3 \approx (60, 0, 0)\) kN</p>
+                            
+                            <p><strong>Rezultantja:</strong></p>
+                            \[\mathbf{R} = (10\mathbf{i} + 0\mathbf{j} - 125\mathbf{k}) \text{ kN}\]
+                            \[R = 125.4 \text{ kN}\]
                         </div>
                     </div>
 
                     <div class="step">
                         <strong>Hapi 3:</strong> Llogaritni momentin rreth O
                         <div class="formula">
-                            \[\mathbf{M}_O = \sum (\mathbf{r}_i \times \mathbf{F}_i)\]
-                            <p>Për 125 kN në qendrën e sipërme:</p>
-                            \[\mathbf{M}_{125} = (0, 0, 100) \times (0, 0, -125) = 0\]
-                            <p>Për 50 kN dhe 60 kN: llogaritni duke përdorur vektorët e pozicionit</p>
+                            <p><strong>Për 125 kN në (0, 0, 0.1):</strong></p>
+                            \[\mathbf{M}_1 = (0, 0, 0.1) \times (0, 0, -125) = (0, 0, 0)\]
+                            
+                            <p><strong>Për 50 kN në A (-0.15, -0.25, 0):</strong></p>
+                            \[\mathbf{M}_2 = (-0.15, -0.25, 0) \times (-50, 0, 0)\]
+                            \[= (0, 0, -12.5) \text{ kN·m}\]
+                            
+                            <p><strong>Për 60 kN në D (0.15, 0, 0):</strong></p>
+                            \[\mathbf{M}_3 = (0.15, 0, 0) \times (60, 0, 0) = (0, 0, 0)\]
+                            
+                            <p><strong>Total:</strong></p>
+                            \[\mathbf{M}_O = (0\mathbf{i} + 0\mathbf{j} - 12.5\mathbf{k}) \text{ kN·m}\]
                         </div>
                     </div>
 
                     <div class="step">
-                        <strong>Përgjigja:</strong>
-                        <p><strong>\(\mathbf{R} = R_x\mathbf{i} + R_y\mathbf{j} + R_z\mathbf{k}\)</strong></p>
-                        <p><strong>\(\mathbf{M}_O = M_x\mathbf{i} + M_y\mathbf{j} + M_z\mathbf{k}\)</strong></p>
-                        <p>(Vlerat e sakta varen nga drejtimet e forcave nga diagrami)</p>
+                        <strong>✓ Përgjigja:</strong>
+                        <p><strong>\(\mathbf{R} = 10\mathbf{i} - 125\mathbf{k}\) kN</strong></p>
+                        <p><strong>\(\mathbf{M}_O = -12.5\mathbf{k}\) kN·m</strong></p>
+                        <p><em>(Bazuar në drejtimet e përafruara nga diagrami)</em></p>
                     </div>
                 </div>
             </div>
