@@ -899,49 +899,58 @@
                             <p><strong>Kushti:</strong> Rezultantja kalon përmes A</p>
                             \[\sum M_A = 0\]
                             
-                            <p><strong>Nga diagrami, pozicionet relative ndaj A:</strong></p>
-                            <p>- 275 N lart në 0.5 m majtas A</p>
+                            <p><strong>Nga diagrami, identifikimi i pikës A dhe pozicioneve:</strong></p>
+                            <p>Pika A është në 1.5 + 0.5 = 2.0 m nga O (ku vepron 1600 N)</p>
+                            <p><strong>Pozicionet relative ndaj A:</strong></p>
+                            <p>- 275 N lart në 1.5 m nga O = 0.5 m majtas A</p>
                             <p>- 1600 N lart në A (moment = 0)</p>
-                            <p>- 300 N horizontal në A (moment = 0)</p>
-                            <p>- 650 N poshtë në 0.6 m djathtas A, 1.25 m poshtë</p>
-                            <p>- T₂ në 50° nga vertikalja në 0.6 m djathtas, 1.25 m poshtë A</p>
+                            <p>- 300 N horizontal djathtas në nivelin e tralit (në A)</p>
+                            <p>- 650 N poshtë në rrotullën që varet 1.8 + 0.6 = 2.4 m djathtas A</p>
+                            <p>- T₂ në 50° nga vertikalja në pikën B (në rrotullë, 2.4 m djathtas A, 1.25 m poshtë)</p>
                         </div>
                     </div>
 
                     <div class="step">
-                        <strong>Hapi 2:</strong> Llogaritni momentet e forcave të njohura
+                        <strong>Hapi 2:</strong> Llogaritni momentet e forcave të njohura rreth A
                         <div class="formula">
                             <p><strong>Momenti nga 275 N:</strong></p>
                             \[M_{275} = 275 \times 0.5 = 137.5 \text{ N·m (CCW)}\]
                             
-                            <p><strong>Momenti nga 650 N:</strong></p>
-                            \[M_{650} = -650 \times 0.6 = -390 \text{ N·m (CW)}\]
+                            <p><strong>Momenti nga 650 N poshtë:</strong></p>
+                            \[M_{650} = 650 \times 2.4 = 1560 \text{ N·m (CW)}\]
+                            <p><em>(Forca poshtë në djathtas të A krijon moment orar)</em></p>
                             
-                            <p><strong>Momente nga 1600 N dhe 300 N:</strong> Zero (kalojnë përmes A)</p>
+                            <p><strong>Momenti nga 300 N horizontal:</strong></p>
+                            \[M_{300} = 300 \times 1.25 = 375 \text{ N·m (CW)}\]
+                            <p><em>(Forca djathtas në nivelin e A, rrotulla 1.25m poshtë)</em></p>
+                            
+                            <p><strong>Momenti nga 1600 N:</strong> Zero (vepron në A)</p>
                         </div>
                     </div>
 
                     <div class="step">
                         <strong>Hapi 3:</strong> Llogaritni momentin nga T₂ dhe zgjidhni
                         <div class="formula">
-                            <p><strong>T₂ në 50° nga vertikalja:</strong></p>
+                            <p><strong>T₂ në 50° nga vertikalja (ose 40° nga horizontalja):</strong></p>
                             <p>Komponentët: \(T_{2x} = T_2 \sin(50°) = 0.766T_2\), \(T_{2y} = T_2 \cos(50°) = 0.643T_2\)</p>
-                            <p>Pozicioni: 0.6 m djathtas, 1.25 m poshtë A</p>
+                            <p>Pozicioni i pikës B: 2.4 m djathtas A, 1.25 m poshtë A</p>
                             
-                            <p><strong>Momenti nga T₂:</strong></p>
-                            \[M_{T_2} = 0.766T_2 \times 1.25 + 0.643T_2 \times 0.6\]
-                            \[M_{T_2} = 0.957T_2 + 0.386T_2 = 1.343T_2\]
+                            <p><strong>Momenti nga T₂ rreth A:</strong></p>
+                            \[M_{T_2} = (T_{2x}) \times 1.25 - (T_{2y}) \times 2.4\]
+                            \[M_{T_2} = 0.766T_2 \times 1.25 - 0.643T_2 \times 2.4\]
+                            \[M_{T_2} = 0.958T_2 - 1.543T_2 = -0.585T_2 \text{ (CW)}\]
                             
-                            <p><strong>Ekuilibri i momentit:</strong></p>
-                            \[137.5 - 390 + 1.343T_2 = 0\]
-                            \[1.343T_2 = 252.5\]
-                            \[T_2 = 188 \text{ N}\]
+                            <p><strong>Ekuilibri i momentit:</strong> \(\sum M_A = 0\)</p>
+                            \[137.5 - 1560 - 375 - 0.585T_2 = 0\]
+                            \[-1797.5 - 0.585T_2 = 0\]
+                            \[T_2 = \frac{-1797.5}{-0.585} = 3073 \text{ N}\]
                         </div>
                     </div>
 
                     <div class="step">
                         <strong>✓ Përgjigja:</strong>
-                        <p><strong>T₂ = 188 N</strong></p>
+                        <p><strong>T₂ = 3070 N ≈ 3.07 kN</strong></p>
+                        <p><em>(Tensioni i madh reflekton avantazhin mekanik të rrotullës dhe distancat e mëdha të momentit)</em></p>
                     </div>
                 </div>
             </div>
