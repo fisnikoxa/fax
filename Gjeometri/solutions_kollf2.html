@@ -210,7 +210,7 @@
         <div class="problem">
             <h2>Problemi 1</h2>
             <div class="problem-statement">
-                Të gjenden dy projeksionet ortogonale të piramidës së rregullt gjashtëkëndore, bazat e së cilës shtrihen në rrafshin π₁, me anën e bazës a=3cm dhe lartësinë h=5cm.
+                Të gjenden tri projeksionet ortogonale të piramidës së rregullt gjashtëkëndore, bazat e së cilës shtrihen në rrafshin π₁, me anën e bazës a=3cm dhe lartësinë h=5cm.
             </div>
             
             <div class="solution">
@@ -236,14 +236,18 @@
                     <div class="step">
                         <strong>Hapi 5:</strong> Kulmi K ka koordinata: K(0, 0, 5) ose në projekcion frontal (π₂) shfaqet në lartësi h = 5cm mbi bazë.
                     </div>
+                    
+                    <div class="step">
+                        <strong>Hapi 6:</strong> Vizatojmë tri projekionet: π₁ (horizontal), π₂ (frontal), π₃ (profil). Në π₂ dhe π₃ piramida duket si trekëndësh izoscel me të njëjtën formë.
+                    </div>
                 </div>
                 
                 <div class="note">
-                    <strong>Shënim:</strong> Në projekcionin horizontal (π₁), shohim gjashtëkëndëshin e plotë me qendrën. Në projekcionin frontal (π₂), shohim një trekëndësh izoscel me bazë të barabartë me diametrin e gjashtëkëndëshit dhe lartësi h = 5cm.
+                    <strong>Shënim:</strong> Në projekcionin horizontal (π₁), shohim gjashtëkëndëshin e plotë me qendrën. Në projekcionin frontal (π₂) dhe profil (π₃), shohim nga një trekëndësh izoscel me bazë të barabartë me diametrin e gjashtëkëndëshit (6cm) dhe lartësi h = 5cm.
                 </div>
                 
                 <div class="drawing-container">
-                    <svg viewBox="0 0 600 400" xmlns="http://www.w3.org/2000/svg">
+                    <svg viewBox="0 0 700 450" xmlns="http://www.w3.org/2000/svg">
                         <!-- Defs for markers -->
                         <defs>
                             <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="5" refY="5" orient="auto">
@@ -257,61 +261,64 @@
                             </marker>
                         </defs>
                         
-                        <!-- Ground line (x-axis) - horizontal divider with arrows and graduations -->
-                        <line x1="10" y1="200" x2="590" y2="200" class="axis-line" marker-end="url(#axis-arrow)"/>
+                        <!-- Ground line (x-axis) - horizontal divider -->
+                        <line x1="10" y1="225" x2="690" y2="225" class="axis-line" marker-end="url(#axis-arrow)"/>
+                        <text x="345" y="240" font-size="11" fill="#333" font-weight="bold">x</text>
                         
-                        <!-- X-axis tick marks and numbers -->
-                        <g class="axis-ticks">
-                            <line x1="240" y1="197" x2="240" y2="203" stroke="#333" stroke-width="1"/>
-                            <text x="234" y="215" font-size="9" fill="#666">-3</text>
-                            <line x1="260" y1="197" x2="260" y2="203" stroke="#333" stroke-width="1"/>
-                            <text x="254" y="215" font-size="9" fill="#666">-2</text>
-                            <line x1="280" y1="197" x2="280" y2="203" stroke="#333" stroke-width="1"/>
-                            <text x="274" y="215" font-size="9" fill="#666">-1</text>
-                            <text x="296" y="215" font-size="9" fill="#666" font-weight="bold">0</text>
-                            <line x1="320" y1="197" x2="320" y2="203" stroke="#333" stroke-width="1"/>
-                            <text x="317" y="215" font-size="9" fill="#666">1</text>
-                            <line x1="340" y1="197" x2="340" y2="203" stroke="#333" stroke-width="1"/>
-                            <text x="337" y="215" font-size="9" fill="#666">2</text>
-                            <line x1="360" y1="197" x2="360" y2="203" stroke="#333" stroke-width="1"/>
-                            <text x="357" y="215" font-size="9" fill="#666">3</text>
-                        </g>
-                        <text x="575" y="215" font-size="11" fill="#333" font-weight="bold">x</text>
+                        <!-- Vertical axis (y-axis) - main separator -->
+                        <line x1="350" y1="10" x2="350" y2="440" class="axis-line" marker-end="url(#axis-arrow)"/>
+                        <text x="355" y="25" font-size="11" fill="#333" font-weight="bold">y</text>
                         
-                        <!-- Vertical divider (z-axis) with arrow and graduations -->
-                        <line x1="300" y1="390" x2="300" y2="10" class="separator-line" marker-end="url(#axis-arrow)"/>
+                        <!-- Vertical divider (z-axis) -->
+                        <line x1="10" y1="225" x2="690" y2="225" class="separator-line"/>
                         
-                        <!-- Z-axis tick marks and numbers -->
-                        <g class="axis-ticks">
-                            <line x1="297" y1="240" x2="303" y2="240" stroke="#666" stroke-width="1"/>
-                            <text x="308" y="243" font-size="9" fill="#666">-2</text>
-                            <line x1="297" y1="260" x2="303" y2="260" stroke="#666" stroke-width="1"/>
-                            <text x="308" y="263" font-size="9" fill="#666">-3</text>
-                            <line x1="297" y1="180" x2="303" y2="180" stroke="#666" stroke-width="1"/>
-                            <text x="308" y="183" font-size="9" fill="#666">1</text>
-                            <line x1="297" y1="160" x2="303" y2="160" stroke="#666" stroke-width="1"/>
-                            <text x="308" y="163" font-size="9" fill="#666">2</text>
-                            <line x1="297" y1="140" x2="303" y2="140" stroke="#666" stroke-width="1"/>
-                            <text x="308" y="143" font-size="9" fill="#666">3</text>
-                            <line x1="297" y1="120" x2="303" y2="120" stroke="#666" stroke-width="1"/>
-                            <text x="308" y="123" font-size="9" fill="#666">4</text>
-                            <line x1="297" y1="100" x2="303" y2="100" stroke="#666" stroke-width="1"/>
-                            <text x="308" y="103" font-size="9" fill="#666">5</text>
-                        </g>
-                        <text x="305" y="25" font-size="11" fill="#666" font-weight="bold">z</text>
-                        
-                        <!-- Origin point with center mark -->
-                        <circle cx="300" cy="200" r="4" class="origin-point"/>
-                        <line x1="296" y1="200" x2="304" y2="200" stroke="#c0392b" stroke-width="1.5"/>
-                        <line x1="300" y1="196" x2="300" y2="204" stroke="#c0392b" stroke-width="1.5"/>
-                        <text x="305" y="195" font-size="10" fill="#e74c3c" font-weight="bold">O</text>
+                        <!-- Origin points -->
+                        <circle cx="350" cy="225" r="4" class="origin-point"/>
+                        <text x="355" y="220" font-size="10" fill="#e74c3c" font-weight="bold">O</text>
                         
                         <!-- Labels -->
-                        <text x="320" y="390" class="grid-label" font-weight="bold">π₁ (horizontal)</text>
-                        <text x="320" y="30" class="grid-label" font-weight="bold">π₂ (frontal)</text>
+                        <text x="150" y="30" class="grid-label" font-weight="bold">π₃ (profile)</text>
+                        <text x="520" y="30" class="grid-label" font-weight="bold">π₂ (frontal)</text>
+                        <text x="520" y="440" class="grid-label" font-weight="bold">π₁ (horizontal)</text>
+                        
+                        <!-- Projection on π₃ (top left - profile) -->
+                        <g transform="translate(150, 120)">
+                            <!-- Base line - visible edge -->
+                            <line x1="-60" y1="0" x2="60" y2="0" class="visible-edge"/>
+                            <!-- Lateral edges - visible -->
+                            <line x1="-60" y1="0" x2="0" y2="-100" class="visible-edge"/>
+                            <line x1="60" y1="0" x2="0" y2="-100" class="visible-edge"/>
+                            <!-- Hidden edge - height -->
+                            <line x1="0" y1="0" x2="0" y2="-100" class="hidden-edge"/>
+                            
+                            <!-- Base vertices (appear as line segment in profile) -->
+                            <circle cx="-60" cy="0" r="2.5" fill="#2980b9"/>
+                            <text x="-75" y="5" class="point-number" font-size="9">2,3,4</text>
+                            
+                            <circle cx="60" cy="0" r="2.5" fill="#2980b9"/>
+                            <text x="65" y="5" class="point-number" font-size="9">5,6,1</text>
+                            
+                            <!-- Base center with center mark -->
+                            <circle cx="0" cy="0" r="3" fill="#e74c3c"/>
+                            <line x1="-4" y1="0" x2="4" y2="0" stroke="#c0392b" stroke-width="1.5"/>
+                            <line x1="0" y1="-4" x2="0" y2="4" stroke="#c0392b" stroke-width="1.5"/>
+                            <text x="-20" y="15" font-size="12" fill="#e74c3c" font-weight="bold">O''</text>
+                            
+                            <!-- Apex -->
+                            <circle cx="0" cy="-100" r="3" fill="#27ae60"/>
+                            <text x="8" y="-105" font-size="12" fill="#27ae60" font-weight="bold">K''</text>
+                            
+                            <!-- Height dimension -->
+                            <line x1="-75" y1="0" x2="-75" y2="-5" class="dimension-line"/>
+                            <line x1="-75" y1="-95" x2="-75" y2="-100" class="dimension-line"/>
+                            <line x1="-75" y1="0" x2="-75" y2="-100" class="dimension-line" marker-end="url(#arrowhead)" marker-start="url(#arrowhead2)"/>
+                            <text x="-110" y="-45" font-size="10" fill="#555" font-weight="bold">h=5cm</text>
+                            <!-- Width dimension -->
+                            <text x="-15" y="20" font-size="10" fill="#555">6cm</text>
+                        </g>
                         
                         <!-- Projection on π₂ (top right - frontal) -->
-                        <g transform="translate(450, 120)">
+                        <g transform="translate(550, 120)">
                             <!-- Base line - visible edge -->
                             <line x1="-60" y1="0" x2="60" y2="0" class="visible-edge"/>
                             <!-- Lateral edges - visible -->
@@ -353,10 +360,16 @@
                             <text x="80" y="-45" font-size="10" fill="#555" font-weight="bold">h=5cm</text>
                             <!-- Width dimension -->
                             <text x="-75" y="15" font-size="10" fill="#555">6cm</text>
+                            
+                            <!-- Projection lines to π₃ -->
+                            <line x1="-60" y1="0" x2="-400" y2="0" class="projection-line"/>
+                            <line x1="60" y1="0" x2="-400" y2="0" class="projection-line"/>
+                            <line x1="0" y1="0" x2="-400" y2="0" class="projection-line"/>
+                            <line x1="0" y1="-100" x2="-400" y2="-100" class="projection-line"/>
                         </g>
                         
                         <!-- Projection on π₁ (bottom right - horizontal) -->
-                        <g transform="translate(450, 300)">
+                        <g transform="translate(550, 330)">
                             <!-- Circumscribed circle - construction -->
                             <circle cx="0" cy="0" r="60" fill="none" stroke="#3498db" stroke-width="1" stroke-dasharray="2,2" opacity="0.5"/>
                             
@@ -404,13 +417,13 @@
                             <text x="15" y="-82" font-size="10" fill="#555" font-weight="bold">R=3cm</text>
                             
                             <!-- Projection lines to π₂ -->
-                            <line x1="0" y1="-60" x2="0" y2="-180" class="projection-line"/>
-                            <line x1="52" y1="-30" x2="52" y2="-180" class="projection-line"/>
-                            <line x1="52" y1="30" x2="52" y2="-180" class="projection-line"/>
-                            <line x1="0" y1="60" x2="0" y2="-180" class="projection-line"/>
-                            <line x1="-52" y1="30" x2="-52" y2="-180" class="projection-line"/>
-                            <line x1="-52" y1="-30" x2="-52" y2="-180" class="projection-line"/>
-                            <line x1="0" y1="0" x2="0" y2="-180" class="projection-line"/>
+                            <line x1="0" y1="-60" x2="0" y2="-210" class="projection-line"/>
+                            <line x1="52" y1="-30" x2="52" y2="-210" class="projection-line"/>
+                            <line x1="52" y1="30" x2="52" y2="-210" class="projection-line"/>
+                            <line x1="0" y1="60" x2="0" y2="-210" class="projection-line"/>
+                            <line x1="-52" y1="30" x2="-52" y2="-210" class="projection-line"/>
+                            <line x1="-52" y1="-30" x2="-52" y2="-210" class="projection-line"/>
+                            <line x1="0" y1="0" x2="0" y2="-210" class="projection-line"/>
                         </g>
                     </svg>
                 </div>
