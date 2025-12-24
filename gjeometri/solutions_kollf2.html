@@ -1,0 +1,1663 @@
+<!DOCTYPE html>
+<html lang="sq">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zgjidhjet - Gjeometri Përshkruese</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+        }
+        
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 40px;
+            font-size: 2.5em;
+            border-bottom: 4px solid #3498db;
+            padding-bottom: 20px;
+        }
+        
+        .problem {
+            margin-bottom: 60px;
+            padding: 30px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            border-left: 5px solid #3498db;
+        }
+        
+        .problem h2 {
+            color: #2980b9;
+            margin-bottom: 20px;
+            font-size: 1.8em;
+        }
+        
+        .problem-statement {
+            background: #e3f2fd;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 25px;
+            font-style: italic;
+            border-left: 3px solid #2196f3;
+        }
+        
+        .solution {
+            margin-top: 20px;
+        }
+        
+        .solution h3 {
+            color: #27ae60;
+            margin: 20px 0 10px 0;
+            font-size: 1.3em;
+        }
+        
+        .steps {
+            margin: 15px 0;
+        }
+        
+        .step {
+            margin: 15px 0;
+            padding-left: 30px;
+            position: relative;
+        }
+        
+        .step::before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: #3498db;
+            font-weight: bold;
+            font-size: 1.2em;
+        }
+        
+        .formula {
+            background: #fff3cd;
+            padding: 10px 15px;
+            margin: 10px 0;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            border-left: 3px solid #ffc107;
+        }
+        
+        .drawing-container {
+            margin: 30px 0;
+            text-align: center;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        svg {
+            max-width: 100%;
+            height: auto;
+            border: 1px solid #ddd;
+        }
+        
+        .note {
+            background: #fff9e6;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 5px;
+            border-left: 3px solid #ff9800;
+        }
+        
+        .note strong {
+            color: #e65100;
+        }
+        
+        code {
+            background: #f4f4f4;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+        }
+        
+        .grid-label {
+            fill: #666;
+            font-size: 12px;
+        }
+        
+        .projection-line {
+            stroke: #999;
+            stroke-width: 0.8;
+            stroke-dasharray: 4,4;
+        }
+        
+        .visible-edge {
+            stroke: #2c3e50;
+            stroke-width: 2.5;
+            fill: none;
+        }
+        
+        .hidden-edge {
+            stroke: #999;
+            stroke-width: 1;
+            stroke-dasharray: 5,5;
+            fill: none;
+        }
+        
+        .construction-line {
+            stroke: #3498db;
+            stroke-width: 0.8;
+            stroke-dasharray: 3,1,3,1;
+            fill: none;
+        }
+        
+        .axis-line {
+            stroke: #333;
+            stroke-width: 2;
+        }
+        
+        .separator-line {
+            stroke: #999;
+            stroke-width: 1;
+        }
+        
+        .dimension-line {
+            stroke: #555;
+            stroke-width: 1.2;
+        }
+        
+        .point-number {
+            fill: #2c3e50;
+            font-size: 10px;
+            font-weight: bold;
+            font-family: 'Courier New', monospace;
+        }
+        
+        .coordinate-label {
+            fill: #16a085;
+            font-size: 9px;
+            font-family: 'Courier New', monospace;
+        }
+        
+        .origin-point {
+            fill: #e74c3c;
+            stroke: #c0392b;
+            stroke-width: 2;
+        }
+        
+        .axis-arrow {
+            fill: #333;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Zgjidhjet e Problemeve - Gjeometri Përshkruese</h1>
+
+        <!-- Problem 1 -->
+        <div class="problem">
+            <h2>Problemi 1</h2>
+            <div class="problem-statement">
+                Të gjenden dy projeksionet ortogonale të piramidës së rregullt gjashtëkëndore, bazat e së cilës shtrihen në rrafshin π₁, me anën e bazës a=3cm dhe lartësinë h=5cm.
+            </div>
+            
+            <div class="solution">
+                <h3>Zgjidhja:</h3>
+                
+                <div class="steps">
+                    <div class="step">
+                        <strong>Hapi 1:</strong> Piramida e rregullt gjashtëkëndore ka bazën në π₁ (projekcion horizontal). Baza është një gjashtëkëndësh i rregullt me anë a = 3cm.
+                    </div>
+                    
+                    <div class="step">
+                        <strong>Hapi 2:</strong> Gjejmë rrezën e rrethit të rrethshkruar të gjashtëkëndëshit: R = a = 3cm (për gjashtëkëndësh të rregullt).
+                    </div>
+                    
+                    <div class="step">
+                        <strong>Hapi 3:</strong> Vendosim qendrën O të bazës në origjinë. Kulmet e bazës ndodhen në rreth me rreze R = 3cm.
+                    </div>
+                    
+                    <div class="step">
+                        <strong>Hapi 4:</strong> Lartësia e piramidës h = 5cm ngrihet pingul me π₁ nga qendra O.
+                    </div>
+                    
+                    <div class="step">
+                        <strong>Hapi 5:</strong> Kulmi K ka koordinata: K(0, 0, 5) ose në projekcion frontal (π₂) shfaqet në lartësi h = 5cm mbi bazë.
+                    </div>
+                </div>
+                
+                <div class="note">
+                    <strong>Shënim:</strong> Në projekcionin horizontal (π₁), shohim gjashtëkëndëshin e plotë me qendrën. Në projekcionin frontal (π₂), shohim një trekëndësh izoscel me bazë të barabartë me diametrin e gjashtëkëndëshit dhe lartësi h = 5cm.
+                </div>
+                
+                <div class="drawing-container">
+                    <svg viewBox="0 0 600 400" xmlns="http://www.w3.org/2000/svg">
+                        <!-- Defs for markers -->
+                        <defs>
+                            <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="5" refY="5" orient="auto">
+                                <polygon points="0 0, 10 5, 0 10" fill="#555"/>
+                            </marker>
+                            <marker id="arrowhead2" markerWidth="10" markerHeight="10" refX="5" refY="5" orient="auto-start-reverse">
+                                <polygon points="0 0, 10 5, 0 10" fill="#555"/>
+                            </marker>
+                            <marker id="axis-arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
+                                <polygon points="0 0, 8 4, 0 8" class="axis-arrow"/>
+                            </marker>
+                        </defs>
+                        
+                        <!-- Ground line (x-axis) - horizontal divider with arrows and graduations -->
+                        <line x1="10" y1="200" x2="590" y2="200" class="axis-line" marker-end="url(#axis-arrow)"/>
+                        
+                        <!-- X-axis tick marks and numbers -->
+                        <g class="axis-ticks">
+                            <line x1="240" y1="197" x2="240" y2="203" stroke="#333" stroke-width="1"/>
+                            <text x="234" y="215" font-size="9" fill="#666">-3</text>
+                            <line x1="260" y1="197" x2="260" y2="203" stroke="#333" stroke-width="1"/>
+                            <text x="254" y="215" font-size="9" fill="#666">-2</text>
+                            <line x1="280" y1="197" x2="280" y2="203" stroke="#333" stroke-width="1"/>
+                            <text x="274" y="215" font-size="9" fill="#666">-1</text>
+                            <text x="296" y="215" font-size="9" fill="#666" font-weight="bold">0</text>
+                            <line x1="320" y1="197" x2="320" y2="203" stroke="#333" stroke-width="1"/>
+                            <text x="317" y="215" font-size="9" fill="#666">1</text>
+                            <line x1="340" y1="197" x2="340" y2="203" stroke="#333" stroke-width="1"/>
+                            <text x="337" y="215" font-size="9" fill="#666">2</text>
+                            <line x1="360" y1="197" x2="360" y2="203" stroke="#333" stroke-width="1"/>
+                            <text x="357" y="215" font-size="9" fill="#666">3</text>
+                        </g>
+                        <text x="575" y="215" font-size="11" fill="#333" font-weight="bold">x</text>
+                        
+                        <!-- Vertical divider (z-axis) with arrow and graduations -->
+                        <line x1="300" y1="390" x2="300" y2="10" class="separator-line" marker-end="url(#axis-arrow)"/>
+                        
+                        <!-- Z-axis tick marks and numbers -->
+                        <g class="axis-ticks">
+                            <line x1="297" y1="240" x2="303" y2="240" stroke="#666" stroke-width="1"/>
+                            <text x="308" y="243" font-size="9" fill="#666">-2</text>
+                            <line x1="297" y1="260" x2="303" y2="260" stroke="#666" stroke-width="1"/>
+                            <text x="308" y="263" font-size="9" fill="#666">-3</text>
+                            <line x1="297" y1="180" x2="303" y2="180" stroke="#666" stroke-width="1"/>
+                            <text x="308" y="183" font-size="9" fill="#666">1</text>
+                            <line x1="297" y1="160" x2="303" y2="160" stroke="#666" stroke-width="1"/>
+                            <text x="308" y="163" font-size="9" fill="#666">2</text>
+                            <line x1="297" y1="140" x2="303" y2="140" stroke="#666" stroke-width="1"/>
+                            <text x="308" y="143" font-size="9" fill="#666">3</text>
+                            <line x1="297" y1="120" x2="303" y2="120" stroke="#666" stroke-width="1"/>
+                            <text x="308" y="123" font-size="9" fill="#666">4</text>
+                            <line x1="297" y1="100" x2="303" y2="100" stroke="#666" stroke-width="1"/>
+                            <text x="308" y="103" font-size="9" fill="#666">5</text>
+                        </g>
+                        <text x="305" y="25" font-size="11" fill="#666" font-weight="bold">z</text>
+                        
+                        <!-- Origin point with center mark -->
+                        <circle cx="300" cy="200" r="4" class="origin-point"/>
+                        <line x1="296" y1="200" x2="304" y2="200" stroke="#c0392b" stroke-width="1.5"/>
+                        <line x1="300" y1="196" x2="300" y2="204" stroke="#c0392b" stroke-width="1.5"/>
+                        <text x="305" y="195" font-size="10" fill="#e74c3c" font-weight="bold">O</text>
+                        
+                        <!-- Labels -->
+                        <text x="10" y="390" class="grid-label" font-weight="bold">π₁ (horizontal)</text>
+                        <text x="480" y="30" class="grid-label" font-weight="bold">π₂ (frontal)</text>
+                        
+                        <!-- Projection on π₁ (left side - horizontal) -->
+                        <g transform="translate(150, 280)">
+                            <!-- Circumscribed circle - construction -->
+                            <circle cx="0" cy="0" r="60" fill="none" stroke="#3498db" stroke-width="1" stroke-dasharray="2,2" opacity="0.5"/>
+                            
+                            <!-- Regular hexagon - visible edges -->
+                            <polygon points="0,-60 52,-30 52,30 0,60 -52,30 -52,-30" class="visible-edge"/>
+                            
+                            <!-- Construction lines - all radii -->
+                            <line x1="0" y1="0" x2="0" y2="-60" class="construction-line"/>
+                            <line x1="0" y1="0" x2="52" y2="-30" class="construction-line"/>
+                            <line x1="0" y1="0" x2="52" y2="30" class="construction-line"/>
+                            <line x1="0" y1="0" x2="0" y2="60" class="construction-line"/>
+                            <line x1="0" y1="0" x2="-52" y2="30" class="construction-line"/>
+                            <line x1="0" y1="0" x2="-52" y2="-30" class="construction-line"/>
+                            
+                            <!-- Hexagon vertices with numbering -->
+                            <circle cx="0" cy="-60" r="2.5" fill="#2980b9"/>
+                            <text x="8" y="-58" class="point-number">1</text>
+                            
+                            <circle cx="52" cy="-30" r="2.5" fill="#2980b9"/>
+                            <text x="58" y="-28" class="point-number">2</text>
+                            
+                            <circle cx="52" cy="30" r="2.5" fill="#2980b9"/>
+                            <text x="58" y="32" class="point-number">3</text>
+                            
+                            <circle cx="0" cy="60" r="2.5" fill="#2980b9"/>
+                            <text x="8" y="62" class="point-number">4</text>
+                            
+                            <circle cx="-52" cy="30" r="2.5" fill="#2980b9"/>
+                            <text x="-48" y="32" class="point-number">5</text>
+                            
+                            <circle cx="-52" cy="-30" r="2.5" fill="#2980b9"/>
+                            <text x="-48" y="-28" class="point-number">6</text>
+                            
+                            <!-- Center point with center mark -->
+                            <circle cx="0" cy="0" r="3" fill="#e74c3c"/>
+                            <line x1="-4" y1="0" x2="4" y2="0" stroke="#c0392b" stroke-width="1.5"/>
+                            <line x1="0" y1="-4" x2="0" y2="4" stroke="#c0392b" stroke-width="1.5"/>
+                            <text x="-15" y="5" font-size="12" fill="#e74c3c" font-weight="bold">O</text>
+                            <text x="-30" y="-10" class="coordinate-label">(0,0,0)</text>
+                            
+                            <!-- Dimension -->
+                            <line x1="0" y1="-70" x2="0" y2="-85" class="dimension-line"/>
+                            <line x1="52" y1="-30" x2="52" y2="-85" class="dimension-line"/>
+                            <line x1="0" y1="-78" x2="52" y2="-78" class="dimension-line" marker-end="url(#arrowhead)" marker-start="url(#arrowhead2)"/>
+                            <text x="15" y="-82" font-size="10" fill="#555" font-weight="bold">R=3cm</text>
+                            
+                            <!-- Projection lines to π₂ - all vertices -->
+                            <line x1="0" y1="-60" x2="0" y2="-280" class="projection-line"/>
+                            <line x1="52" y1="-30" x2="52" y2="-280" class="projection-line"/>
+                            <line x1="52" y1="30" x2="52" y2="-280" class="projection-line"/>
+                            <line x1="0" y1="60" x2="0" y2="-280" class="projection-line"/>
+                            <line x1="-52" y1="30" x2="-52" y2="-280" class="projection-line"/>
+                            <line x1="-52" y1="-30" x2="-52" y2="-280" class="projection-line"/>
+                            <line x1="0" y1="0" x2="0" y2="-280" class="projection-line"/>
+                        </g>
+                        
+                        <!-- Projection on π₂ (right side - frontal) -->
+                        <g transform="translate(450, 280)">
+                            <!-- Base line - visible edge -->
+                            <line x1="-60" y1="0" x2="60" y2="0" class="visible-edge"/>
+                            <!-- Lateral edges - visible -->
+                            <line x1="-60" y1="0" x2="0" y2="-100" class="visible-edge"/>
+                            <line x1="60" y1="0" x2="0" y2="-100" class="visible-edge"/>
+                            <!-- Hidden edge - height -->
+                            <line x1="0" y1="0" x2="0" y2="-100" class="hidden-edge"/>
+                            
+                            <!-- Base vertices with numbering -->
+                            <circle cx="-60" cy="0" r="2.5" fill="#2980b9"/>
+                            <text x="-70" y="3" class="point-number">6'</text>
+                            
+                            <circle cx="-52" cy="0" r="2" fill="#2980b9"/>
+                            <text x="-50" y="-8" class="point-number" font-size="8">5',1'</text>
+                            
+                            <circle cx="52" cy="0" r="2" fill="#2980b9"/>
+                            <text x="54" y="-8" class="point-number" font-size="8">2',4'</text>
+                            
+                            <circle cx="60" cy="0" r="2.5" fill="#2980b9"/>
+                            <text x="65" y="3" class="point-number">3'</text>
+                            
+                            <!-- Base center with center mark -->
+                            <circle cx="0" cy="0" r="3" fill="#e74c3c"/>
+                            <line x1="-4" y1="0" x2="4" y2="0" stroke="#c0392b" stroke-width="1.5"/>
+                            <line x1="0" y1="-4" x2="0" y2="4" stroke="#c0392b" stroke-width="1.5"/>
+                            <text x="-20" y="15" font-size="12" fill="#e74c3c" font-weight="bold">O'</text>
+                            <text x="-25" y="28" class="coordinate-label">(0,0,0)</text>
+                            
+                            <!-- Apex -->
+                            <circle cx="0" cy="-100" r="3" fill="#27ae60"/>
+                            <text x="8" y="-105" font-size="12" fill="#27ae60" font-weight="bold">K'</text>
+                            <text x="8" y="-95" class="point-number">7'</text>
+                            <text x="-30" y="-110" class="coordinate-label">(0,0,5)</text>
+                            
+                            <!-- Height dimension -->
+                            <line x1="75" y1="0" x2="75" y2="-5" class="dimension-line"/>
+                            <line x1="75" y1="-95" x2="75" y2="-100" class="dimension-line"/>
+                            <line x1="75" y1="0" x2="75" y2="-100" class="dimension-line" marker-end="url(#arrowhead)" marker-start="url(#arrowhead2)"/>
+                            <text x="80" y="-45" font-size="10" fill="#555" font-weight="bold">h=5cm</text>
+                            <!-- Width dimension -->
+                            <text x="-75" y="15" font-size="10" fill="#555">6cm</text>
+                        </g>
+                    </svg>
+                </div>
+            </div>
+        </div>
+
+        <!-- Problem 2 -->
+        <div class="problem">
+            <h2>Problemi 2</h2>
+            <div class="problem-statement">
+                Të përcaktohen dy projeksionet normale të piramidës trekëndore. Baza e saj është trekëndësh barabrinjës me anë a=2.5cm në rrafshin π₂, me qendrën e rrethit të rrethuar Q(4,0,3) dhe kulmin K(8,8,7). Baza të zgjidhet ashtu që njëra nga teh i saj të jetë a) paralele me rrafshin π₁, dhe b) të formojë kënd 30° me rrafshin π₁.
+            </div>
+            
+            <div class="solution">
+                <h3>Zgjidhja:</h3>
+                
+                <div class="steps">
+                    <div class="step">
+                        <strong>Hapi 1:</strong> Baza e piramidës ndodhet në rrafshin π₂ (frontal). Qendra e rrethit të rrethshkruar është Q(4,0,3).
+                    </div>
+                    
+                    <div class="step">
+                        <strong>Hapi 2:</strong> Për trekëndësh barabrinjës me anë a = 2.5cm, rrezja e rrethit të rrethshkruar është:
+                        <div class="formula">R = a / √3 = 2.5 / √3 ≈ 1.44 cm</div>
+                    </div>
+                    
+                    <div class="step">
+                        <strong>Hapi 3:</strong> Kulmi i piramidës është K(8,8,7). Vektori nga Q në K është: QK = (4, 8, 4).
+                    </div>
+                    
+                    <div class="step">
+                        <strong>Hapi 4a:</strong> <em>Rasti a)</em> Për një teh paralel me π₁, njëri nga tehet e trekëndëshit duhet të jetë horizontal (y = konstantë). Vendosim kulmet e bazës në distancë R nga Q.
+                    </div>
+                    
+                    <div class="step">
+                        <strong>Hapi 4b:</strong> <em>Rasti b)</em> Për kënd 30° me π₁, rrotullojmë trekëndëshin në mënyrë që tehu të formojë kënd 30° me horizontalen.
+                    </div>
+                    
+                    <div class="step">
+                        <strong>Hapi 5:</strong> Vizatojmë projekcionin horizontal (π₁) dhe frontal (π₂) duke përdorur koordinatat e dhëna.
+                    </div>
+                </div>
+                
+                <div class="note">
+                    <strong>Shënim:</strong> Në projekcionin frontal (π₂), baza shfaqet si trekëndësh i plotë barabrinjës. Në projekcionin horizontal (π₁), baza projeksionohet si segment vijë pasi ndodhet në rrafshin π₂.
+                </div>
+                
+                <div class="drawing-container">
+                    <svg viewBox="0 0 600 450" xmlns="http://www.w3.org/2000/svg">
+                        <!-- Defs for markers -->
+                        <defs>
+                            <marker id="axis-arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
+                                <polygon points="0 0, 8 4, 0 8" class="axis-arrow"/>
+                            </marker>
+                            <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="5" refY="5" orient="auto">
+                                <polygon points="0 0, 10 5, 0 10" fill="#555"/>
+                            </marker>
+                            <marker id="arrowhead2" markerWidth="10" markerHeight="10" refX="5" refY="5" orient="auto-start-reverse">
+                                <polygon points="0 0, 10 5, 0 10" fill="#555"/>
+                            </marker>
+                        </defs>
+                        
+                        <!-- Ground line (x-axis) - horizontal divider with arrow -->
+                        <line x1="10" y1="240" x2="590" y2="240" class="axis-line" marker-end="url(#axis-arrow)"/>
+                        <text x="290" y="255" font-size="11" fill="#333" font-weight="bold">x</text>
+                        
+                        <!-- Vertical divider (z-axis) with arrow -->
+                        <line x1="300" y1="440" x2="300" y2="10" class="separator-line" marker-end="url(#axis-arrow)"/>
+                        <text x="305" y="25" font-size="11" fill="#666" font-weight="bold">z</text>
+                        
+                        <!-- Origin point -->
+                        <circle cx="300" cy="240" r="4" class="origin-point"/>
+                        <text x="305" y="235" font-size="10" fill="#e74c3c" font-weight="bold">O</text>
+                        
+                        <!-- Labels -->
+                        <text x="10" y="440" class="grid-label" font-weight="bold">π₁ (horizontal)</text>
+                        <text x="480" y="30" class="grid-label" font-weight="bold">π₂ (frontal)</text>
+                        
+                        <!-- Projection on π₁ (horizontal) -->
+                        <g transform="translate(100, 300)">
+                            <text x="-10" y="-80" font-size="12" fill="#2980b9" font-weight="bold">Rasti a)</text>
+                            <!-- Axis projection - visible edge -->
+                            <line x1="40" y1="0" x2="80" y2="80" class="visible-edge"/>
+                            <!-- Base projects as line segment on π₂ plane -->
+                            <line x1="40" y1="0" x2="45" y2="5" class="hidden-edge"/>
+                            <!-- Points -->
+                            <circle cx="40" cy="0" r="3" fill="#e74c3c"/>
+                            <circle cx="80" cy="80" r="3" fill="#27ae60"/>
+                            <!-- Labels -->
+                            <text x="25" y="5" font-size="12" fill="#e74c3c" font-weight="bold">Q</text>
+                            <text x="85" y="85" font-size="12" fill="#27ae60" font-weight="bold">K</text>
+                            <!-- Projection lines to π₂ -->
+                            <line x1="40" y1="0" x2="40" y2="-240" class="projection-line"/>
+                            <line x1="80" y1="80" x2="80" y2="-240" class="projection-line"/>
+                        </g>
+                        
+                        <!-- Projection on π₂ (frontal) - Case a -->
+                        <g transform="translate(380, 140)">
+                            <text x="-50" y="-30" font-size="12" fill="#2980b9" font-weight="bold">Rasti a)</text>
+                            <!-- Equilateral triangle base - visible edges -->
+                            <polygon points="0,30 -25,-13.66 25,-13.66" 
+                                     fill="rgba(52,152,219,0.1)" class="visible-edge"/>
+                            <!-- Center Q -->
+                            <circle cx="0" cy="0" r="3" fill="#e74c3c"/>
+                            <!-- Construction line - radius -->
+                            <line x1="0" y1="0" x2="0" y2="30" class="construction-line"/>
+                            <text x="-18" y="5" font-size="11" fill="#e74c3c" font-weight="bold">Q'</text>
+                            <!-- Apex K -->
+                            <circle cx="40" cy="-80" r="3" fill="#27ae60"/>
+                            <text x="45" y="-75" font-size="11" fill="#27ae60" font-weight="bold">K'</text>
+                            <!-- Edges from base to apex - visible -->
+                            <line x1="0" y1="30" x2="40" y2="-80" class="visible-edge"/>
+                            <line x1="-25" y1="-13.66" x2="40" y2="-80" class="visible-edge"/>
+                            <line x1="25" y1="-13.66" x2="40" y2="-80" class="visible-edge"/>
+                            <!-- Hidden edge - axis -->
+                            <line x1="0" y1="0" x2="40" y2="-80" class="hidden-edge"/>
+                            <!-- Dimension for base edge -->
+                            <line x1="-25" y1="-13.66" x2="-30" y2="-18" class="dimension-line"/>
+                            <line x1="25" y1="-13.66" x2="30" y2="-18" class="dimension-line"/>
+                            <line x1="-28" y1="-20" x2="28" y2="-20" class="dimension-line" marker-end="url(#arrowhead)" marker-start="url(#arrowhead2)"/>
+                            <text x="-15" y="-25" font-size="9" fill="#555" font-weight="bold">a=2.5cm</text>
+                        </g>
+                        
+                        <!-- Case b indication -->
+                        <g transform="translate(380, 350)">
+                            <text x="-50" y="-30" font-size="12" fill="#2980b9" font-weight="bold">Rasti b) - kënd 30°:</text>
+                            <!-- Horizontal reference line -->
+                            <line x1="-30" y1="0" x2="50" y2="0" class="construction-line"/>
+                            <!-- Rotated triangle -->
+                            <g transform="rotate(-30)">
+                                <polygon points="0,30 -25,-13.66 25,-13.66" 
+                                         fill="rgba(155,89,182,0.1)" stroke="#9b59b6" stroke-width="2.5"/>
+                                <!-- One edge highlighted -->
+                                <line x1="-25" y1="-13.66" x2="25" y2="-13.66" stroke="#e74c3c" stroke-width="2.5"/>
+                            </g>
+                            <!-- Center point -->
+                            <circle cx="0" cy="0" r="3" fill="#e74c3c"/>
+                            <text x="-18" y="5" font-size="11" fill="#e74c3c" font-weight="bold">Q'</text>
+                            <!-- Angle indicator - larger arc -->
+                            <path d="M 25 -14 Q 28 -18 24 -23" fill="none" stroke="#e74c3c" stroke-width="1.5"/>
+                            <path d="M 25 -14 A 8 8 0 0 0 22 -18" fill="none" stroke="#e74c3c" stroke-width="1.5"/>
+                            <text x="28" y="-12" font-size="10" fill="#e74c3c" font-weight="bold">30°</text>
+                        </g>
+                    </svg>
+                </div>
+            </div>
+        </div>
+
+        <!-- Problem 3 -->
+        <div class="problem">
+            <h2>Problemi 3</h2>
+            <div class="problem-statement">
+                Të përcaktohen dy projeksionet e prizmit të pjerret trekëndor. Baza e tij është trekëndësh barabrinjës në rrafshin π₁. Janë dhënë dy kulmet e bazës së poshtme A(1,3,0), B(4,4,0), dhe kulmi i bazës së eperme Ā(6,6,5).
+            </div>
+            
+            <div class="solution">
+                <h3>Zgjidhja:</h3>
+                
+                <div class="steps">
+                    <div class="step">
+                        <strong>Hapi 1:</strong> Baza e poshtme ndodhet në π₁ (z = 0). Kemi dy kulme: A(1,3,0) dhe B(4,4,0).
+                    </div>
+                    
+                    <div class="step">
+                        <strong>Hapi 2:</strong> Gjejmë kulmin e tretë C të bazës së poshtme. Duhet të formojmë trekëndësh barabrinjës.
+                        <div class="formula">Anët: |AB| = √[(4-1)² + (4-3)²] = √10 ≈ 3.16</div>
+                    </div>
+                    
+                    <div class="step">
+                        <strong>Hapi 3:</strong> Kulmi C duhet të jetë në distancë √10 nga A dhe B. Duke përdorur gjeometrinë, gjejmë C ≈ (3.5, 1.4, 0).
+                    </div>
+                    
+                    <div class="step">
+                        <strong>Hapi 4:</strong> Baza e sipërme fitohet duke zhvendosur bazën e poshtme me vektor: AA̅ = (6-1, 6-3, 5-0) = (5, 3, 5).
+                    </div>
+                    
+                    <div class="step">
+                        <strong>Hapi 5:</strong> Koordinatat e bazës së sipërme:
+                        <div class="formula">Ā(6,6,5), B̄ = B + AA̅ = (9,7,5), C̄ = C + AA̅ ≈ (8.5,4.4,5)</div>
+                    </div>
+                    
+                    <div class="step">
+                        <strong>Hapi 6:</strong> Vizatojmë dy bazat dhe i lidhim kulmet përkatëse për të formuar prizmin e pjerrët.
+                    </div>
+                </div>
+                
+                <div class="note">
+                    <strong>Shënim:</strong> Prizma është e pjerrët sepse vektori AA̅ nuk është pingul me bazën (ka komponente x dhe y jo-zero).
+                </div>
+                
+                <div class="drawing-container">
+                    <svg viewBox="0 0 600 400" xmlns="http://www.w3.org/2000/svg">
+                        <!-- Defs for markers -->
+                        <defs>
+                            <marker id="axis-arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
+                                <polygon points="0 0, 8 4, 0 8" class="axis-arrow"/>
+                            </marker>
+                            <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="5" refY="5" orient="auto">
+                                <polygon points="0 0, 10 5, 0 10" fill="#555"/>
+                            </marker>
+                            <marker id="arrowhead2" markerWidth="10" markerHeight="10" refX="5" refY="5" orient="auto-start-reverse">
+                                <polygon points="0 0, 10 5, 0 10" fill="#555"/>
+                            </marker>
+                        </defs>
+                        
+                        <!-- Ground line (x-axis) - horizontal divider with arrow -->
+                        <line x1="10" y1="200" x2="590" y2="200" class="axis-line" marker-end="url(#axis-arrow)"/>
+                        <text x="290" y="215" font-size="11" fill="#333" font-weight="bold">x</text>
+                        
+                        <!-- Vertical divider (z-axis) with arrow -->
+                        <line x1="300" y1="390" x2="300" y2="10" class="separator-line" marker-end="url(#axis-arrow)"/>
+                        <text x="305" y="25" font-size="11" fill="#666" font-weight="bold">z</text>
+                        
+                        <!-- Origin point -->
+                        <circle cx="300" cy="200" r="4" class="origin-point"/>
+                        <text x="305" y="195" font-size="10" fill="#e74c3c" font-weight="bold">O</text>
+                        
+                        <!-- Labels -->
+                        <text x="10" y="390" class="grid-label" font-weight="bold">π₁ (horizontal)</text>
+                        <text x="480" y="30" class="grid-label" font-weight="bold">π₂ (frontal)</text>
+                        
+                        <!-- Projection on π₁ (horizontal) -->
+                        <g transform="translate(100, 280)">
+                            <!-- Lower base - visible edges -->
+                            <polygon points="10,30 40,40 35,14" fill="rgba(52,152,219,0.15)" class="visible-edge"/>
+                            <!-- Upper base projection - visible edges -->
+                            <polygon points="60,60 90,70 85,44" fill="rgba(46,204,113,0.15)" class="visible-edge"/>
+                            <!-- Lateral edges - visible -->
+                            <line x1="10" y1="30" x2="60" y2="60" class="visible-edge"/>
+                            <line x1="40" y1="40" x2="90" y2="70" class="visible-edge"/>
+                            <line x1="35" y1="14" x2="85" y2="44" class="visible-edge"/>
+                            
+                            <!-- Lower base vertices with numbering -->
+                            <circle cx="10" cy="30" r="3" fill="#e74c3c"/>
+                            <text x="-3" y="28" font-size="11" fill="#e74c3c" font-weight="bold">A</text>
+                            <text x="12" y="33" class="point-number">1</text>
+                            <text x="-10" y="45" class="coordinate-label">(1,3,0)</text>
+                            
+                            <circle cx="40" cy="40" r="3" fill="#e74c3c"/>
+                            <text x="43" y="38" font-size="11" fill="#e74c3c" font-weight="bold">B</text>
+                            <text x="42" y="50" class="point-number">2</text>
+                            <text x="30" y="58" class="coordinate-label">(4,4,0)</text>
+                            
+                            <circle cx="35" cy="14" r="3" fill="#e74c3c"/>
+                            <text x="38" y="10" font-size="11" fill="#e74c3c" font-weight="bold">C</text>
+                            <text x="37" y="23" class="point-number">3</text>
+                            
+                            <!-- Upper base vertices with numbering -->
+                            <circle cx="60" cy="60" r="3" fill="#27ae60"/>
+                            <text x="63" y="58" font-size="11" fill="#27ae60" font-weight="bold">Ā</text>
+                            <text x="62" y="70" class="point-number">4</text>
+                            <text x="50" y="78" class="coordinate-label">(6,6,5)</text>
+                            
+                            <circle cx="90" cy="70" r="3" fill="#27ae60"/>
+                            <text x="93" y="68" font-size="11" fill="#27ae60" font-weight="bold">B̄</text>
+                            <text x="92" y="80" class="point-number">5</text>
+                            
+                            <circle cx="85" cy="44" r="3" fill="#27ae60"/>
+                            <text x="88" y="40" font-size="11" fill="#27ae60" font-weight="bold">C̄</text>
+                            <text x="87" y="53" class="point-number">6</text>
+                            
+                            <!-- Projection lines to π₂ -->
+                            <line x1="10" y1="30" x2="10" y2="-200" class="projection-line"/>
+                            <line x1="40" y1="40" x2="40" y2="-200" class="projection-line"/>
+                            <line x1="60" y1="60" x2="60" y2="-200" class="projection-line"/>
+                            <line x1="90" y1="70" x2="90" y2="-200" class="projection-line"/>
+                        </g>
+                        
+                        <!-- Projection on π₂ (frontal) -->
+                        <g transform="translate(400, 280)">
+                            <!-- Lower base (line on z=0) - visible -->
+                            <line x1="-40" y1="0" x2="10" y2="0" class="visible-edge"/>
+                            <!-- Upper base (line on z=5) - visible -->
+                            <line x1="10" y1="-100" x2="60" y2="-100" class="visible-edge"/>
+                            <!-- Lateral edges - visible -->
+                            <line x1="-40" y1="0" x2="10" y2="-100" class="visible-edge"/>
+                            <line x1="10" y1="0" x2="60" y2="-100" class="visible-edge"/>
+                            <!-- Hidden edge -->
+                            <line x1="-15" y1="0" x2="35" y2="-100" class="hidden-edge"/>
+                            
+                            <!-- Lower base vertices with numbering -->
+                            <circle cx="-40" cy="0" r="3" fill="#e74c3c"/>
+                            <text x="-50" y="3" class="point-number">1'</text>
+                            
+                            <circle cx="10" cy="0" r="3" fill="#e74c3c"/>
+                            <text x="15" y="3" class="point-number">2'</text>
+                            <text x="-75" y="15" class="coordinate-label">z=0</text>
+                            
+                            <!-- Upper base vertices with numbering -->
+                            <circle cx="10" cy="-100" r="3" fill="#27ae60"/>
+                            <text x="15" y="-95" class="point-number">4'</text>
+                            
+                            <circle cx="60" cy="-100" r="3" fill="#27ae60"/>
+                            <text x="65" y="-95" class="point-number">5'</text>
+                            <text x="15" y="-110" class="coordinate-label">z=5</text>
+                            
+                            <!-- Height dimension -->
+                            <line x1="75" y1="0" x2="75" y2="-5" class="dimension-line"/>
+                            <line x1="75" y1="-95" x2="75" y2="-100" class="dimension-line"/>
+                            <line x1="75" y1="0" x2="75" y2="-100" class="dimension-line" marker-end="url(#arrowhead)" marker-start="url(#arrowhead2)"/>
+                            <text x="80" y="-45" font-size="10" fill="#555" font-weight="bold">h=5</text>
+                        </g>
+                    </svg>
+                </div>
+            </div>
+        </div>
+
+        <!-- Problem 4 -->
+        <div class="problem">
+            <h2>Problemi 4</h2>
+            <div class="problem-statement">
+                Të përcaktohen tri projeksionet normale të kubit bazat e të cilit janë në rrafshin π₁, me dy kulmet e dhëna A(5,1,0) dhe B(2,2,0).
+            </div>
+            
+            <div class="solution">
+                <h3>Zgjidhja:</h3>
+                
+                <div class="steps">
+                    <div class="step">
+                        <strong>Hapi 1:</strong> Baza e poshtme e kubit ndodhet në π₁. Kemi dy kulme: A(5,1,0) dhe B(2,2,0).
+                    </div>
+                    
+                    <div class="step">
+                        <strong>Hapi 2:</strong> Gjejmë anën e kubit:
+                        <div class="formula">a = |AB| = √[(5-2)² + (1-2)²] = √[9 + 1] = √10 ≈ 3.16</div>
+                    </div>
+                    
+                    <div class="step">
+                        <strong>Hapi 3:</strong> Vektori AB = (-3, 1, 0). Për të gjetur kulmet e tjerë, formojmë vektor pingul: BC = (1, 3, 0) (i rrotulluar 90°).
+                    </div>
+                    
+                    <div class="step">
+                        <strong>Hapi 4:</strong> Kulmet e bazës së poshtme:
+                        <div class="formula">
+                        A(5,1,0), B(2,2,0)<br>
+                        C = B + BC = (3,5,0), D = A + BC = (6,4,0)
+                        </div>
+                    </div>
+                    
+                    <div class="step">
+                        <strong>Hapi 5:</strong> Baza e sipërme fitohet duke shtuar lartësinë h = √10 në drejtim z:
+                        <div class="formula">A'(5,1,√10), B'(2,2,√10), C'(3,5,√10), D'(6,4,√10)</div>
+                    </div>
+                    
+                    <div class="step">
+                        <strong>Hapi 6:</strong> Vizatojmë tri projekionet: π₁ (horizontal), π₂ (frontal), π₃ (profil).
+                    </div>
+                </div>
+                
+                <div class="drawing-container">
+                    <svg viewBox="0 0 700 450" xmlns="http://www.w3.org/2000/svg">
+                        <!-- Defs for markers -->
+                        <defs>
+                            <marker id="axis-arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
+                                <polygon points="0 0, 8 4, 0 8" class="axis-arrow"/>
+                            </marker>
+                            <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="5" refY="5" orient="auto">
+                                <polygon points="0 0, 10 5, 0 10" fill="#555"/>
+                            </marker>
+                            <marker id="arrowhead2" markerWidth="10" markerHeight="10" refX="5" refY="5" orient="auto-start-reverse">
+                                <polygon points="0 0, 10 5, 0 10" fill="#555"/>
+                            </marker>
+                        </defs>
+                        
+                        <!-- Ground line (x-axis) - horizontal divider with arrow -->
+                        <line x1="10" y1="300" x2="690" y2="300" class="axis-line" marker-end="url(#axis-arrow)"/>
+                        <text x="220" y="315" font-size="11" fill="#333" font-weight="bold">x</text>
+                        <!-- Vertical axis (y-axis) - main separator with arrow -->
+                        <line x1="450" y1="440" x2="450" y2="10" class="axis-line" marker-end="url(#axis-arrow)"/>
+                        <text x="455" y="25" font-size="11" fill="#333" font-weight="bold">y</text>
+                        <!-- Vertical divider (z-axis) - separator between π₁ and π₂ with arrow -->
+                        <line x1="225" y1="440" x2="225" y2="10" class="separator-line" marker-end="url(#axis-arrow)"/>
+                        <text x="230" y="25" font-size="11" fill="#666" font-weight="bold">z</text>
+                        
+                        <!-- Origin points -->
+                        <circle cx="225" cy="300" r="4" class="origin-point"/>
+                        <text x="230" y="295" font-size="10" fill="#e74c3c" font-weight="bold">O</text>
+                        <circle cx="450" cy="300" r="4" class="origin-point"/>
+                        <text x="455" y="295" font-size="10" fill="#e74c3c" font-weight="bold">O</text>
+                        
+                        <!-- π₁ - Horizontal projection (bottom left) -->
+                        <g transform="translate(100, 360)">
+                            <text x="-30" y="40" font-size="13" fill="#2980b9" font-weight="bold">π₁</text>
+                            <!-- Base square - visible edges -->
+                            <polygon points="50,10 20,20 30,50 60,40" fill="rgba(52,152,219,0.15)" class="visible-edge"/>
+                            <!-- Vertices -->
+                            <circle cx="50" cy="10" r="3" fill="#e74c3c"/>
+                            <circle cx="20" cy="20" r="3" fill="#e74c3c"/>
+                            <circle cx="30" cy="50" r="3" fill="#e74c3c"/>
+                            <circle cx="60" cy="40" r="3" fill="#e74c3c"/>
+                            <!-- Labels -->
+                            <text x="53" y="8" font-size="10" fill="#e74c3c" font-weight="bold">A</text>
+                            <text x="10" y="18" font-size="10" fill="#e74c3c" font-weight="bold">B</text>
+                            <text x="20" y="65" font-size="10" fill="#e74c3c" font-weight="bold">C</text>
+                            <text x="63" y="38" font-size="10" fill="#e74c3c" font-weight="bold">D</text>
+                            <!-- Projection lines to π₂ -->
+                            <line x1="50" y1="10" x2="50" y2="-300" class="projection-line"/>
+                            <line x1="20" y1="20" x2="20" y2="-300" class="projection-line"/>
+                            <line x1="30" y1="50" x2="30" y2="-300" class="projection-line"/>
+                            <line x1="60" y1="40" x2="60" y2="-300" class="projection-line"/>
+                        </g>
+                        
+                        <!-- π₂ - Frontal projection (middle) -->
+                        <g transform="translate(320, 280)">
+                            <text x="-50" y="-70" font-size="13" fill="#2980b9" font-weight="bold">π₂</text>
+                            <!-- Cube in frontal view - visible edges -->
+                            <rect x="-20" y="-43" width="70" height="63" fill="rgba(52,152,219,0.15)" class="visible-edge"/>
+                            <!-- Hidden vertical edges -->
+                            <line x1="10" y1="20" x2="10" y2="-43" class="hidden-edge"/>
+                            <line x1="35" y1="20" x2="35" y2="-43" class="hidden-edge"/>
+                            <!-- Vertices -->
+                            <circle cx="-20" cy="20" r="2.5" fill="#e74c3c"/>
+                            <circle cx="50" cy="20" r="2.5" fill="#e74c3c"/>
+                            <circle cx="-20" cy="-43" r="2.5" fill="#27ae60"/>
+                            <circle cx="50" cy="-43" r="2.5" fill="#27ae60"/>
+                            <!-- Labels -->
+                            <text x="-40" y="25" font-size="10" fill="#e74c3c" font-weight="bold">A',B'</text>
+                            <text x="-50" y="-45" font-size="10" fill="#27ae60" font-weight="bold">A'',B''</text>
+                            <!-- Height dimension -->
+                            <line x1="65" y1="20" x2="65" y2="15" class="dimension-line"/>
+                            <line x1="65" y1="-38" x2="65" y2="-43" class="dimension-line"/>
+                            <line x1="65" y1="20" x2="65" y2="-43" class="dimension-line" marker-end="url(#arrowhead)" marker-start="url(#arrowhead2)"/>
+                            <text x="70" y="-8" font-size="9" fill="#555" font-weight="bold">a=√10</text>
+                            <!-- Projection lines to π₃ -->
+                            <line x1="50" y1="20" x2="450" y2="20" class="projection-line"/>
+                            <line x1="50" y1="-43" x2="450" y2="-43" class="projection-line"/>
+                            <line x1="-20" y1="20" x2="450" y2="20" class="projection-line"/>
+                            <line x1="-20" y1="-43" x2="450" y2="-43" class="projection-line"/>
+                        </g>
+                        
+                        <!-- π₃ - Profile projection (right) -->
+                        <g transform="translate(550, 280)">
+                            <text x="-50" y="-70" font-size="13" fill="#2980b9" font-weight="bold">π₃</text>
+                            <!-- Cube in profile view - visible edges -->
+                            <rect x="-30" y="-43" width="63" height="63" fill="rgba(155,89,182,0.15)" class="visible-edge"/>
+                            <!-- Hidden edges -->
+                            <line x1="-30" y1="-10" x2="33" y2="-10" class="hidden-edge"/>
+                            <line x1="0" y1="-43" x2="0" y2="20" class="hidden-edge"/>
+                            <!-- Vertices -->
+                            <circle cx="-30" cy="20" r="2.5" fill="#e74c3c"/>
+                            <circle cx="33" cy="20" r="2.5" fill="#e74c3c"/>
+                            <circle cx="-30" cy="-43" r="2.5" fill="#27ae60"/>
+                            <circle cx="33" cy="-43" r="2.5" fill="#27ae60"/>
+                        </g>
+                    </svg>
+                </div>
+            </div>
+        </div>
+
+        <!-- Problem 5 -->
+        <div class="problem">
+            <h2>Problemi 5</h2>
+            <div class="problem-statement">
+                Të vizatohen të tri projeksionet e konit të drejtë bazat e të cilit janë në rrafshin π₂, me qendrën e bazës Q(5,0,4), rreze r=3 njësi dhe lartësi h=6 njësi.
+            </div>
+            
+            <div class="solution">
+                <h3>Zgjidhja:</h3>
+                
+                <div class="steps">
+                    <div class="step">
+                        <strong>Hapi 1:</strong> Baza e konit ndodhet në rrafshin π₂ (frontal, y = 0), me qendër Q(5,0,4).
+                    </div>
+                    
+                    <div class="step">
+                        <strong>Hapi 2:</strong> Rrezja e bazës është r = 3, pra baza është rreth me qendër Q dhe rreze 3 në rrafshin π₂.
+                    </div>
+                    
+                    <div class="step">
+                        <strong>Hapi 3:</strong> Koni është i drejtë, pra lartësia h = 6 është pingul me π₂, në drejtim të aksit y. Kulmi K ka koordinata:
+                        <div class="formula">K = Q + (0, h, 0) = (5, 6, 4)</div>
+                    </div>
+                    
+                    <div class="step">
+                        <strong>Hapi 4:</strong> Në projekcionin frontal (π₂): baza shihet si rreth me rreze r=3, dhe kulmi K është në qendër.
+                    </div>
+                    
+                    <div class="step">
+                        <strong>Hapi 5:</strong> Në projekcionin horizontal (π₁): koni shihet si trekëndësh me bazë 2r dhe lartësi h.
+                    </div>
+                    
+                    <div class="step">
+                        <strong>Hapi 6:</strong> Në projekcionin profil (π₃): koni shihet gjithashtu si trekëndësh.
+                    </div>
+                </div>
+                
+                <div class="drawing-container">
+                    <svg viewBox="0 0 700 400" xmlns="http://www.w3.org/2000/svg">
+                        <!-- Ground line (x-axis) - horizontal divider -->
+                        <line x1="0" y1="250" x2="700" y2="250" class="axis-line"/>
+                        <text x="245" y="265" font-size="11" fill="#333" font-weight="bold">x</text>
+                        <!-- Vertical axis (y-axis) - main separator -->
+                        <line x1="500" y1="0" x2="500" y2="400" class="axis-line"/>
+                        <text x="505" y="200" font-size="11" fill="#333" font-weight="bold">y</text>
+                        <!-- Vertical divider (z-axis) - separator between π₁ and π₂ -->
+                        <line x1="250" y1="0" x2="250" y2="400" class="separator-line"/>
+                        
+                        <!-- π₁ - Horizontal projection -->
+                        <g transform="translate(100, 300)">
+                            <text x="-50" y="60" font-size="13" fill="#2980b9" font-weight="bold">π₁</text>
+                            <!-- Triangle representing cone from top - visible edges -->
+                            <line x1="0" y1="-60" x2="50" y2="0" class="visible-edge"/>
+                            <line x1="0" y1="-60" x2="50" y2="-120" class="visible-edge"/>
+                            <line x1="50" y1="0" x2="50" y2="-120" class="visible-edge"/>
+                            <!-- Base circle outline - construction -->
+                            <ellipse cx="0" cy="-60" rx="3" ry="60" fill="none" class="construction-line"/>
+                            <!-- Center and apex -->
+                            <circle cx="0" cy="-60" r="3" fill="#e74c3c"/>
+                            <circle cx="50" cy="-60" r="3" fill="#27ae60"/>
+                            <!-- Labels -->
+                            <text x="-20" y="-55" font-size="11" fill="#e74c3c" font-weight="bold">Q</text>
+                            <text x="55" y="-55" font-size="11" fill="#27ae60" font-weight="bold">K</text>
+                            <!-- Height dimension -->
+                            <line x1="0" y1="-145" x2="5" y2="-145" class="dimension-line"/>
+                            <line x1="45" y1="-145" x2="50" y2="-145" class="dimension-line"/>
+                            <line x1="0" y1="-145" x2="50" y2="-145" class="dimension-line" marker-end="url(#arrowhead)" marker-start="url(#arrowhead2)"/>
+                            <text x="15" y="-150" font-size="10" fill="#555" font-weight="bold">h=6</text>
+                            <!-- Radius dimension -->
+                            <line x1="0" y1="-60" x2="0" y2="0" class="construction-line"/>
+                            <text x="-25" y="-25" font-size="10" fill="#555" font-weight="bold">r=3</text>
+                            <!-- Projection lines to π₂ -->
+                            <line x1="0" y1="-60" x2="0" y2="-250" class="projection-line"/>
+                            <line x1="50" y1="-60" x2="50" y2="-250" class="projection-line"/>
+                            <line x1="0" y1="0" x2="0" y2="-250" class="projection-line"/>
+                            <line x1="0" y1="-120" x2="0" y2="-250" class="projection-line"/>
+                        </g>
+                        
+                        <!-- π₂ - Frontal projection -->
+                        <g transform="translate(350, 250)">
+                            <text x="-70" y="-90" font-size="13" fill="#2980b9" font-weight="bold">π₂</text>
+                            <!-- Circle base - visible edge -->
+                            <circle cx="0" cy="0" r="60" fill="rgba(52,152,219,0.1)" class="visible-edge"/>
+                            <!-- Center -->
+                            <circle cx="0" cy="0" r="3" fill="#e74c3c"/>
+                            <text x="-20" y="5" font-size="11" fill="#e74c3c" font-weight="bold">Q'</text>
+                            <!-- Radius dimension -->
+                            <line x1="0" y1="0" x2="0" y2="-60" class="construction-line"/>
+                            <line x1="0" y1="-65" x2="0" y2="-70" class="dimension-line"/>
+                            <line x1="0" y1="-67" x2="0" y2="-60" class="dimension-line" marker-end="url(#arrowhead)"/>
+                            <text x="5" y="-65" font-size="9" fill="#555" font-weight="bold">r=3</text>
+                            <!-- Projection lines to π₃ -->
+                            <line x1="60" y1="0" x2="500" y2="0" class="projection-line"/>
+                            <line x1="-60" y1="0" x2="500" y2="0" class="projection-line"/>
+                            <line x1="0" y1="0" x2="500" y2="0" class="projection-line"/>
+                        </g>
+                        
+                        <!-- π₃ - Profile projection -->
+                        <g transform="translate(580, 300)">
+                            <text x="-70" y="60" font-size="13" fill="#2980b9" font-weight="bold">π₃</text>
+                            <!-- Triangle - visible edges -->
+                            <line x1="0" y1="-60" x2="-60" y2="0" class="visible-edge"/>
+                            <line x1="0" y1="-60" x2="-60" y2="-120" class="visible-edge"/>
+                            <line x1="-60" y1="0" x2="-60" y2="-120" class="visible-edge"/>
+                            <!-- Hidden height line -->
+                            <line x1="-60" y1="-60" x2="0" y2="-60" class="hidden-edge"/>
+                            <!-- Base circle as ellipse -->
+                            <ellipse cx="-60" cy="-60" rx="60" ry="3" fill="none" class="construction-line"/>
+                            <!-- Center and apex -->
+                            <circle cx="-60" cy="-60" r="3" fill="#e74c3c"/>
+                            <circle cx="0" cy="-60" r="3" fill="#27ae60"/>
+                            <!-- Labels -->
+                            <text x="-80" y="-55" font-size="11" fill="#e74c3c" font-weight="bold">Q''</text>
+                            <text x="5" y="-55" font-size="11" fill="#27ae60" font-weight="bold">K''</text>
+                        </g>
+                    </svg>
+                </div>
+            </div>
+        </div>
+
+        <!-- Problem 6 -->
+        <div class="problem">
+            <h2>Problemi 6</h2>
+            <div class="problem-statement">
+                Janë dhënë pikat Q(4,4,1) dhe K(6,3,4). Të konstruktohet projeksioni i konit bazat e të cilit janë në një rrafsh paralel me π₁. Q është qendra e bazës, K është kulmi, rrezja e bazës r=3 njësi, dhe projeksioni i dytë M'' i mbeshtjelleses të konit është dhënë. Të përcaktohet M' dhe projeksioni i konit.
+            </div>
+            
+            <div class="solution">
+                <h3>Zgjidhja:</h3>
+                
+                <div class="steps">
+                    <div class="step">
+                        <strong>Hapi 1:</strong> Baza e konit është në rrafsh paralel me π₁, pra z = 1 (konstantë). Qendra është Q(4,4,1).
+                    </div>
+                    
+                    <div class="step">
+                        <strong>Hapi 2:</strong> Kulmi i konit është K(6,3,4). Aksi i konit është segmenti QK.
+                    </div>
+                    
+                    <div class="step">
+                        <strong>Hapi 3:</strong> Vektori aksor: QK = (2, -1, 3). Lartësia e konit:
+                        <div class="formula">h = |QK| = √(4 + 1 + 9) = √14 ≈ 3.74</div>
+                    </div>
+                    
+                    <div class="step">
+                        <strong>Hapi 4:</strong> Në projekcionin horizontal (π₁), baza shihet si rreth me rreze r=3 dhe qendër në (4,4).
+                    </div>
+                    
+                    <div class="step">
+                        <strong>Hapi 5:</strong> Gjeneratori (mbeshtjellësja) lidh një pikë M në perimetrin e bazës me kulmin K. Për të gjetur M', përdorim kushtin që M ndodhet në rreth me qendër Q dhe rreze r=3.
+                    </div>
+                    
+                    <div class="step">
+                        <strong>Hapi 6:</strong> Duke ditur M'', proijeksionojmë për të gjetur M' duke përdorur vijat projektuese.
+                    </div>
+                </div>
+                
+                <div class="drawing-container">
+                    <svg viewBox="0 0 600 400" xmlns="http://www.w3.org/2000/svg">
+                        <!-- Ground line (x-axis) - horizontal divider -->
+                        <line x1="0" y1="200" x2="600" y2="200" class="axis-line"/>
+                        <text x="290" y="215" font-size="11" fill="#333" font-weight="bold">x</text>
+                        
+                        <!-- Vertical divider (z-axis) -->
+                        <line x1="300" y1="0" x2="300" y2="400" class="separator-line"/>
+                        
+                        <!-- Labels -->
+                        <text x="10" y="390" class="grid-label" font-weight="bold">π₁ (horizontal)</text>
+                        <text x="480" y="30" class="grid-label" font-weight="bold">π₂ (frontal)</text>
+                        
+                        <!-- π₁ - Horizontal projection -->
+                        <g transform="translate(120, 260)">
+                            <!-- Base circle - visible edge -->
+                            <circle cx="40" cy="-40" r="60" fill="rgba(52,152,219,0.1)" class="visible-edge"/>
+                            <!-- Construction lines -->
+                            <line x1="40" y1="-40" x2="60" y2="-30" class="construction-line"/>
+                            <line x1="40" y1="-40" x2="100" y2="-40" class="construction-line"/>
+                            <!-- Generator line - visible edge (highlighted) -->
+                            <line x1="60" y1="-30" x2="100" y2="-40" stroke="#e67e22" stroke-width="3" fill="none"/>
+                            <!-- Center Q -->
+                            <circle cx="40" cy="-40" r="3" fill="#e74c3c"/>
+                            <!-- Apex K projection -->
+                            <circle cx="60" cy="-30" r="3" fill="#27ae60"/>
+                            <!-- Generator point M on circle -->
+                            <circle cx="100" cy="-40" r="3" fill="#9b59b6"/>
+                            <!-- Labels -->
+                            <text x="25" y="-35" font-size="11" fill="#e74c3c" font-weight="bold">Q</text>
+                            <text x="63" y="-25" font-size="11" fill="#27ae60" font-weight="bold">K</text>
+                            <text x="105" y="-35" font-size="11" fill="#9b59b6" font-weight="bold">M</text>
+                            <!-- Radius dimension -->
+                            <text x="60" y="-48" font-size="10" fill="#555" font-weight="bold">r=3</text>
+                            <!-- Projection lines to π₂ -->
+                            <line x1="40" y1="-40" x2="40" y2="-200" class="projection-line"/>
+                            <line x1="60" y1="-30" x2="60" y2="-200" class="projection-line"/>
+                            <line x1="100" y1="-40" x2="100" y2="-200" class="projection-line"/>
+                            <line x1="-20" y1="-40" x2="-20" y2="-200" class="projection-line"/>
+                        </g>
+                        
+                        <!-- π₂ - Frontal projection -->
+                        <g transform="translate(420, 280)">
+                            <!-- Base ellipse - visible -->
+                            <ellipse cx="0" cy="0" rx="60" ry="10" fill="rgba(52,152,219,0.1)" class="visible-edge"/>
+                            <!-- Cone outline - visible edges -->
+                            <line x1="-60" y1="0" x2="20" y2="-74" class="visible-edge"/>
+                            <line x1="60" y1="0" x2="20" y2="-74" class="visible-edge"/>
+                            <!-- Hidden axis -->
+                            <line x1="0" y1="0" x2="20" y2="-74" class="hidden-edge"/>
+                            <!-- Generator M' - highlighted -->
+                            <line x1="60" y1="0" x2="20" y2="-74" stroke="#e67e22" stroke-width="3" fill="none"/>
+                            <!-- Center Q' -->
+                            <circle cx="0" cy="0" r="3" fill="#e74c3c"/>
+                            <!-- Apex K' -->
+                            <circle cx="20" cy="-74" r="3" fill="#27ae60"/>
+                            <!-- Generator M' -->
+                            <circle cx="60" cy="0" r="3" fill="#9b59b6"/>
+                            <!-- Labels -->
+                            <text x="-20" y="5" font-size="11" fill="#e74c3c" font-weight="bold">Q'</text>
+                            <text x="25" y="-78" font-size="11" fill="#27ae60" font-weight="bold">K'</text>
+                            <text x="65" y="5" font-size="11" fill="#9b59b6" font-weight="bold">M'</text>
+                            <!-- Height dimension -->
+                            <line x1="-75" y1="0" x2="-75" y2="-5" class="dimension-line"/>
+                            <line x1="-75" y1="-69" x2="-75" y2="-74" class="dimension-line"/>
+                            <line x1="-75" y1="0" x2="-75" y2="-74" class="dimension-line" marker-end="url(#arrowhead)" marker-start="url(#arrowhead2)"/>
+                            <text x="-105" y="-32" font-size="9" fill="#555" font-weight="bold">h=√14</text>
+                        </g>
+                    </svg>
+                </div>
+            </div>
+        </div>
+
+        <!-- Problem 7 -->
+        <div class="problem">
+            <h2>Problemi 7</h2>
+            <div class="problem-statement">
+                Në rrafshin paralel me π₂ në distancë 3cm, është baza e konit të drejtë i cili prek rrafshin π₁. Kulmi i konit është në rrafshin π₂, me r=h. Të konstruktohen projeksionet e konit.
+            </div>
+            
+            <div class="solution">
+                <h3>Zgjidhja:</h3>
+                
+                <div class="steps">
+                    <div class="step">
+                        <strong>Hapi 1:</strong> Baza e konit është në rrafsh paralel me π₂ në distancë 3cm, pra në rrafshin y = 3.
+                    </div>
+                    
+                    <div class="step">
+                        <strong>Hapi 2:</strong> Koni prek π₁, kjo do të thotë që gjeneratori më i ulët i konit takon z = 0.
+                    </div>
+                    
+                    <div class="step">
+                        <strong>Hapi 3:</strong> Kulmi K ndodhet në π₂ (y = 0). Kushti r = h do të thotë që rrezja dhe lartësia janë të barabarta.
+                    </div>
+                    
+                    <div class="step">
+                        <strong>Hapi 4:</strong> Nëse qendra e bazës është Q(x, 3, z₀), dhe rrezja r, atëherë koni prek π₁ kur z₀ - r = 0, pra z₀ = r.
+                    </div>
+                    
+                    <div class="step">
+                        <strong>Hapi 5:</strong> Kulmi K është në (x, 0, z₀). Lartësia h = 3 (distanca nga y=3 në y=0). Prandaj r = h = 3.
+                    </div>
+                    
+                    <div class="step">
+                        <strong>Hapi 6:</strong> Qendra e bazës: Q(0, 3, 3), Kulmi: K(0, 0, 3), Rreze r = 3.
+                    </div>
+                </div>
+                
+                <div class="note">
+                    <strong>Shënim:</strong> Kushti r=h përcakton gjeometrinë e konit. Koni formon një kënd 45° me aksin.
+                </div>
+                
+                <div class="drawing-container">
+                    <svg viewBox="0 0 600 400" xmlns="http://www.w3.org/2000/svg">
+                        <!-- Ground line (x-axis) - horizontal divider -->
+                        <line x1="0" y1="200" x2="600" y2="200" class="axis-line"/>
+                        <text x="290" y="215" font-size="11" fill="#333" font-weight="bold">x</text>
+                        
+                        <!-- Vertical divider (z-axis) -->
+                        <line x1="300" y1="0" x2="300" y2="400" class="separator-line"/>
+                        
+                        <!-- Labels -->
+                        <text x="10" y="390" class="grid-label" font-weight="bold">π₁ (horizontal)</text>
+                        <text x="480" y="30" class="grid-label" font-weight="bold">π₂ (frontal)</text>
+                        
+                        <!-- π₁ - Horizontal projection -->
+                        <g transform="translate(120, 280)">
+                            <!-- Triangle - visible edges -->
+                            <line x1="-60" y1="-30" x2="0" y2="-90" class="visible-edge"/>
+                            <line x1="60" y1="-30" x2="0" y2="-90" class="visible-edge"/>
+                            <line x1="-60" y1="-30" x2="60" y2="-30" class="visible-edge"/>
+                            <!-- Tangent circle to π₁ - construction -->
+                            <circle cx="0" cy="-30" r="60" fill="rgba(52,152,219,0.1)" class="construction-line"/>
+                            <!-- Height line - hidden -->
+                            <line x1="0" y1="-30" x2="0" y2="-90" class="hidden-edge"/>
+                            <!-- Center Q -->
+                            <circle cx="0" cy="-30" r="3" fill="#e74c3c"/>
+                            <!-- Apex K -->
+                            <circle cx="0" cy="-90" r="3" fill="#27ae60"/>
+                            <!-- Labels -->
+                            <text x="-18" y="-25" font-size="11" fill="#e74c3c" font-weight="bold">Q</text>
+                            <text x="8" y="-95" font-size="11" fill="#27ae60" font-weight="bold">K</text>
+                            <!-- Height dimension -->
+                            <line x1="-75" y1="-30" x2="-75" y2="-35" class="dimension-line"/>
+                            <line x1="-75" y1="-85" x2="-75" y2="-90" class="dimension-line"/>
+                            <line x1="-75" y1="-30" x2="-75" y2="-90" class="dimension-line" marker-end="url(#arrowhead)" marker-start="url(#arrowhead2)"/>
+                            <text x="-100" y="-55" font-size="10" fill="#555" font-weight="bold">h=3</text>
+                            <!-- Radius dimension -->
+                            <line x1="0" y1="-30" x2="60" y2="-30" class="construction-line"/>
+                            <text x="20" y="-35" font-size="10" fill="#555" font-weight="bold">r=3</text>
+                            <!-- Projection lines to π₂ -->
+                            <line x1="0" y1="-30" x2="0" y2="-200" class="projection-line"/>
+                            <line x1="0" y1="-90" x2="0" y2="-200" class="projection-line"/>
+                            <line x1="60" y1="-30" x2="60" y2="-200" class="projection-line"/>
+                            <line x1="-60" y1="-30" x2="-60" y2="-200" class="projection-line"/>
+                        </g>
+                        
+                        <!-- π₂ - Frontal projection -->
+                        <g transform="translate(420, 280)">
+                            <!-- Circle (base seen from side) - visible edge -->
+                            <circle cx="0" cy="0" r="60" fill="rgba(52,152,219,0.1)" class="visible-edge"/>
+                            <!-- Center Q' -->
+                            <circle cx="0" cy="0" r="3" fill="#e74c3c"/>
+                            <text x="-20" y="5" font-size="11" fill="#e74c3c" font-weight="bold">Q'</text>
+                            <!-- Radius construction -->
+                            <line x1="0" y1="0" x2="60" y2="0" class="construction-line"/>
+                            <line x1="0" y1="0" x2="0" y2="60" class="construction-line"/>
+                            <!-- Radius dimension -->
+                            <line x1="0" y1="70" x2="5" y2="70" class="dimension-line"/>
+                            <line x1="55" y1="70" x2="60" y2="70" class="dimension-line"/>
+                            <line x1="0" y1="70" x2="60" y2="70" class="dimension-line" marker-end="url(#arrowhead)" marker-start="url(#arrowhead2)"/>
+                            <text x="22" y="85" font-size="10" fill="#555" font-weight="bold">r=3</text>
+                            <!-- π₁ tangent line -->
+                            <line x1="-90" y1="60" x2="90" y2="60" stroke="#e74c3c" stroke-width="2" stroke-dasharray="5,5"/>
+                            <text x="-120" y="65" font-size="11" fill="#e74c3c" font-weight="bold">π₁ (z=0)</text>
+                            <!-- Distance to π₂ -->
+                            <line x1="-90" y1="0" x2="-100" y2="0" class="dimension-line"/>
+                            <line x1="-90" y1="60" x2="-100" y2="60" class="dimension-line"/>
+                            <line x1="-95" y1="0" x2="-95" y2="60" class="dimension-line" marker-end="url(#arrowhead)" marker-start="url(#arrowhead2)"/>
+                            <text x="-130" y="35" font-size="9" fill="#555" font-weight="bold">3cm</text>
+                        </g>
+                    </svg>
+                </div>
+            </div>
+        </div>
+
+        <!-- Problem 8 -->
+        <div class="problem">
+            <h2>Problemi 8</h2>
+            <div class="problem-statement">
+                Janë dhënë pikat S(3,1,2) dhe S̅(6,6,4) të konstruktohet projeksioni i cilindrit bazat e të cilit janë paralel me π₂. S,S̅- qendrat e bazave dhe r=2.
+            </div>
+            
+            <div class="solution">
+                <h3>Zgjidhja:</h3>
+                
+                <div class="steps">
+                    <div class="step">
+                        <strong>Hapi 1:</strong> Bazat e cilindrit janë paralele me π₂, pra janë në rrafshine y = 1 dhe y = 6.
+                    </div>
+                    
+                    <div class="step">
+                        <strong>Hapi 2:</strong> Qendrat e bazave: S(3,1,2) dhe S̅(6,6,4). Rrezja r = 2.
+                    </div>
+                    
+                    <div class="step">
+                        <strong>Hapi 3:</strong> Aksi i cilindrit është segmenti SS̅. Gjatësia:
+                        <div class="formula">L = |SS̅| = √[(6-3)² + (6-1)² + (4-2)²] = √[9+25+4] = √38 ≈ 6.16</div>
+                    </div>
+                    
+                    <div class="step">
+                        <strong>Hapi 4:</strong> Në projekcionin frontal (π₂), bazat shihen si rrathë me rreze r=2.
+                    </div>
+                    
+                    <div class="step">
+                        <strong>Hapi 5:</strong> Në projekcionin horizontal (π₁), cilindri shihet si drejtkëndësh me brinjë të përcaktuara nga gjeneratorët tangjentë.
+                    </div>
+                </div>
+                
+                <div class="drawing-container">
+                    <svg viewBox="0 0 600 400" xmlns="http://www.w3.org/2000/svg">
+                        <!-- Ground line (x-axis) - horizontal divider -->
+                        <line x1="0" y1="200" x2="600" y2="200" class="axis-line"/>
+                        <text x="290" y="215" font-size="11" fill="#333" font-weight="bold">x</text>
+                        
+                        <!-- Vertical divider (z-axis) -->
+                        <line x1="300" y1="0" x2="300" y2="400" class="separator-line"/>
+                        
+                        <!-- Labels -->
+                        <text x="10" y="390" class="grid-label" font-weight="bold">π₁ (horizontal)</text>
+                        <text x="480" y="30" class="grid-label" font-weight="bold">π₂ (frontal)</text>
+                        
+                        <!-- π₁ - Horizontal projection -->
+                        <g transform="translate(100, 280)">
+                            <!-- Rectangle representing cylinder - visible edges -->
+                            <rect x="30" y="-80" width="100" height="60" fill="rgba(52,152,219,0.15)" class="visible-edge"/>
+                            <!-- Hidden tangent edges -->
+                            <line x1="50" y1="-80" x2="50" y2="-20" class="hidden-edge"/>
+                            <line x1="110" y1="-80" x2="110" y2="-20" class="hidden-edge"/>
+                            <!-- Axis - construction line -->
+                            <line x1="40" y1="-50" x2="120" y2="-50" class="construction-line"/>
+                            <!-- Centers -->
+                            <circle cx="40" cy="-50" r="3" fill="#e74c3c"/>
+                            <circle cx="120" cy="-50" r="3" fill="#27ae60"/>
+                            <!-- Labels -->
+                            <text x="20" y="-45" font-size="11" fill="#e74c3c" font-weight="bold">S</text>
+                            <text x="125" y="-45" font-size="11" fill="#27ae60" font-weight="bold">S̅</text>
+                            <!-- Projection lines to π₂ -->
+                            <line x1="30" y1="-80" x2="30" y2="-200" class="projection-line"/>
+                            <line x1="130" y1="-80" x2="130" y2="-200" class="projection-line"/>
+                            <line x1="30" y1="-20" x2="30" y2="-200" class="projection-line"/>
+                            <line x1="130" y1="-20" x2="130" y2="-200" class="projection-line"/>
+                            <line x1="40" y1="-50" x2="40" y2="-200" class="projection-line"/>
+                            <line x1="120" y1="-50" x2="120" y2="-200" class="projection-line"/>
+                        </g>
+                        
+                        <!-- π₂ - Frontal projection -->
+                        <g transform="translate(400, 280)">
+                            <!-- First circle - visible edge -->
+                            <circle cx="-30" cy="-20" r="40" fill="rgba(52,152,219,0.15)" class="visible-edge"/>
+                            <circle cx="-30" cy="-20" r="3" fill="#e74c3c"/>
+                            <text x="-48" y="-15" font-size="11" fill="#e74c3c" font-weight="bold">S'</text>
+                            <!-- Second circle - visible edge -->
+                            <circle cx="60" cy="40" r="40" fill="rgba(46,204,113,0.15)" class="visible-edge"/>
+                            <circle cx="60" cy="40" r="3" fill="#27ae60"/>
+                            <text x="65" y="45" font-size="11" fill="#27ae60" font-weight="bold">S̅'</text>
+                            <!-- External tangent lines - visible edges -->
+                            <line x1="-30" y1="20" x2="60" y2="80" class="visible-edge"/>
+                            <line x1="-30" y1="-60" x2="60" y2="0" class="visible-edge"/>
+                            <!-- Axis - hidden -->
+                            <line x1="-30" y1="-20" x2="60" y2="40" class="hidden-edge"/>
+                            <!-- Radius dimension -->
+                            <line x1="-30" y1="-20" x2="-30" y2="20" class="construction-line"/>
+                            <line x1="-30" y1="25" x2="-35" y2="25" class="dimension-line"/>
+                            <line x1="-30" y1="25" x2="-30" y2="20" class="dimension-line" marker-end="url(#arrowhead)"/>
+                            <text x="-55" y="30" font-size="9" fill="#555" font-weight="bold">r=2</text>
+                            <!-- Length dimension -->
+                            <line x1="-30" y1="-75" x2="-35" y2="-75" class="dimension-line"/>
+                            <line x1="60" y1="-15" x2="65" y2="-15" class="dimension-line"/>
+                            <text x="5" y="-80" font-size="9" fill="#555" font-weight="bold">L=√38</text>
+                        </g>
+                    </svg>
+                </div>
+            </div>
+        </div>
+
+        <!-- Problem 9 -->
+        <div class="problem">
+            <h2>Problemi 9</h2>
+            <div class="problem-statement">
+                Janë dhënë pikat S(3,2,3), S̅(4,4,4) të konstruktohen projeksionet e cilindrit bazat e të cilit janë paralel me π₂. S,S̅- qendrat e bazave dhe r=1cm.
+            </div>
+            
+            <div class="solution">
+                <h3>Zgjidhja:</h3>
+                
+                <div class="steps">
+                    <div class="step">
+                        <strong>Hapi 1:</strong> Qendrat e bazave: S(3,2,3) dhe S̅(4,4,4), me r = 1cm.
+                    </div>
+                    
+                    <div class="step">
+                        <strong>Hapi 2:</strong> Bazat janë paralele me π₂ (në rrafshine y = 2 dhe y = 4).
+                    </div>
+                    
+                    <div class="step">
+                        <strong>Hapi 3:</strong> Gjatësia e aksit:
+                        <div class="formula">L = √[(4-3)² + (4-2)² + (4-3)²] = √[1+4+1] = √6 ≈ 2.45 cm</div>
+                    </div>
+                    
+                    <div class="step">
+                        <strong>Hapi 4:</strong> Në π₂, bazat shihen si rrathë me rreze 1cm.
+                    </div>
+                    
+                    <div class="step">
+                        <strong>Hapi 5:</strong> Në π₁, cilindri projeksionohet si drejtkëndësh ose paralelogram (në varësi të orientimit).
+                    </div>
+                </div>
+                
+                <div class="drawing-container">
+                    <svg viewBox="0 0 600 350" xmlns="http://www.w3.org/2000/svg">
+                        <!-- Ground line (x-axis) - horizontal divider -->
+                        <line x1="0" y1="180" x2="600" y2="180" class="axis-line"/>
+                        <text x="290" y="195" font-size="11" fill="#333" font-weight="bold">x</text>
+                        
+                        <!-- Vertical divider (z-axis) -->
+                        <line x1="300" y1="0" x2="300" y2="350" class="separator-line"/>
+                        
+                        <!-- Labels -->
+                        <text x="10" y="340" class="grid-label" font-weight="bold">π₁ (horizontal)</text>
+                        <text x="480" y="30" class="grid-label" font-weight="bold">π₂ (frontal)</text>
+                        
+                        <!-- π₁ - Horizontal projection -->
+                        <g transform="translate(120, 250)">
+                            <!-- Parallelogram (cylinder from top) - visible edges -->
+                            <path d="M 30 -30 L 60 -50 L 80 -30 L 50 -10 Z" fill="rgba(52,152,219,0.15)" class="visible-edge"/>
+                            <!-- Hidden edges -->
+                            <line x1="40" y1="-40" x2="70" y2="-20" class="hidden-edge"/>
+                            <!-- Axis - construction line -->
+                            <line x1="40" y1="-20" x2="70" y2="-40" class="construction-line"/>
+                            <!-- Centers -->
+                            <circle cx="40" cy="-20" r="3" fill="#e74c3c"/>
+                            <circle cx="70" cy="-40" r="3" fill="#27ae60"/>
+                            <!-- Labels -->
+                            <text x="22" y="-15" font-size="11" fill="#e74c3c" font-weight="bold">S</text>
+                            <text x="75" y="-35" font-size="11" fill="#27ae60" font-weight="bold">S̅</text>
+                            <!-- Projection lines to π₂ -->
+                            <line x1="30" y1="-30" x2="30" y2="-180" class="projection-line"/>
+                            <line x1="60" y1="-50" x2="60" y2="-180" class="projection-line"/>
+                            <line x1="80" y1="-30" x2="80" y2="-180" class="projection-line"/>
+                            <line x1="50" y1="-10" x2="50" y2="-180" class="projection-line"/>
+                        </g>
+                        
+                        <!-- π₂ - Frontal projection -->
+                        <g transform="translate(420, 230)">
+                            <!-- Two circles - visible edges -->
+                            <circle cx="-15" cy="-10" r="20" fill="rgba(52,152,219,0.15)" class="visible-edge"/>
+                            <circle cx="-15" cy="-10" r="3" fill="#e74c3c"/>
+                            <text x="-30" y="-5" font-size="10" fill="#e74c3c" font-weight="bold">S'</text>
+                            
+                            <circle cx="25" cy="20" r="20" fill="rgba(46,204,113,0.15)" class="visible-edge"/>
+                            <circle cx="25" cy="20" r="3" fill="#27ae60"/>
+                            <text x="30" y="25" font-size="10" fill="#27ae60" font-weight="bold">S̅'</text>
+                            
+                            <!-- External tangent lines - visible edges -->
+                            <line x1="-15" y1="10" x2="25" y2="40" class="visible-edge"/>
+                            <line x1="-15" y1="-30" x2="25" y2="0" class="visible-edge"/>
+                            
+                            <!-- Axis - hidden -->
+                            <line x1="-15" y1="-10" x2="25" y2="20" class="hidden-edge"/>
+                            
+                            <!-- Radius dimension -->
+                            <line x1="-15" y1="-10" x2="-15" y2="10" class="construction-line"/>
+                            <line x1="-15" y1="12" x2="-18" y2="12" class="dimension-line"/>
+                            <line x1="-15" y1="12" x2="-15" y2="10" class="dimension-line" marker-end="url(#arrowhead)"/>
+                            <text x="-38" y="17" font-size="9" fill="#555" font-weight="bold">r=1</text>
+                            
+                            <!-- Length dimension -->
+                            <text x="-5" y="-40" font-size="9" fill="#555" font-weight="bold">L=√6</text>
+                        </g>
+                    </svg>
+                </div>
+            </div>
+        </div>
+
+        <!-- Problem 10 -->
+        <div class="problem">
+            <h2>Problemi 10</h2>
+            <div class="problem-statement">
+                Janë dhënë pikat S(3,1,4) dhe S̅(6,3,3) të konstruktohen tri projeksionet e cilindrit, bazat e të cilit janë paralel me π₂, kurse rrezja r=2 njësi.
+            </div>
+            
+            <div class="solution">
+                <h3>Zgjidhja:</h3>
+                
+                <div class="steps">
+                    <div class="step">
+                        <strong>Hapi 1:</strong> Qendrat: S(3,1,4) dhe S̅(6,3,3), me r = 2 njësi.
+                    </div>
+                    
+                    <div class="step">
+                        <strong>Hapi 2:</strong> Bazat janë në rrafshine y = 1 dhe y = 3 (paralele me π₂).
+                    </div>
+                    
+                    <div class="step">
+                        <strong>Hapi 3:</strong> Gjatësia e cilindrit:
+                        <div class="formula">L = √[(6-3)² + (3-1)² + (3-4)²] = √[9+4+1] = √14 ≈ 3.74</div>
+                    </div>
+                    
+                    <div class="step">
+                        <strong>Hapi 4:</strong> Vizatojmë tri projekionet: π₁ (horizontal), π₂ (frontal), π₃ (profil).
+                    </div>
+                    
+                    <div class="step">
+                        <strong>Hapi 5:</strong> Në π₂, shihen dy rrathë me rreze r=2. Në π₁ dhe π₃, cilindri projektonohet si drejtkëndësh/paralelogram.
+                    </div>
+                </div>
+                
+                <div class="drawing-container">
+                    <svg viewBox="0 0 700 400" xmlns="http://www.w3.org/2000/svg">
+                        <!-- Ground line (x-axis) - horizontal divider -->
+                        <line x1="0" y1="250" x2="700" y2="250" class="axis-line"/>
+                        <text x="245" y="265" font-size="11" fill="#333" font-weight="bold">x</text>
+                        <!-- Vertical axis (y-axis) - main separator -->
+                        <line x1="500" y1="0" x2="500" y2="400" class="axis-line"/>
+                        <text x="505" y="200" font-size="11" fill="#333" font-weight="bold">y</text>
+                        <!-- Vertical divider (z-axis) - separator between π₁ and π₂ -->
+                        <line x1="250" y1="0" x2="250" y2="400" class="separator-line"/>
+                        
+                        <!-- π₁ - Horizontal projection -->
+                        <g transform="translate(110, 300)">
+                            <text x="-50" y="50" font-size="12" fill="#2980b9" font-weight="bold">π₁</text>
+                            <!-- Parallelogram - visible edges -->
+                            <path d="M 30 -40 L 80 -60 L 120 -30 L 70 -10 Z" fill="rgba(52,152,219,0.15)" class="visible-edge"/>
+                            <!-- Hidden edges -->
+                            <line x1="50" y1="-50" x2="100" y2="-20" class="hidden-edge"/>
+                            <!-- Axis - construction -->
+                            <line x1="50" y1="-25" x2="100" y2="-45" class="construction-line"/>
+                            <!-- Centers -->
+                            <circle cx="50" cy="-25" r="3" fill="#e74c3c"/>
+                            <circle cx="100" cy="-45" r="3" fill="#27ae60"/>
+                            <!-- Labels -->
+                            <text x="30" y="-20" font-size="10" fill="#e74c3c" font-weight="bold">S</text>
+                            <text x="105" y="-40" font-size="10" fill="#27ae60" font-weight="bold">S̅</text>
+                            <!-- Projection lines to π₂ -->
+                            <line x1="30" y1="-40" x2="30" y2="-250" class="projection-line"/>
+                            <line x1="80" y1="-60" x2="80" y2="-250" class="projection-line"/>
+                            <line x1="120" y1="-30" x2="120" y2="-250" class="projection-line"/>
+                            <line x1="70" y1="-10" x2="70" y2="-250" class="projection-line"/>
+                        </g>
+                        
+                        <!-- π₂ - Frontal projection -->
+                        <g transform="translate(360, 250)">
+                            <text x="-70" y="-90" font-size="12" fill="#2980b9" font-weight="bold">π₂</text>
+                            <!-- Two circles - visible edges -->
+                            <circle cx="-30" cy="0" r="40" fill="rgba(52,152,219,0.15)" class="visible-edge"/>
+                            <circle cx="-30" cy="0" r="3" fill="#e74c3c"/>
+                            <text x="-48" y="5" font-size="10" fill="#e74c3c" font-weight="bold">S'</text>
+                            
+                            <circle cx="50" cy="-20" r="40" fill="rgba(46,204,113,0.15)" class="visible-edge"/>
+                            <circle cx="50" cy="-20" r="3" fill="#27ae60"/>
+                            <text x="55" y="-15" font-size="10" fill="#27ae60" font-weight="bold">S̅'</text>
+                            
+                            <!-- External tangent lines - visible edges -->
+                            <line x1="-30" y1="40" x2="50" y2="20" class="visible-edge"/>
+                            <line x1="-30" y1="-40" x2="50" y2="-60" class="visible-edge"/>
+                            
+                            <!-- Axis - hidden -->
+                            <line x1="-30" y1="0" x2="50" y2="-20" class="hidden-edge"/>
+                            
+                            <!-- Radius dimension -->
+                            <line x1="-30" y1="0" x2="-30" y2="40" class="construction-line"/>
+                            <text x="-55" y="45" font-size="9" fill="#555" font-weight="bold">r=2</text>
+                            
+                            <!-- Projection lines to π₃ -->
+                            <line x1="50" y1="20" x2="500" y2="20" class="projection-line"/>
+                            <line x1="50" y1="-60" x2="500" y2="-60" class="projection-line"/>
+                            <line x1="-30" y1="40" x2="500" y2="40" class="projection-line"/>
+                            <line x1="-30" y1="-40" x2="500" y2="-40" class="projection-line"/>
+                        </g>
+                        
+                        <!-- π₃ - Profile projection -->
+                        <g transform="translate(600, 290)">
+                            <text x="-70" y="50" font-size="12" fill="#2980b9" font-weight="bold">π₃</text>
+                            <!-- Rectangle - visible edges -->
+                            <rect x="-80" y="-70" width="40" height="80" fill="rgba(155,89,182,0.15)" class="visible-edge"/>
+                            <!-- Hidden edges -->
+                            <line x1="-60" y1="-70" x2="-60" y2="10" class="hidden-edge"/>
+                            <!-- Centers -->
+                            <circle cx="-60" cy="-50" r="2.5" fill="#e74c3c"/>
+                            <circle cx="-60" cy="-30" r="2.5" fill="#27ae60"/>
+                            <!-- Axis -->
+                            <line x1="-60" y1="-50" x2="-60" y2="-30" class="construction-line"/>
+                            <!-- Labels -->
+                            <text x="-95" y="-45" font-size="10" fill="#e74c3c" font-weight="bold">S''</text>
+                            <text x="-95" y="-25" font-size="10" fill="#27ae60" font-weight="bold">S̅''</text>
+                        </g>
+                    </svg>
+                </div>
+            </div>
+        </div>
+
+        <!-- Problem 11 -->
+        <div class="problem">
+            <h2>Problemi 11</h2>
+            <div class="problem-statement">
+                Të gjenden projeksionet e piramidës me kulmet e bazës A(2,4,0), B(3,1,0), C(5,1,0) dhe D(4,5,0) kulmi K(3.5,3.6) në qoftëse ajo pritet me rrafshin paralel me π₁, dhe i cili është 2 njësi larg prej π₁.
+            </div>
+            
+            <div class="solution">
+                <h3>Zgjidhja:</h3>
+                
+                <div class="steps">
+                    <div class="step">
+                        <strong>Hapi 1:</strong> Baza e piramidës ka kulmet: A(2,4,0), B(3,1,0), C(5,1,0), D(4,5,0) në π₁.
+                    </div>
+                    
+                    <div class="step">
+                        <strong>Hapi 2:</strong> Kulmi i piramidës: K(3.5, 3, 6) (duke supozuar z=6 për kulmin).
+                    </div>
+                    
+                    <div class="step">
+                        <strong>Hapi 3:</strong> Rrafshi prerës është paralel me π₁ dhe z = 2 (2 njësi larg π₁).
+                    </div>
+                    
+                    <div class="step">
+                        <strong>Hapi 4:</strong> Prerja gjendet duke gjetur pikat ku tehet anësore të piramidës kryqëzohen me rrafshin z = 2.
+                    </div>
+                    
+                    <div class="step">
+                        <strong>Hapi 5:</strong> Për çdo teh AK, BK, CK, DK, gjejmë pikën e prerjes:
+                        <div class="formula">P = A + t(K - A), ku z-koordinata e P është 2<br>
+                        t = 2/6 = 1/3</div>
+                    </div>
+                    
+                    <div class="step">
+                        <strong>Hapi 6:</strong> Pikat e prerjes formojnë një katërkëndësh të ngjashëm me bazën, por më të vogël.
+                    </div>
+                </div>
+                
+                <div class="note">
+                    <strong>Shënim:</strong> Prerja e piramidës me rrafsh paralel me bazën jep një figurë të ngjashme me bazën, e zvogëluar në proporcion me distancën nga kulmi.
+                </div>
+                
+                <div class="drawing-container">
+                    <svg viewBox="0 0 650 450" xmlns="http://www.w3.org/2000/svg">
+                        <!-- Ground line (x-axis) - horizontal divider -->
+                        <line x1="0" y1="250" x2="650" y2="250" class="axis-line"/>
+                        <text x="320" y="265" font-size="11" fill="#333" font-weight="bold">x</text>
+                        
+                        <!-- Vertical divider (z-axis) -->
+                        <line x1="325" y1="0" x2="325" y2="450" class="separator-line"/>
+                        
+                        <!-- Labels -->
+                        <text x="10" y="440" class="grid-label" font-weight="bold">π₁ (horizontal)</text>
+                        <text x="500" y="30" class="grid-label" font-weight="bold">π₂ (frontal)</text>
+                        
+                        <!-- π₁ - Horizontal projection -->
+                        <g transform="translate(100, 320)">
+                            <!-- Base quadrilateral - visible edges -->
+                            <polygon points="20,40 30,10 50,10 40,50" fill="rgba(52,152,219,0.15)" class="visible-edge"/>
+                            <!-- Cross-section (similar quadrilateral, smaller) -->
+                            <polygon points="27,3 31,-6 43,-6 39,3" fill="rgba(231,76,60,0.2)" stroke="#e74c3c" stroke-width="2.5" stroke-dasharray="5,5"/>
+                            <!-- Edges to apex - visible -->
+                            <line x1="20" y1="40" x2="35" y2="-16" class="visible-edge"/>
+                            <line x1="30" y1="10" x2="35" y2="-16" class="visible-edge"/>
+                            <line x1="50" y1="10" x2="35" y2="-16" class="visible-edge"/>
+                            <line x1="40" y1="50" x2="35" y2="-16" class="visible-edge"/>
+                            <!-- Cross-section edges to apex - visible (above cut) -->
+                            <line x1="27" y1="3" x2="35" y2="-16" stroke="#e67e22" stroke-width="1.5"/>
+                            <line x1="31" y1="-6" x2="35" y2="-16" stroke="#e67e22" stroke-width="1.5"/>
+                            <line x1="43" y1="-6" x2="35" y2="-16" stroke="#e67e22" stroke-width="1.5"/>
+                            <line x1="39" y1="3" x2="35" y2="-16" stroke="#e67e22" stroke-width="1.5"/>
+                            <!-- Apex projection -->
+                            <circle cx="35" cy="-16" r="3" fill="#27ae60"/>
+                            <!-- Vertices base -->
+                            <circle cx="20" cy="40" r="2.5" fill="#2c3e50"/>
+                            <circle cx="30" cy="10" r="2.5" fill="#2c3e50"/>
+                            <circle cx="50" cy="10" r="2.5" fill="#2c3e50"/>
+                            <circle cx="40" cy="50" r="2.5" fill="#2c3e50"/>
+                            <!-- Cross-section vertices -->
+                            <circle cx="27" cy="3" r="2" fill="#e74c3c"/>
+                            <circle cx="31" cy="-6" r="2" fill="#e74c3c"/>
+                            <circle cx="43" cy="-6" r="2" fill="#e74c3c"/>
+                            <circle cx="39" cy="3" r="2" fill="#e74c3c"/>
+                            <!-- Labels -->
+                            <text x="12" y="45" font-size="10" font-weight="bold">A</text>
+                            <text x="22" y="5" font-size="10" font-weight="bold">B</text>
+                            <text x="52" y="8" font-size="10" font-weight="bold">C</text>
+                            <text x="42" y="58" font-size="10" font-weight="bold">D</text>
+                            <text x="38" y="-20" font-size="10" fill="#27ae60" font-weight="bold">K</text>
+                            <!-- Projection lines to π₂ -->
+                            <line x1="20" y1="40" x2="20" y2="-250" class="projection-line"/>
+                            <line x1="40" y1="50" x2="40" y2="-250" class="projection-line"/>
+                            <line x1="30" y1="10" x2="30" y2="-250" class="projection-line"/>
+                            <line x1="50" y1="10" x2="50" y2="-250" class="projection-line"/>
+                            <line x1="35" y1="-16" x2="35" y2="-250" class="projection-line"/>
+                        </g>
+                        
+                        <!-- π₂ - Frontal projection -->
+                        <g transform="translate(470, 330)">
+                            <!-- Base line - visible edge -->
+                            <line x1="-40" y1="0" x2="40" y2="0" class="visible-edge"/>
+                            <!-- Pyramid lateral edges - visible -->
+                            <line x1="-40" y1="0" x2="0" y2="-120" class="visible-edge"/>
+                            <line x1="40" y1="0" x2="0" y2="-120" class="visible-edge"/>
+                            <!-- Hidden lateral edges -->
+                            <line x1="-20" y1="0" x2="0" y2="-120" class="hidden-edge"/>
+                            <line x1="20" y1="0" x2="0" y2="-120" class="hidden-edge"/>
+                            <!-- Cross-section line - highlighted -->
+                            <line x1="-27" y1="-40" x2="27" y2="-40" stroke="#e74c3c" stroke-width="3" stroke-dasharray="6,4"/>
+                            <!-- Cross-section level indicator plane -->
+                            <line x1="-70" y1="-40" x2="70" y2="-40" stroke="#ff9999" stroke-width="1.5" stroke-dasharray="4,2"/>
+                            <text x="-110" y="-35" font-size="10" fill="#e74c3c" font-weight="bold">z = 2</text>
+                            <!-- Cross-section vertices -->
+                            <circle cx="-27" cy="-40" r="2" fill="#e74c3c"/>
+                            <circle cx="27" cy="-40" r="2" fill="#e74c3c"/>
+                            <!-- Apex -->
+                            <circle cx="0" cy="-120" r="3" fill="#27ae60"/>
+                            <!-- Base vertices -->
+                            <circle cx="-40" cy="0" r="2.5" fill="#2c3e50"/>
+                            <circle cx="40" cy="0" r="2.5" fill="#2c3e50"/>
+                            <!-- Labels -->
+                            <text x="-70" y="15" font-size="10" font-weight="bold">A',B',C',D'</text>
+                            <text x="8" y="-125" font-size="10" fill="#27ae60" font-weight="bold">K'</text>
+                            <!-- Height dimensions -->
+                            <line x1="-75" y1="0" x2="-75" y2="-5" class="dimension-line"/>
+                            <line x1="-75" y1="-35" x2="-75" y2="-40" class="dimension-line"/>
+                            <line x1="-75" y1="0" x2="-75" y2="-40" class="dimension-line" marker-end="url(#arrowhead)" marker-start="url(#arrowhead2)"/>
+                            <text x="-100" y="-15" font-size="9" fill="#555" font-weight="bold">h=2</text>
+                            <line x1="75" y1="0" x2="75" y2="-5" class="dimension-line"/>
+                            <line x1="75" y1="-115" x2="75" y2="-120" class="dimension-line"/>
+                            <line x1="75" y1="0" x2="75" y2="-120" class="dimension-line" marker-end="url(#arrowhead)" marker-start="url(#arrowhead2)"/>
+                            <text x="80" y="-55" font-size="9" fill="#555" font-weight="bold">H=6</text>
+                        </g>
+                    </svg>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</body>
+</html>
